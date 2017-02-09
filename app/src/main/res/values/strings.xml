@@ -1,0 +1,9 @@
+<resources>
+  <string name="app_name">Seek</string>
+
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+
+  <string name="main_title">首页</string>
+  <string name="explore_title">发现</string>
+</resources>

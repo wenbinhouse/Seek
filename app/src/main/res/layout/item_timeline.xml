@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/color_white"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/half_margin"
+              android:paddingLeft="@dimen/base_margin"
+              android:paddingRight="@dimen/base_margin"
+              android:paddingTop="@dimen/half_margin">
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <wb.app.seek.common.widgets.SmartImageView
+        android:id="@+id/user_avatar_img"
+        android:layout_width="@dimen/timeline_avatar_width"
+        android:layout_height="@dimen/timeline_avatar_width"
+        fresco:roundAsCircle="true"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/user_avatar_img"
+        android:orientation="vertical">
+
+      <TextView
+          android:id="@+id/user_name_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="非正常人类心理学"/>
+
+      <TextView
+          android:id="@+id/created_at_tv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          tools:text="15分钟前"/>
+
+    </LinearLayout>
+
+  </RelativeLayout>
+
+  <TextView
+      android:id="@+id/content_tv"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:text="微博内容"/>
+
+  <wb.app.seek.view.widgets.SharePhotoView
+      android:id="@+id/share_photo_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+  <!-- 被转发的微博 -->
+  <LinearLayout
+      android:id="@+id/re_timeline_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/color_background"
+      android:orientation="vertical"
+      android:paddingBottom="@dimen/half_margin"
+      android:paddingTop="@dimen/half_margin"
+      android:visibility="gone">
+
+    <TextView
+        android:id="@+id/re_content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/half_margin"
+        android:layout_marginTop="@dimen/half_margin"
+        tools:text="微博内容"/>
+
+    <wb.app.seek.view.widgets.SharePhotoView
+        android:id="@+id/re_share_photo_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingBottom="@dimen/half_margin"
+      android:paddingTop="@dimen/half_margin">
+
+    <TextView
+        android:id="@+id/source_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:text="微博weibo.com"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="7"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="7"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="7"/>
+
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/color_divider"/>
+
+</LinearLayout>

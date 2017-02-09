@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:orientation="horizontal"
+              android:padding="@dimen/half_margin">
+
+  <ProgressBar
+      android:id="@+id/loading_pb"
+      style="@android:style/Widget.Holo.Light.ProgressBar.Small"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <TextView
+      android:id="@+id/loading_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/half_margin"
+      android:text="加载中..."
+      android:textSize="@dimen/text_size_h2"/>
+
+  <TextView
+      android:id="@+id/no_more_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="没有更多了"
+      android:textSize="@dimen/text_size_h2"
+      android:visibility="gone"/>
+
+</LinearLayout>

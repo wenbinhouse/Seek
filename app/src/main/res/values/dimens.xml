@@ -1,0 +1,15 @@
+<resources>
+  <dimen name="base_margin">16dp</dimen>
+  <dimen name="half_margin">8dp</dimen>
+  <dimen name="quarter_margin">4dp</dimen>
+
+  <dimen name="nav_header_height">160dp</dimen>
+
+  <dimen name="timeline_avatar_width">36dp</dimen>
+  <dimen name="avatar_width">48dp</dimen>
+
+  <dimen name="text_size_h0">18sp</dimen>
+  <dimen name="text_size_h1">16sp</dimen>
+  <dimen name="text_size_h2">14sp</dimen>
+  <dimen name="text_size_h3">12sp</dimen>
+</resources>

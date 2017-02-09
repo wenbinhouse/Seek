@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#FF4081</color>
+
+  <color name="color_background">#efefef</color>
+
+  <color name="color_gap">#efefef</color>
+
+  //分割线颜色
+  <color name="color_divider">#efefef</color>
+
+  //描边
+  <color name="color_border">#dbdbdb</color>
+
+  //白色半透明
+  <color name="translucent_white">#7fffffff</color>
+
+  //黑色半透明
+  <color name="translucent_dark">#7f000000</color>
+
+  //黑色半透明深
+  <color name="translucent_dark_deep">#cf000000</color>
+
+  //黑色半透明
+  <color name="translucent_dark_light">#3f000000</color>
+
+  //完全透明浅
+  <color name="transparent">#00000000</color>
+
+  <color name="color_black">#000000</color>
+  <color name="color_white">#ffffff</color>
+
+  <color name="color_h0_dark">#111111</color>
+
+  //一级字体 深色 色值 用于：Actionbar元素及自定义标题 或线框
+  <color name="color_h1_dark">#333333</color>
+
+  //二级字体 深色 色值 用于：页面子标题或线框
+  <color name="color_h2_dark">#666666</color>
+
+  //三级字体 深色 色值 用于：文章内容或线框
+  <color name="color_h3_dark">#999999</color>
+</resources>
