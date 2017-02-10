@@ -5,10 +5,13 @@ import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 import rx.Observable;
+import wb.app.seek.model.ZhihuDailyNews;
+import wb.app.seek.model.ZhihuDailyStory;
 
 /**
  * Created by W.b on 16/9/24.
@@ -31,5 +34,8 @@ public interface AppService {
   Observable<ResponseBody> getFollowers(@Query("uid") String uid);
 
   @GET("api/4/news/latest")
-  Observable<ResponseBody> getZhiHuNewsLatest();
+  Observable<ZhihuDailyNews> getZhiHuNewsLatest();
+
+  @GET("api/4/news/{storyId}")
+  Observable<ZhihuDailyStory> getZhihuNewsDetail(@Path("storyId") int storyId);
 }

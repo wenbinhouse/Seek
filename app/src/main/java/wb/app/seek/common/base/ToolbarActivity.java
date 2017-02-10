@@ -1,8 +1,14 @@
 package wb.app.seek.common.base;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+
+import wb.app.seek.R;
 
 /**
  * Created by W.b on 2017/1/11.
@@ -10,7 +16,27 @@ import android.support.v7.app.AppCompatActivity;
 public class ToolbarActivity extends AppCompatActivity {
 
   @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  public void setContentView(@LayoutRes int layoutResID) {
+//    super.setContentView(layoutResID);
+    RelativeLayout contentView = new RelativeLayout(this);
+    contentView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+    LayoutInflater inflater = LayoutInflater.from(this);
+
+    View userView = inflater.inflate(layoutResID, null);
+    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+    int toolBarSize = (int) getResources().getDimension(R.dimen.tool_bar_height);
+    layoutParams.topMargin = toolBarSize;
+    contentView.addView(userView, layoutParams);
+
+    View view = inflater.inflate(R.layout.view_toolbar, contentView);
+    Toolbar toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
+
+    setContentView(contentView);
+    setSupportActionBar(toolbar);
+  }
+
+  public void setContentViewNoToolbar(@LayoutRes int layoutResID) {
+    super.setContentView(layoutResID);
   }
 }

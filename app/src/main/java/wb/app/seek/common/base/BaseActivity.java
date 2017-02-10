@@ -3,6 +3,7 @@ package wb.app.seek.common.base;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
 import wb.app.seek.common.http.AppService;
@@ -11,13 +12,11 @@ import wb.app.seek.common.http.retrofit.AppClient;
 /**
  * Created by W.b on 2016/11/29.
  */
-public abstract class BaseActivity<P extends BasePresenter> extends ToolbarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
   private String TAG = getClass().getSimpleName();
 
   private ProgressDialog mProgressDialog;
-
-  private P mPresenter;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,28 +24,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends ToolbarActiv
 
     setContentView(getContentViewId());
     ButterKnife.bind(this);
-
-    mPresenter = createPresenter();
-    if (mPresenter != null) {
-      mPresenter.attachView();
-    }
   }
-
-  @Override
-  protected void onDestroy() {
-    if (mPresenter != null) {
-      mPresenter.detachView();
-    }
-    super.onDestroy();
-  }
-
-  protected abstract P createPresenter();
 
   protected abstract int getContentViewId();
-
-  public P getPresenter() {
-    return mPresenter;
-  }
 
   public SeekHelper getHelper() {
     return ((BaseApplication) getApplication()).getHelper();

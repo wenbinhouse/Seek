@@ -1,10 +1,11 @@
-package wb.app.seek.view.adapter;
+package wb.app.seek.modules.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import wb.app.seek.view.fragment.RecommendFragment;
+import wb.app.seek.modules.RecommendFragment;
+import wb.app.seek.modules.zhihu.ZhihuDailyFragment;
 
 /**
  * Created by W.b on 2017/1/10.
@@ -17,10 +18,10 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
   @Override
   public Fragment getItem(int position) {
-//    if (position == 0) {
-      return new RecommendFragment();
-//    }
-//    return new ExploreFragment();
+    if (position == 0) {
+      return new ZhihuDailyFragment();
+    }
+    return new RecommendFragment();
   }
 
   @Override
@@ -30,9 +31,9 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
   @Override
   public CharSequence getPageTitle(int position) {
-//    if (position == 0) {
-      return "首页";
-//    }
-//    return "发现";
+    if (position == 0) {
+      return "知乎日报";
+    }
+    return "发现";
   }
 }

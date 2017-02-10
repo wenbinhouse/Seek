@@ -1,4 +1,4 @@
-package wb.app.seek.view.widgets;
+package wb.app.seek.widgets;
 
 import android.content.Context;
 import android.media.Image;

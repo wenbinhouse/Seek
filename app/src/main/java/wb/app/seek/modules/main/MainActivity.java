@@ -1,4 +1,4 @@
-package wb.app.seek.view.activity;
+package wb.app.seek.modules.main;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,18 +11,11 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
-import wb.app.seek.common.http.retrofit.AppClient;
-import wb.app.seek.common.http.rx.BaseSubscriber;
 import wb.app.seek.common.widgets.SmartImageView;
-import wb.app.seek.presenter.MainPresenter;
-import wb.app.seek.view.adapter.MainPagerAdapter;
 
-public class MainActivity extends BaseActivity<MainPresenter> {
+public class MainActivity extends BaseActivity {
 
   @BindView(R.id.main_toolbar) Toolbar mMainToolbar;
   @BindView(R.id.drawer_main_layout) DrawerLayout mDrawerLayout;
@@ -39,31 +32,6 @@ public class MainActivity extends BaseActivity<MainPresenter> {
     initToolbar();
 
     initViews();
-
-    AppClient.getInstance().getService().getZhiHuNewsLatest()
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new BaseSubscriber<ResponseBody>() {
-          @Override
-          public void onSuccess(ResponseBody data) {
-
-          }
-
-          @Override
-          public void onFailure(String msg, String exception) {
-
-          }
-
-          @Override
-          public void onFinish() {
-
-          }
-        });
-  }
-
-  @Override
-  protected MainPresenter createPresenter() {
-    return new MainPresenter();
   }
 
   @Override

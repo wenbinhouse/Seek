@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package wb.app.seek;
+package wb.app.seek.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -32,6 +32,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
+import wb.app.seek.R;
 
 /**
  * An {@link android.widget.ImageView} that draws its contents inside a mask and draws a border

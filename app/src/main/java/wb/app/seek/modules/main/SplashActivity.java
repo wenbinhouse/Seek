@@ -1,4 +1,4 @@
-package wb.app.seek.view.activity;
+package wb.app.seek.modules.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,17 +11,11 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
-import wb.app.seek.common.base.BasePresenter;
 
 /**
  * Created by W.b on 2017/1/9.
  */
 public class SplashActivity extends BaseActivity {
-
-  @Override
-  protected BasePresenter createPresenter() {
-    return null;
-  }
 
   @Override
   protected int getContentViewId() {

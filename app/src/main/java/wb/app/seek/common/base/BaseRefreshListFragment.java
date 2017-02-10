@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wb.app.seek.R;
+import wb.app.seek.common.base.mvp.BasePresenter;
+import wb.app.seek.common.base.mvp.MvpFragment;
 import wb.app.seek.common.utils.mlog.MLog;
 import wb.app.seek.common.widgets.recyclerview.BaseListAdapter;
 import wb.app.seek.common.widgets.recyclerview.OnRecyclerViewScrollListener;
@@ -17,7 +19,7 @@ import wb.app.seek.common.widgets.recyclerview.SimpleListAdapter;
 /**
  * Created by W.b on 2017/1/11.
  */
-public abstract class BaseRefreshListFragment<P extends BasePresenter> extends BaseFragment<P> implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class BaseRefreshListFragment<P extends BasePresenter> extends MvpFragment<P> implements SwipeRefreshLayout.OnRefreshListener {
 
   private String TAG = "BaseRefreshListFragment";
 

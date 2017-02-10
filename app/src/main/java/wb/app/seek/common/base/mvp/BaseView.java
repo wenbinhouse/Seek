@@ -9,5 +9,5 @@ public interface BaseView {
 
   void hideLoading();
 
-  void onFailure(String msg, String exception);
+  void showError(String msg, String exception);
 }

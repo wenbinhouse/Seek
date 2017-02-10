@@ -50,7 +50,7 @@
       android:layout_height="wrap_content"
       tools:text="微博内容"/>
 
-  <wb.app.seek.view.widgets.SharePhotoView
+  <wb.app.seek.widgets.SharePhotoView
       android:id="@+id/share_photo_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"/>
@@ -74,7 +74,7 @@
         android:layout_marginTop="@dimen/half_margin"
         tools:text="微博内容"/>
 
-    <wb.app.seek.view.widgets.SharePhotoView
+    <wb.app.seek.widgets.SharePhotoView
         android:id="@+id/re_share_photo_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import wb.app.seek.R;
 import wb.app.seek.common.widgets.SmartImageView;
-import wb.app.seek.view.widgets.SharePhotoView;
+import wb.app.seek.widgets.SharePhotoView;
 
 /**
  * Created by W.b on 2017/1/17.

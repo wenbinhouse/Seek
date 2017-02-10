@@ -44,7 +44,7 @@ public class MLogFormat {
 
   // 控制台打印内容的格式
   public static final String PRINT_CONSOLE_FORMAT_MESSAGE
-      = "%1$s.%2$s (%3$s:%4$d) Thread:%5$s" + MLogPrinter.LINE_SEPARATOR + "%6$s";
+      = "%1$s.%2$s (%3$s:%4$d) Thread:%5$s" + MLog.LINE_SEPARATOR + "%6$s";
 
   /**
    * 格式化打印到控制台的信息
@@ -126,7 +126,7 @@ public class MLogFormat {
           String.valueOf(XML_INDENT));
       transformer.transform(xmlInput, xmlOutput);
       formatXML = xmlOutput.getWriter().toString().replaceFirst(">", ">"
-          + MLogPrinter.LINE_SEPARATOR);
+          + MLog.LINE_SEPARATOR);
     } catch (Exception e) {
       formatXML = xml;
 
@@ -203,11 +203,11 @@ public class MLogFormat {
     }
 
     StringBuilder msgBuilder = new StringBuilder();
-    msgBuilder.append(TOP_HORIZONTAL_BORDER).append(MLogPrinter.LINE_SEPARATOR);
+    msgBuilder.append(TOP_HORIZONTAL_BORDER).append(MLog.LINE_SEPARATOR);
     for (int i = 0; i < nonNullCount; i++) {
       msgBuilder.append(appendVerticalBorder(nonNullSegments[i]));
       if (i == nonNullCount - 1) {
-        msgBuilder.append(MLogPrinter.LINE_SEPARATOR).append(BOTTOM_HORIZONTAL_BORDER);
+        msgBuilder.append(MLog.LINE_SEPARATOR).append(BOTTOM_HORIZONTAL_BORDER);
       }
     }
     return msgBuilder.toString();
@@ -221,10 +221,10 @@ public class MLogFormat {
    */
   private static String appendVerticalBorder(String msg) {
     StringBuilder borderedMsgBuilder = new StringBuilder(msg.length() + 10);
-    String[] lines = msg.split(MLogPrinter.LINE_SEPARATOR);
+    String[] lines = msg.split(MLog.LINE_SEPARATOR);
     for (int i = 0, N = lines.length; i < N; i++) {
       if (i != 0) {
-        borderedMsgBuilder.append(MLogPrinter.LINE_SEPARATOR);
+        borderedMsgBuilder.append(MLog.LINE_SEPARATOR);
       }
       String line = lines[i];
       borderedMsgBuilder.append(VERTICAL_BORDER_CHAR).append('\t').append(line);

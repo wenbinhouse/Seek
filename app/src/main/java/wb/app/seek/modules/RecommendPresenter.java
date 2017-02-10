@@ -1,6 +1,6 @@
-package wb.app.seek.presenter;
+package wb.app.seek.modules;
 
-import wb.app.seek.common.base.BasePresenter;
+import wb.app.seek.common.base.mvp.BasePresenter;
 
 /**
  * Created by W.b on 2017/1/10.

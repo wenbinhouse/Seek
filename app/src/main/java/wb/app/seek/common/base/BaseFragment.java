@@ -7,21 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by W.b on 2017/1/10.
  */
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
-
-  private P mPresenter;
+public abstract class BaseFragment extends Fragment {
 
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(getContentViewId(), container, false);
-    mPresenter = createPresenter();
-    if (mPresenter != null) {
-      mPresenter.attachView();
-    }
+    ButterKnife.bind(this, view);
     return view;
   }
 
@@ -29,20 +26,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     initComponents(view);
-  }
-
-  @Override
-  public void onDestroyView() {
-    if (mPresenter != null) {
-      mPresenter.detachView();
-    }
-    super.onDestroyView();
-  }
-
-  protected abstract P createPresenter();
-
-  public P getPresenter() {
-    return mPresenter;
   }
 
   protected abstract int getContentViewId();
