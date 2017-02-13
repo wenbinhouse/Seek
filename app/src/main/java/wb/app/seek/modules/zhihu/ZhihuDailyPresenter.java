@@ -14,10 +14,15 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
   private String mBeforeDay;
 
   @Override
-  public void refreshNews() {
+  public void refreshNews(String date) {
+    if (!DateTimeUtils.isValid(date)) {
+      getView().showError("日期不能小于2013-05-20", "");
+      return;
+    }
+
     getView().showLoading();
 
-    getService().getZhihuNewsByDate(DateTimeUtils.getCurrentDay())
+    getService().getZhihuNewsByDate(date)
         .compose(this.<ZhihuDailyNews>bindLifecycleEvent())
         .subscribe(new BaseSubscriber<ZhihuDailyNews>() {
           @Override

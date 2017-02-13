@@ -7,9 +7,9 @@
               android:gravity="center"
               android:orientation="horizontal">
 
-  <android.support.v4.widget.ContentLoadingProgressBar
+  <ProgressBar
       android:id="@+id/item_loading_pb"
-      style="?android:attr/progressBarStyleSmallInverse"
+      style="?android:attr/progressBarStyleSmall"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginRight="@dimen/half_margin"/>

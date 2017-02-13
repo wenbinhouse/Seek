@@ -19,7 +19,7 @@ public class ZhihuDailyContract {
 
   interface Presenter {
 
-    void refreshNews();
+    void refreshNews(String date);
 
     void loadMoreNews();
   }
