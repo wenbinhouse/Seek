@@ -10,11 +10,17 @@ public class ZhihuDailyContract {
 
   interface View extends BaseView {
 
-    void showStories(ZhihuDailyNews data);
+    void showNews(ZhihuDailyNews dailyNews);
+
+    void showMoreNews(ZhihuDailyNews dailyNews);
+
+    void showNoMoreNews();
   }
 
   interface Presenter {
 
-    void getStories();
+    void refreshNews();
+
+    void loadMoreNews();
   }
 }

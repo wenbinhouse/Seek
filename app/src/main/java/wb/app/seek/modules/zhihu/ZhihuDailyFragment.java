@@ -9,6 +9,7 @@ import android.view.View;
 import butterknife.BindView;
 import wb.app.seek.R;
 import wb.app.seek.common.base.mvp.MvpFragment;
+import wb.app.seek.common.widgets.recyclerview.OnRecyclerViewScrollListener;
 import wb.app.seek.model.ZhihuDailyNews;
 
 /**
@@ -55,7 +56,20 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
       }
     });
     mRecyclerView.setAdapter(mZhihuListAdapter);
+    mRecyclerView.addOnScrollListener(onScrollListener);
   }
+
+  private RecyclerView.OnScrollListener onScrollListener = new OnRecyclerViewScrollListener() {
+
+    @Override
+    protected void onLoad() {
+    }
+
+    @Override
+    protected void onLoadMore() {
+      getPresenter().loadMoreNews();
+    }
+  };
 
   @Override
   public void showLoading() {
@@ -64,7 +78,9 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
 
   @Override
   public void hideLoading() {
-    mRefreshLayout.setRefreshing(false);
+    if (mRefreshLayout.isRefreshing()) {
+      mRefreshLayout.setRefreshing(false);
+    }
   }
 
   @Override
@@ -73,12 +89,22 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
   }
 
   @Override
-  public void showStories(ZhihuDailyNews data) {
-    mZhihuListAdapter.setStories(data);
+  public void showNews(ZhihuDailyNews dailyNews) {
+    mZhihuListAdapter.showNews(dailyNews);
+  }
+
+  @Override
+  public void showMoreNews(ZhihuDailyNews dailyNews) {
+    mZhihuListAdapter.showMoreNews(dailyNews);
+  }
+
+  @Override
+  public void showNoMoreNews() {
+    mZhihuListAdapter.showNoMoreNews();
   }
 
   @Override
   public void onRefresh() {
-    getPresenter().getStories();
+    getPresenter().refreshNews();
   }
 }

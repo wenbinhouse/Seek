@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="96dp"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/half_margin"
     android:layout_marginRight="@dimen/half_margin"
-    android:layout_marginTop="@dimen/half_margin"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/quarter_margin"
-    app:cardElevation="1dp"
-    app:cardPreventCornerOverlap="true">
+    android:orientation="vertical">
 
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/half_margin"
+      android:layout_marginTop="@dimen/half_margin"
       android:orientation="horizontal"
       android:paddingLeft="@dimen/half_margin"
       android:paddingRight="@dimen/half_margin">
@@ -29,8 +24,6 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="3"
-        android:paddingBottom="@dimen/half_margin"
-        android:paddingTop="@dimen/half_margin"
         android:textSize="@dimen/text_size_h1"/>
 
     <ImageView
@@ -41,4 +34,9 @@
 
   </LinearLayout>
 
-</android.support.v7.widget.CardView>
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1px"
+      android:background="@color/color_divider"/>
+
+</LinearLayout>

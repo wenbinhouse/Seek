@@ -33,8 +33,25 @@ public interface AppService {
   @GET("2/friendships/followers.json")
   Observable<ResponseBody> getFollowers(@Query("uid") String uid);
 
+  /**
+   * 获取最新消息
+   *
+   * @return
+   */
   @GET("api/4/news/latest")
   Observable<ZhihuDailyNews> getZhiHuNewsLatest();
+
+  /**
+   * 获取过往消息
+   * 若果需要查询 11 月 18 日的消息，before 后的数字应为 20131119
+   * 知乎日报的生日为 2013 年 5 月 19 日，若 before 后数字小于 20130520 ，只会接收到空消息
+   * 输入的今日之后的日期仍然获得今日内容，但是格式不同于最新消息的 JSON 格式
+   *
+   * @param date
+   * @return
+   */
+  @GET("api/4/news/before/{date}")
+  Observable<ZhihuDailyNews> getZhihuNewsByDate(@Path("date") String date);
 
   @GET("api/4/news/{storyId}")
   Observable<ZhihuDailyStory> getZhihuNewsDetail(@Path("storyId") int storyId);

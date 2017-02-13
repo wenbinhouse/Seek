@@ -6,4 +6,11 @@
 
   <string name="main_title">首页</string>
   <string name="explore_title">发现</string>
+
+  <string name="nav_home">首页</string>
+  <string name="nav_setting">设置</string>
+  <string name="nav_about">关于</string>
+
+  <string name="loading_more">加载中…</string>
+  <string name="no_more">没有更多了</string>
 </resources>

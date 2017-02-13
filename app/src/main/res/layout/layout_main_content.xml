@@ -27,14 +27,4 @@
       android:layout_height="match_parent"
       android:layout_below="@+id/main_toolbar"/>
 
-  <android.support.design.widget.FloatingActionButton
-      android:id="@+id/publish_timeline_fab"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:layout_alignParentRight="true"
-      android:layout_marginBottom="@dimen/base_margin"
-      android:layout_marginRight="@dimen/base_margin"
-      android:src="@mipmap/ic_launcher"/>
-
 </RelativeLayout>

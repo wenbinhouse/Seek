@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 1 pixel -->
+    <dimen name="pixel_1">0.67dp</dimen>
+
+    <!-- 5 pixel -->
+    <dimen name="pixel_5">3.33dp</dimen>
+
+    <!-- 10 pixel -->
+    <dimen name="pixel_10">6.67dp</dimen>
+
+    <!-- 12 pixel -->
+    <dimen name="pixel_12">8dp</dimen>
+
+    <!-- 15 pixel -->
+    <dimen name="pixel_15">10dp</dimen>
+
+    <!-- 20 pixel -->
+    <dimen name="pixel_20">13.3dp</dimen>
+
+    <!-- 25 pixel -->
+    <dimen name="pixel_25">16.67dp</dimen>
+
+    <!-- 30 pixel -->
+    <dimen name="pixel_30">20dp</dimen>
+
+    <!-- 60 pixel -->
+    <dimen name="pixel_60">40dp</dimen>
+
+</resources>

@@ -6,15 +6,11 @@ android {
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "wb.app.seek"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-//        ndk {
-//            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64, mips, mips64"
-//        }
     }
     buildTypes {
         release {
