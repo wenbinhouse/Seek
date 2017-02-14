@@ -1,5 +1,6 @@
 package wb.app.seek.common.widgets.recyclerview;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 /**
@@ -10,6 +11,17 @@ public abstract class OnRecyclerViewScrollListener extends RecyclerView.OnScroll
   @Override
   public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
     super.onScrolled(recyclerView, dx, dy);
+
+    RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+    if (layoutManager instanceof LinearLayoutManager) {
+      LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+      int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
+      if (firstVisibleItemPosition > 10) {
+        showRocket();
+      } else {
+        hideRocket();
+      }
+    }
 
     boolean canScrollDown = recyclerView.canScrollVertically(-1);
     boolean canScrollUp = recyclerView.canScrollVertically(1);
@@ -23,6 +35,14 @@ public abstract class OnRecyclerViewScrollListener extends RecyclerView.OnScroll
       //上拉加载更多
       onLoadMore();
     }
+  }
+
+  public void hideRocket() {
+
+  }
+
+  public void showRocket() {
+
   }
 
   protected abstract void onLoad();

@@ -9,7 +9,7 @@
     android:background="@color/color_white"
     android:orientation="vertical">
 
-  <RelativeLayout
+  <android.support.design.widget.CoordinatorLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
@@ -23,15 +23,25 @@
         android:id="@+id/date_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/base_margin"
         android:layout_marginRight="@dimen/base_margin"
-        android:src="@mipmap/ic_launcher"
-        app:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/ic_date_64"
+        app:backgroundTint="@color/color_white"
         app:borderWidth="0dp"
-        app:elevation="4dp"/>
+        app:elevation="4dp"
+        app:layout_anchor="@id/recycler_view"
+        app:layout_anchorGravity="bottom|right"/>
 
-  </RelativeLayout>
+    <ImageView
+        android:id="@+id/rocket_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/base_margin"
+        android:alpha="0.3"
+        android:src="@drawable/ic_rocket_64"
+        android:visibility="gone"/>
+
+  </android.support.design.widget.CoordinatorLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -6,7 +6,7 @@ import wb.app.seek.model.ZhihuDailyNews;
 /**
  * Created by W.b on 2017/2/10.
  */
-public class ZhihuDailyContract {
+class ZhihuDailyContract {
 
   interface View extends BaseView {
 

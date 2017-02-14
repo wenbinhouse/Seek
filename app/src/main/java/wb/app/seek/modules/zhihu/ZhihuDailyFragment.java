@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 
 import java.util.Calendar;
 
@@ -31,6 +32,7 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
   @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
   @BindView(R.id.refresh_layout) SwipeRefreshLayout mRefreshLayout;
   @BindView(R.id.date_fab) FloatingActionButton mDateFab;
+  @BindView(R.id.rocket_img) ImageView mRocketImg;
   private ZhihuDailyAdapter mZhihuListAdapter;
 
   @Override
@@ -81,6 +83,20 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     protected void onLoadMore() {
       getPresenter().loadMoreNews();
     }
+
+    @Override
+    public void showRocket() {
+      super.showRocket();
+
+      mRocketImg.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideRocket() {
+      super.hideRocket();
+
+      mRocketImg.setVisibility(View.GONE);
+    }
   };
 
   @Override
@@ -128,7 +144,7 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     return rootView;
   }
 
-  @OnClick({R.id.date_fab})
+  @OnClick({R.id.date_fab, R.id.rocket_img})
   public void onClick(View view) {
     switch (view.getId()) {
       case R.id.date_fab:
@@ -147,6 +163,11 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
           }
         }, curYear, curMonth, curDayOfMonth);
         datePickerDialog.show();
+        break;
+
+      case R.id.rocket_img:
+        // 快速滚到到顶部
+        mRecyclerView.smoothScrollToPosition(0);
         break;
     }
   }

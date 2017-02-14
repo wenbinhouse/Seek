@@ -23,6 +23,11 @@ public class SplashActivity extends BaseActivity {
   }
 
   @Override
+  protected boolean isContentViewWithToolbar() {
+    return false;
+  }
+
+  @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 

@@ -5,7 +5,7 @@ import wb.app.seek.common.base.mvp.BaseView;
 /**
  * Created by W.b on 2017/2/10.
  */
-public class ZhihuDailyDetailContract {
+class ZhihuDailyDetailContract {
 
   interface View extends BaseView {
 

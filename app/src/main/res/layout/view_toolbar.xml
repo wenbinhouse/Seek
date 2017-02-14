@@ -6,15 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/tool_bar_height"
     android:background="@android:color/white"
-    android:elevation="6dp"
+    android:elevation="@dimen/pixel_1"
     app:navigationIcon="?attr/homeAsUpIndicator">
-
-  <View
-      android:id="@+id/tool_bar_line"
-      android:layout_width="match_parent"
-      android:layout_height="1px"
-      android:layout_alignBottom="@+id/tool_bar"
-      android:background="#e5e5e5"
-      android:visibility="gone"/>
 
 </android.support.v7.widget.Toolbar>

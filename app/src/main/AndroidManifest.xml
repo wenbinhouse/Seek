@@ -33,8 +33,17 @@
         android:name=".modules.main.PhotoPreviewActivity"
         android:screenOrientation="portrait"/>
 
-    <activity android:name=".modules.zhihu.ZhihuDailyDetailActivity"
-              android:screenOrientation="portrait"/>
+    <activity
+        android:name=".modules.zhihu.ZhihuDailyDetailActivity"
+        android:screenOrientation="portrait"/>
+
+    <activity
+        android:name=".modules.main.SettingActivity"
+        android:screenOrientation="portrait"/>
+
+    <activity
+        android:name=".modules.main.AboutActivity"
+        android:screenOrientation="portrait"/>
 
   </application>
 

@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import wb.app.seek.R;
@@ -17,7 +16,7 @@ import wb.app.seek.common.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 
-  @BindView(R.id.main_toolbar) Toolbar mMainToolbar;
+  @BindView(R.id.tool_bar) Toolbar mMainToolbar;
   @BindView(R.id.drawer_main_layout) DrawerLayout mDrawerLayout;
   @BindView(R.id.main_viewpager) ViewPager mMainViewpager;
   @BindView(R.id.main_tab_layout) TabLayout mMainTabLayout;
@@ -35,41 +34,37 @@ public class MainActivity extends BaseActivity {
   }
 
   private void setupDrawerContent() {
+    mNavView.setCheckedItem(R.id.nav_home);
+
     mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
       @Override
       public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        item.setChecked(true);
         switch (item.getItemId()) {
           case R.id.nav_home:
-            Toast.makeText(MainActivity.this, "home", Toast.LENGTH_SHORT).show();
             break;
 
           case R.id.nav_setting:
-            Toast.makeText(MainActivity.this, "setting", Toast.LENGTH_SHORT).show();
+            startActivity(SettingActivity.class);
             break;
 
           case R.id.nav_about:
-            Toast.makeText(MainActivity.this, "about", Toast.LENGTH_SHORT).show();
+            startActivity(AboutActivity.class);
             break;
         }
         mDrawerLayout.closeDrawers();
         return true;
       }
     });
-    mNavView.setNavigationItemSelectedListener(
-        new NavigationView.OnNavigationItemSelectedListener() {
-          @Override
-          public boolean onNavigationItemSelected(MenuItem menuItem) {
-            menuItem.setChecked(true);
-            mDrawerLayout.closeDrawers();
-            return true;
-          }
-        });
   }
 
   @Override
   protected int getContentViewId() {
     return R.layout.activity_main;
+  }
+
+  @Override
+  public boolean isContentViewWithToolbar() {
+    return false;
   }
 
   private void initViews() {
@@ -78,7 +73,6 @@ public class MainActivity extends BaseActivity {
   }
 
   private void initToolbar() {
-    mMainToolbar.setTitle("");
     setSupportActionBar(mMainToolbar);
 
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
