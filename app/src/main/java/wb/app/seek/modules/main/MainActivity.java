@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
+import wb.app.seek.modules.about.AboutActivity;
+import wb.app.seek.modules.setting.SettingActivity;
 
 public class MainActivity extends BaseActivity {
 

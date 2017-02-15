@@ -1,13 +1,13 @@
 package wb.app.seek.modules.zhihu;
 
-import wb.app.seek.common.base.mvp.BaseView;
+import wb.app.seek.common.base.mvp.IView;
 
 /**
  * Created by W.b on 2017/2/10.
  */
 class ZhihuDailyDetailContract {
 
-  interface View extends BaseView {
+  interface View extends IView {
 
     void showCoverImg(String url);
 

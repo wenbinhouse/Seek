@@ -3,6 +3,7 @@ package wb.app.seek.modules.zhihu;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +46,14 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     return R.layout.fragment_zhihu;
   }
 
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_zhihu, container, false);
+    ButterKnife.bind(this, view);
+    return view;
+  }
+
   @Override
   protected void initComponents(View view) {
     initRecyclerView();
@@ -75,8 +84,10 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
 
   private RecyclerView.OnScrollListener onScrollListener = new OnRecyclerViewScrollListener() {
 
+
     @Override
-    protected void onLoad() {
+    protected void onRefresh(boolean isCanRefresh) {
+      mRefreshLayout.setEnabled(isCanRefresh ? true : false);
     }
 
     @Override
@@ -134,14 +145,6 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
   @Override
   public void onRefresh() {
     getPresenter().refreshNews(DateTimeUtils.getCurrentDay());
-  }
-
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    // TODO: inflate a fragment view
-    View rootView = super.onCreateView(inflater, container, savedInstanceState);
-    ButterKnife.bind(this, rootView);
-    return rootView;
   }
 
   @OnClick({R.id.date_fab, R.id.rocket_img})

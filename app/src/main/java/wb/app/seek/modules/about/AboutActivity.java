@@ -1,4 +1,4 @@
-package wb.app.seek.modules.main;
+package wb.app.seek.modules.about;
 
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;

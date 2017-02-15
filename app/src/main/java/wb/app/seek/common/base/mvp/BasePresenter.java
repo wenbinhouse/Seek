@@ -13,7 +13,7 @@ import wb.app.seek.common.http.rx.LifecycleEvent;
 /**
  * Created by W.b on 2016/11/29.
  */
-public class BasePresenter<V extends BaseView> {
+public class BasePresenter<V extends IView> implements IPresenter<V> {
 
   protected String TAG = getClass().getSimpleName();
 
@@ -32,12 +32,14 @@ public class BasePresenter<V extends BaseView> {
 
   private AppService mService;
 
-  public void attachView(V mvpView) {
-    this.mView = mvpView;
+  @Override
+  public void attachView(V view) {
+    this.mView = view;
     mAppClient = AppClient.getInstance();
     mService = mAppClient.getService();
   }
 
+  @Override
   public void detachView() {
     this.mView = null;
     mLifecycleSubject.onNext(LifecycleEvent.DESTROY);

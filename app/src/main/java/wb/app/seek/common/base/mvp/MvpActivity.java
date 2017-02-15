@@ -10,7 +10,7 @@ import wb.app.seek.common.base.BaseActivity;
 /**
  * Created by W.b on 2016/11/29.
  */
-public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity implements BaseView {
+public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity implements IView {
 
   private String TAG = getClass().getSimpleName();
 

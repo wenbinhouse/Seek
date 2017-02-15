@@ -26,16 +26,20 @@ public abstract class OnRecyclerViewScrollListener extends RecyclerView.OnScroll
     boolean canScrollDown = recyclerView.canScrollVertically(-1);
     boolean canScrollUp = recyclerView.canScrollVertically(1);
 
-    if (!canScrollDown) {
-      //下拉刷新
-      onLoad();
-    }
+    //下拉刷新
+    onRefresh(!canScrollDown ? true : false);
 
     if (!canScrollUp) {
       //上拉加载更多
       onLoadMore();
     }
   }
+
+  protected void onRefresh(boolean isCanRefresh) {
+
+  }
+
+  protected abstract void onLoadMore();
 
   public void hideRocket() {
 
@@ -44,8 +48,4 @@ public abstract class OnRecyclerViewScrollListener extends RecyclerView.OnScroll
   public void showRocket() {
 
   }
-
-  protected abstract void onLoad();
-
-  protected abstract void onLoadMore();
 }

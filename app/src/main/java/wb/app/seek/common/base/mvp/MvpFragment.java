@@ -13,15 +13,15 @@ import wb.app.seek.common.base.BaseFragment;
 /**
  * Created by W.b on 2016/12/29.
  */
-public abstract class MvpFragment<P extends BasePresenter> extends BaseFragment implements BaseView {
-
-  protected P getPresenter() {
-    return mPresenter;
-  }
+public abstract class MvpFragment<P extends BasePresenter> extends BaseFragment implements IView {
 
   private P mPresenter;
 
   protected abstract P createPresenter();
+
+  protected P getPresenter() {
+    return mPresenter;
+  }
 
   @Override
   public void onAttach(Context context) {

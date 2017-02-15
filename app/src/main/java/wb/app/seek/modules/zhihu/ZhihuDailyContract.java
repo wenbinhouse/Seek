@@ -1,6 +1,6 @@
 package wb.app.seek.modules.zhihu;
 
-import wb.app.seek.common.base.mvp.BaseView;
+import wb.app.seek.common.base.mvp.IView;
 import wb.app.seek.model.ZhihuDailyNews;
 
 /**
@@ -8,7 +8,7 @@ import wb.app.seek.model.ZhihuDailyNews;
  */
 class ZhihuDailyContract {
 
-  interface View extends BaseView {
+  interface View extends IView {
 
     void showNews(ZhihuDailyNews dailyNews);
 

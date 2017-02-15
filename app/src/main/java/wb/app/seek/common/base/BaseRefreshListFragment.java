@@ -103,10 +103,6 @@ public abstract class BaseRefreshListFragment<P extends BasePresenter> extends M
   private RecyclerView.OnScrollListener onScrollListener = new OnRecyclerViewScrollListener() {
 
     @Override
-    protected void onLoad() {
-    }
-
-    @Override
     protected void onLoadMore() {
       if (mCurrentStatus == ACTION_IDLE) {
         mCurrentStatus = ACTION_LOAD_MORE_REFRESH;
