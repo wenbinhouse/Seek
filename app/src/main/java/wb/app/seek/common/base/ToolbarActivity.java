@@ -4,6 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -26,7 +27,11 @@ public class ToolbarActivity extends AppCompatActivity {
     View userView = inflater.inflate(layoutResID, null);
     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     int toolBarSize = (int) getResources().getDimension(R.dimen.tool_bar_height);
-    layoutParams.topMargin = toolBarSize;
+    if (isOverLayout()) {
+      layoutParams.topMargin = 0;
+    } else {
+      layoutParams.topMargin = toolBarSize;
+    }
     contentView.addView(userView, layoutParams);
 
     View view = inflater.inflate(R.layout.view_toolbar, contentView);
@@ -36,7 +41,20 @@ public class ToolbarActivity extends AppCompatActivity {
     setSupportActionBar(toolbar);
   }
 
+  protected boolean isOverLayout() {
+    return false;
+  }
+
   public void setContentViewNoToolbar(@LayoutRes int layoutResID) {
     super.setContentView(layoutResID);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+      onBackPressed();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

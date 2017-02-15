@@ -15,8 +15,14 @@
         android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:collapsedTitleTextAppearance="?android:attr/textAppearanceMedium"
         app:contentScrim="@color/colorPrimary"
-        app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways">
+        app:expandedTitleMarginEnd="48dp"
+        app:expandedTitleMarginStart="48dp"
+        app:expandedTitleTextAppearance="?android:attr/textAppearanceMedium"
+        app:layout_collapseMode="pin"
+        app:layout_collapseParallaxMultiplier="0.1"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
       <ImageView
           android:id="@+id/cover_img"
@@ -26,12 +32,7 @@
           android:scrollbarAlwaysDrawVerticalTrack="true"
           android:scrollbarStyle="insideInset"/>
 
-      <android.support.v7.widget.Toolbar
-          android:id="@+id/tool_bar"
-          android:layout_width="match_parent"
-          android:layout_height="?attr/actionBarSize"
-          app:background="@color/colorPrimary"
-          app:layout_collapseMode="pin"/>
+      <include layout="@layout/view_toolbar"/>
 
     </android.support.design.widget.CollapsingToolbarLayout>
 

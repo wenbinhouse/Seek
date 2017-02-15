@@ -1,5 +1,6 @@
 package wb.app.seek.modules.zhihu;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -8,6 +9,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -54,6 +56,8 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
 
     mStoryId = getIntent().getIntExtra("storyId", -1);
 
+    initToolbar();
+
     initWebView();
 
     mRefreshLayout.setOnRefreshListener(this);
@@ -63,6 +67,11 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
         onRefresh();
       }
     });
+  }
+
+  private void initToolbar() {
+    mToolbar.setBackgroundColor(Color.TRANSPARENT);
+    setSupportActionBar(mToolbar);
   }
 
   private void initWebView() {
@@ -77,14 +86,23 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
     mWebView.getSettings().setDomStorageEnabled(true);
     //开启application Cache功能
     mWebView.getSettings().setAppCacheEnabled(false);
-    //显示网页图片
-//    mWebView.getSettings().setBlockNetworkImage(false);
+    //加载网页图片
+    mWebView.getSettings().setBlockNetworkImage(false);
 
 //    mWebView.getSettings().setUseWideViewPort(true);
 //    mWebView.getSettings().setLoadWithOverviewMode(true);
 
 //    mWebView.setWebChromeClient(new WebChromeClient());
 //    mWebView.setWebViewClient(new WebViewClient());
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+      onBackPressed();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   @Override
