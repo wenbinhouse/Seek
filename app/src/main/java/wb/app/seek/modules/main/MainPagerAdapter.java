@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import wb.app.seek.modules.RecommendFragment;
 import wb.app.seek.modules.zhihu.ZhihuDailyFragment;
 
 /**
@@ -18,10 +17,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
   @Override
   public Fragment getItem(int position) {
-    if (position == 0) {
-      return new ZhihuDailyFragment();
-    }
-    return new RecommendFragment();
+    return new ZhihuDailyFragment();
   }
 
   @Override
@@ -31,9 +27,6 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
   @Override
   public CharSequence getPageTitle(int position) {
-    if (position == 0) {
-      return "知乎日报";
-    }
-    return "发现";
+    return "知乎日报";
   }
 }

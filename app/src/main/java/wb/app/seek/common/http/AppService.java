@@ -6,7 +6,6 @@ import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 import rx.Observable;
@@ -26,12 +25,6 @@ public interface AppService {
 
   @POST("{url}")
   Observable<ResponseBody> executePost(@Url() String url, @QueryMap Map<String, String> map);
-
-  @GET("2/friendships/friends.json")
-  Observable<ResponseBody> getFriends(@Query("uid") String uid);
-
-  @GET("2/friendships/followers.json")
-  Observable<ResponseBody> getFollowers(@Query("uid") String uid);
 
   /**
    * 获取最新消息

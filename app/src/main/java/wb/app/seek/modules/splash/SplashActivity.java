@@ -1,4 +1,4 @@
-package wb.app.seek.modules.main;
+package wb.app.seek.modules.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
+import wb.app.seek.modules.main.MainActivity;
 
 /**
  * Created by W.b on 2017/1/9.
@@ -31,10 +32,10 @@ public class SplashActivity extends BaseActivity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    WeiBoAuth();
+    launchMain();
   }
 
-  private void WeiBoAuth() {
+  private void launchMain() {
     Observable.timer(2, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
         .map(new Func1<Long, Object>() {
           @Override

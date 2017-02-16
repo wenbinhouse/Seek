@@ -2,7 +2,6 @@ package wb.app.seek.common.base;
 
 import android.app.Application;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
@@ -24,9 +23,6 @@ public class BaseApplication extends Application {
       return;
     }
     LeakCanary.install(this);
-
-    //初始化Fresco图片框架
-    Fresco.initialize(this);
 
     mInstance = this;
 
