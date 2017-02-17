@@ -3,9 +3,9 @@ package wb.app.seek.common.base;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 
-import butterknife.ButterKnife;
 import wb.app.seek.common.http.AppService;
 import wb.app.seek.common.http.retrofit.AppClient;
 
@@ -21,16 +21,16 @@ public abstract class BaseActivity extends ToolbarActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    if (isContentViewWithToolbar()) {
-      setContentView(getContentViewId());
-    } else {
-      setContentViewNoToolbar(getContentViewId());
-    }
-    ButterKnife.bind(this);
   }
 
-  protected abstract int getContentViewId();
+  @Override
+  public void setContentView(@LayoutRes int layoutResID) {
+    if (isContentViewWithToolbar()) {
+      super.setContentView(layoutResID);
+    } else {
+      setContentViewNoToolbar(layoutResID);
+    }
+  }
 
   protected boolean isContentViewWithToolbar() {
     return true;

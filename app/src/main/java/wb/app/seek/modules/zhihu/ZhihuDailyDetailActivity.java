@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import wb.app.seek.R;
 import wb.app.seek.common.base.mvp.MvpActivity;
 
@@ -41,18 +42,11 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
   }
 
   @Override
-  protected int getContentViewId() {
-    return R.layout.activity_zhihu_daily_detail;
-  }
-
-  @Override
-  protected boolean isContentViewWithToolbar() {
-    return false;
-  }
-
-  @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_zhihu_daily_detail);
+
+    ButterKnife.bind(this);
 
     mStoryId = getIntent().getIntExtra("storyId", -1);
 
@@ -67,6 +61,11 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
         onRefresh();
       }
     });
+  }
+
+  @Override
+  protected boolean isContentViewWithToolbar() {
+    return false;
   }
 
   private void initToolbar() {
@@ -126,8 +125,6 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
         .load(url)
         .asBitmap()
         .centerCrop()
-        .placeholder(R.drawable.ic_placeholder)
-        .error(R.drawable.ic_placeholder)
         .into(mCoverImg);
   }
 

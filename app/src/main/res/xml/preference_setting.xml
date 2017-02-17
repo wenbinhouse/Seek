@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory android:title="基本设置">
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="no_pic_mode"
+        android:summary="阅读时不加载图片"
+        android:title="无图模式"/>
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="in_app_browser"
+        android:summary="应用内查看链接"
+        android:title="使用内置浏览器"/>
+
+  </PreferenceCategory>
+
+</PreferenceScreen>

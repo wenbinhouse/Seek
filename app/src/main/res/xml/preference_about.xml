@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+  <PreferenceCategory android:title="Seek">
+
+    <Preference android:title="版本: V1.0.0"/>
+
+    <Preference
+        android:key="rate"
+        android:summary="如果你喜欢 Seek, 请在应用商店给它一个好评吧"
+        android:title="为 Seek 评价"/>
+
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="作者">
+
+    <Preference
+        android:key="author"
+        android:summary="福建 厦门"
+        android:title="kee彬"/>
+
+    <Preference
+        android:key="github"
+        android:summary="https://github.com/coderWenbin"
+        android:title="在 github 关注我"/>
+
+    <Preference
+        android:key="jianshu"
+        android:summary="http://www.jianshu.com/u/4f328937e30c"
+        android:title="在 简书 关注我"/>
+
+    <!--<Preference-->
+        <!--android:key="qq"-->
+        <!--android:summary="1459808168"-->
+        <!--android:title="在 qq 联系我"/>-->
+
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="支持">
+
+    <Preference
+        android:key="feedback"
+        android:summary="帮助我改进 Seek"
+        android:title="反馈与建议"/>
+
+    <Preference
+        android:key="donate"
+        android:summary="如果觉得 Seek 对你有帮助，可以请我喝杯咖啡表示支持"
+        android:title="请我喝杯咖啡"/>
+
+    <Preference
+        android:key="license"
+        android:summary="本 App 仅学习交流使用，请勿用于商业用途"
+        android:title="开源许可"/>
+
+  </PreferenceCategory>
+
+</PreferenceScreen>

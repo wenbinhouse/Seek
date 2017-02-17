@@ -36,6 +36,10 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
   @BindView(R.id.rocket_img) ImageView mRocketImg;
   private ZhihuDailyAdapter mZhihuListAdapter;
 
+  public static ZhihuDailyFragment newInstance() {
+    return new ZhihuDailyFragment();
+  }
+
   @Override
   protected ZhihuDailyPresenter createPresenter() {
     return new ZhihuDailyPresenter();

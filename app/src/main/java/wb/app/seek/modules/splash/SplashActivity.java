@@ -19,20 +19,16 @@ import wb.app.seek.modules.main.MainActivity;
 public class SplashActivity extends BaseActivity {
 
   @Override
-  protected int getContentViewId() {
-    return R.layout.activity_splash;
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_splash);
+
+    launchMain();
   }
 
   @Override
   protected boolean isContentViewWithToolbar() {
     return false;
-  }
-
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    launchMain();
   }
 
   private void launchMain() {

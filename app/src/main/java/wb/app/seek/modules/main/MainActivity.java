@@ -1,7 +1,9 @@
 package wb.app.seek.modules.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
 import wb.app.seek.modules.about.AboutActivity;
@@ -25,14 +28,21 @@ public class MainActivity extends BaseActivity {
   @BindView(R.id.nav_view) NavigationView mNavView;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ButterKnife.bind(this);
 
     initToolbar();
 
     setupDrawerContent();
 
     initViews();
+  }
+
+  @Override
+  public boolean isContentViewWithToolbar() {
+    return false;
   }
 
   private void setupDrawerContent() {
@@ -46,27 +56,17 @@ public class MainActivity extends BaseActivity {
             break;
 
           case R.id.nav_setting:
-            startActivity(SettingActivity.class);
+            startActivity(new Intent(MainActivity.this, SettingActivity.class));
             break;
 
           case R.id.nav_about:
-            startActivity(AboutActivity.class);
+            startActivity(new Intent(MainActivity.this, AboutActivity.class));
             break;
         }
         mDrawerLayout.closeDrawers();
         return true;
       }
     });
-  }
-
-  @Override
-  protected int getContentViewId() {
-    return R.layout.activity_main;
-  }
-
-  @Override
-  public boolean isContentViewWithToolbar() {
-    return false;
   }
 
   private void initViews() {
