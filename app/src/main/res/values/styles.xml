@@ -14,4 +14,11 @@
     <item name="android:background">@color/color_divider</item>
   </style>
 
+  <style name="MyTabLayoutStyle" parent="Widget.Design.TabLayout">
+    <item name="tabIndicatorColor">@color/color_h2_dark</item>
+    <item name="tabBackground">@color/color_white</item>
+    <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+    <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+  </style>
+
 </resources>

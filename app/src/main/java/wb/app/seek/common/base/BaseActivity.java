@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 
-import wb.app.seek.common.http.AppService;
-import wb.app.seek.common.http.retrofit.AppClient;
-
 /**
  * Created by W.b on 2016/11/29.
  */
@@ -38,10 +35,6 @@ public abstract class BaseActivity extends ToolbarActivity {
 
   public SeekHelper getHelper() {
     return ((BaseApplication) getApplication()).getHelper();
-  }
-
-  public AppService getService() {
-    return AppClient.getInstance().getService();
   }
 
   protected void startActivity(Class<? extends BaseActivity> clz) {

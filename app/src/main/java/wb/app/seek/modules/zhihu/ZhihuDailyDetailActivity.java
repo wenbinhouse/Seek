@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -31,8 +30,6 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
   @BindView(R.id.tool_bar) Toolbar mToolbar;
   @BindView(R.id.toolbar_layout) CollapsingToolbarLayout mToolbarLayout;
   @BindView(R.id.appbar_layout) AppBarLayout mAppbarLayout;
-  @BindView(R.id.scroll_view) NestedScrollView mScrollView;
-  @BindView(R.id.refresh_layout) SwipeRefreshLayout mRefreshLayout;
   @BindView(R.id.coordinator_layout) CoordinatorLayout mCoordinatorLayout;
   private int mStoryId;
 
@@ -54,13 +51,7 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
 
     initWebView();
 
-    mRefreshLayout.setOnRefreshListener(this);
-    mRefreshLayout.post(new Runnable() {
-      @Override
-      public void run() {
-        onRefresh();
-      }
-    });
+    getPresenter().getDetail(mStoryId);
   }
 
   @Override
@@ -106,12 +97,10 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
 
   @Override
   public void showLoading() {
-    mRefreshLayout.setRefreshing(true);
   }
 
   @Override
   public void hideLoading() {
-    mRefreshLayout.setRefreshing(false);
   }
 
   @Override
@@ -125,6 +114,21 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
         .load(url)
         .asBitmap()
         .centerCrop()
+//        .into(new SimpleTarget<Bitmap>() {
+//          @Override
+//          public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+//            mCoverImg.setImageBitmap(resource);
+//            Palette.Builder pa = Palette.from(resource);
+//            pa.generate(new Palette.PaletteAsyncListener() {
+//              @Override
+//              public void onGenerated(Palette palette) {
+//                if (palette.getLightVibrantSwatch() != null) {
+//                  getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getLightVibrantColor(0x000000)));
+//                }
+//              }
+//            });
+//          }
+//        });
         .into(mCoverImg);
   }
 

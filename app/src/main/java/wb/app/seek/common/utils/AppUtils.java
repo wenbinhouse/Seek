@@ -1,6 +1,10 @@
 package wb.app.seek.common.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
+import wb.app.seek.common.utils.mlog.MLog;
 
 /**
  * App相关工具类
@@ -21,5 +25,21 @@ public class AppUtils {
    */
   public static String getAppPackageName(Context context) {
     return context.getPackageName();
+  }
+
+  /**
+   * 获取应用版本号
+   */
+  public static String getAppVersion(Context context) {
+    try {
+      PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+      int versionCode = packageInfo.versionCode;
+      String versionName = packageInfo.versionName;
+      MLog.d("versionCode = " + versionCode + ", versionName = " + versionName);
+      return versionName;
+    } catch (PackageManager.NameNotFoundException e) {
+      e.printStackTrace();
+      return "";
+    }
   }
 }

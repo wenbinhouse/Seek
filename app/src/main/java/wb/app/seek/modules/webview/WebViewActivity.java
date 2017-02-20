@@ -2,6 +2,7 @@ package wb.app.seek.modules.webview;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -20,6 +21,7 @@ import wb.app.seek.common.base.BaseActivity;
 public class WebViewActivity extends BaseActivity {
 
   public static final String INTENT_KEY_URL = "INTENT_KEY_URL";
+  public static final String INTENT_KEY_TITLE = "INTENT_KEY_TITLE";
 
   @BindView(R.id.progress_bar) ProgressBar mProgressBar;
   @BindView(R.id.web_view) WebView mWebView;
@@ -33,6 +35,7 @@ public class WebViewActivity extends BaseActivity {
     ButterKnife.bind(this);
 
     String url = getIntent().getStringExtra(INTENT_KEY_URL);
+    final String title = getIntent().getStringExtra(INTENT_KEY_TITLE);
 
     mWebView.setScrollbarFadingEnabled(true);
     //能够和js交互
@@ -53,7 +56,11 @@ public class WebViewActivity extends BaseActivity {
       public void onProgressChanged(WebView view, int newProgress) {
         super.onProgressChanged(view, newProgress);
 
-        setTitle(mWebView.getTitle());
+        if (TextUtils.isEmpty(title)) {
+          setTitle(mWebView.getTitle());
+        } else {
+          setTitle(title);
+        }
 
         if (newProgress < 100) {
           mProgressBar.setVisibility(View.VISIBLE);

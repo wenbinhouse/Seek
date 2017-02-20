@@ -156,6 +156,8 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     switch (view.getId()) {
       case R.id.date_fab:
         // 选择日期
+        smoothScrollTop();
+
         final Calendar calendar = Calendar.getInstance();
         int curYear = calendar.get(Calendar.YEAR);
         int curMonth = calendar.get(Calendar.MONTH);
@@ -174,8 +176,12 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
 
       case R.id.rocket_img:
         // 快速滚到到顶部
-        mRecyclerView.smoothScrollToPosition(0);
+        smoothScrollTop();
         break;
     }
+  }
+
+  private void smoothScrollTop() {
+    mRecyclerView.smoothScrollToPosition(0);
   }
 }

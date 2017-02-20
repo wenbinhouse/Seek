@@ -32,7 +32,7 @@ public class SplashActivity extends BaseActivity {
   }
 
   private void launchMain() {
-    Observable.timer(2, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+    Observable.timer(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
         .map(new Func1<Long, Object>() {
           @Override
           public Object call(Long aLong) {

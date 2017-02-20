@@ -22,7 +22,7 @@
 
     <Preference
         android:key="github"
-        android:summary="https://github.com/coderWenbin"
+        android:summary="https://github.com/mawb23"
         android:title="在 github 关注我"/>
 
     <Preference
@@ -39,10 +39,10 @@
 
   <PreferenceCategory android:title="支持">
 
-    <Preference
-        android:key="feedback"
-        android:summary="帮助我改进 Seek"
-        android:title="反馈与建议"/>
+    <!--<Preference-->
+        <!--android:key="feedback"-->
+        <!--android:summary="帮助我改进 Seek"-->
+        <!--android:title="反馈与建议"/>-->
 
     <Preference
         android:key="donate"

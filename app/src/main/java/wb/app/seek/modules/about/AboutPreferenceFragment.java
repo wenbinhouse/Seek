@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.view.View;
+import android.widget.Toast;
 
 import wb.app.seek.R;
 
@@ -69,13 +70,13 @@ public class AboutPreferenceFragment extends PreferenceFragment implements About
 //      }
 //    });
 
-    findPreference("feedback").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-      @Override
-      public boolean onPreferenceClick(Preference preference) {
-        presenter.feedback();
-        return false;
-      }
-    });
+//    findPreference("feedback").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//      @Override
+//      public boolean onPreferenceClick(Preference preference) {
+//        presenter.feedback();
+//        return false;
+//      }
+//    });
 
     findPreference("donate").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
       @Override
@@ -106,5 +107,10 @@ public class AboutPreferenceFragment extends PreferenceFragment implements About
   @Override
   public void showBrowserNotFoundError() {
 
+  }
+
+  @Override
+  public void showDonateToast() {
+    Toast.makeText(getActivity(), "复制成功，请进入支付宝完成捐赠", Toast.LENGTH_SHORT).show();
   }
 }

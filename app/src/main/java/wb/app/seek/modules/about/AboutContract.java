@@ -12,6 +12,8 @@ public class AboutContract {
     void showFeedbackError();
 
     void showBrowserNotFoundError();
+
+    void showDonateToast();
   }
 
   interface Presenter {
