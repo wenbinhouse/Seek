@@ -27,20 +27,23 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
         .subscribe(new BaseSubscriber<ZhihuDailyNews>() {
           @Override
           public void onSuccess(ZhihuDailyNews data) {
-            if (data != null) {
+            if (data != null)
               mBeforeDay = data.getDate();
-            }
-            getView().showNews(data);
+
+            if (getView() != null)
+              getView().showNews(data);
           }
 
           @Override
           public void onFailure(String msg, String exception) {
-            getView().showError(msg, exception);
+            if (getView() != null)
+              getView().showError(msg, exception);
           }
 
           @Override
           public void onFinish() {
-            getView().hideLoading();
+            if (getView() != null)
+              getView().hideLoading();
           }
         });
   }
@@ -59,6 +62,9 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
           @Override
           public void onSuccess(ZhihuDailyNews data) {
+            if (getView() == null)
+              return;
+
             if (data != null && data.getStories() != null && data.getStories().size() > 0) {
               mBeforeDay = data.getDate();
               getView().showMoreNews(data);
@@ -69,7 +75,8 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
           @Override
           public void onFailure(String msg, String exception) {
-            getView().showError(msg, exception);
+            if (getView() != null)
+              getView().showError(msg, exception);
           }
 
           @Override

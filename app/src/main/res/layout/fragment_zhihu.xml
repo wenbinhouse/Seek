@@ -44,6 +44,7 @@
         android:layout_marginBottom="@dimen/base_margin"
         android:alpha="0.3"
         android:src="@drawable/ic_rocket_64"
+        android:visibility="gone"
         app:layout_anchor="@+id/recycler_view"
         app:layout_anchorGravity="bottom|center_horizontal"/>
 

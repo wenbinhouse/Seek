@@ -22,6 +22,10 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
   private V mView;
   private AppClient mAppClient;
 
+  /**
+   * @return
+   * @Exception NullPointerException
+   */
   public V getView() {
     return mView;
   }

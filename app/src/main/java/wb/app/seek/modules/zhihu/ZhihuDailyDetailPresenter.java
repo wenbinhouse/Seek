@@ -18,7 +18,7 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
         .subscribe(new BaseSubscriber<ZhihuDailyStory>() {
           @Override
           public void onSuccess(ZhihuDailyStory data) {
-            if (data != null) {
+            if (data != null && getView() != null) {
               getView().showTitle(data.getTitle());
               getView().showCoverImg(data.getImage());
               getView().showWeb(convertZhihuContent(data.getBody()));
@@ -27,12 +27,14 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
 
           @Override
           public void onFailure(String msg, String exception) {
-            getView().showError(msg, exception);
+            if (getView() != null)
+              getView().showError(msg, exception);
           }
 
           @Override
           public void onFinish() {
-            getView().hideLoading();
+            if (getView() != null)
+              getView().hideLoading();
           }
         });
   }
