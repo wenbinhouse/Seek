@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import wb.app.seek.common.utils.mlog.MLog;
+import wb.app.library.MLog;
 
 /**
  * App相关工具类

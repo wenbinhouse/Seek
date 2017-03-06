@@ -28,9 +28,10 @@
 
     <ImageView
         android:id="@+id/item_cover_img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center_vertical"/>
+        android:layout_width="@dimen/small_image_width"
+        android:layout_height="@dimen/small_image_width"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/base_margin"/>
 
   </LinearLayout>
 

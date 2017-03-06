@@ -10,6 +10,7 @@
   <string name="nav_home">首页</string>
   <string name="nav_setting">设置</string>
   <string name="nav_about">关于</string>
+  <string name="nav_date">选择日期</string>
 
   <string name="loading_more">加载中…</string>
   <string name="no_more">没有更多了</string>
@@ -66,5 +67,7 @@
 
   <!-- 设置 -->
   <string name="setting_title">设置</string>
+
+  <string name="transition_name_cover_image">封面图片</string>
 
 </resources>

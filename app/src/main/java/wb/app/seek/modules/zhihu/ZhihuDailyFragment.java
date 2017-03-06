@@ -1,6 +1,5 @@
 package wb.app.seek.modules.zhihu;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,10 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.ImageView;
-
-import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,8 +27,7 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
 
   @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
   @BindView(R.id.refresh_layout) SwipeRefreshLayout mRefreshLayout;
-  @BindView(R.id.date_fab) FloatingActionButton mDateFab;
-  @BindView(R.id.rocket_img) ImageView mRocketImg;
+  @BindView(R.id.rocket_fab) FloatingActionButton mRocketFab;
   private ZhihuDailyAdapter mZhihuListAdapter;
 
   public static ZhihuDailyFragment newInstance() {
@@ -75,6 +69,7 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     mZhihuListAdapter = new ZhihuDailyAdapter();
     mZhihuListAdapter.setOnItemClickListener(new ZhihuDailyAdapter.OnItemClickListener() {
+
       @Override
       public void onClick(int id) {
         Intent intent = new Intent(getActivity(), ZhihuDailyDetailActivity.class);
@@ -103,14 +98,14 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     public void showRocket() {
       super.showRocket();
 
-      mRocketImg.setVisibility(View.VISIBLE);
+      mRocketFab.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideRocket() {
       super.hideRocket();
 
-      mRocketImg.setVisibility(View.GONE);
+      mRocketFab.setVisibility(View.GONE);
     }
   };
 
@@ -151,37 +146,34 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     getPresenter().refreshNews(DateTimeUtils.getCurrentDay());
   }
 
-  @OnClick({R.id.date_fab, R.id.rocket_img})
+  @OnClick({R.id.rocket_fab})
   public void onClick(View view) {
     switch (view.getId()) {
-      case R.id.date_fab:
-        // 选择日期
-        smoothScrollTop();
-
-        final Calendar calendar = Calendar.getInstance();
-        int curYear = calendar.get(Calendar.YEAR);
-        int curMonth = calendar.get(Calendar.MONTH);
-        int curDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-          @Override
-          public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            month += 1;
-            String monthStr = DateTimeUtils.formatDate(month);
-            String dayOfMonthStr = DateTimeUtils.formatDate(dayOfMonth);
-            getPresenter().refreshNews(String.format("%1$d%2$s%3$s", year, monthStr, dayOfMonthStr));
-          }
-        }, curYear, curMonth, curDayOfMonth);
-        datePickerDialog.show();
-        break;
-
-      case R.id.rocket_img:
+      case R.id.rocket_fab:
         // 快速滚到到顶部
         smoothScrollTop();
+//        final Calendar calendar = Calendar.getInstance();
+//        int curYear = calendar.get(Calendar.YEAR);
+//        int curMonth = calendar.get(Calendar.MONTH);
+//        int curDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+//        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+//          @Override
+//          public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//            smoothScrollTop();
+//
+//            month += 1;
+//            String monthStr = DateTimeUtils.formatDate(month);
+//            String dayOfMonthStr = DateTimeUtils.formatDate(dayOfMonth);
+//            getPresenter().refreshNews(String.format("%1$d%2$s%3$s", year, monthStr, dayOfMonthStr));
+//          }
+//        }, curYear, curMonth, curDayOfMonth);
+//        datePickerDialog.show();
         break;
     }
   }
 
   private void smoothScrollTop() {
-    mRecyclerView.smoothScrollToPosition(0);
+    mRecyclerView.scrollToPosition(0);
+//    mRecyclerView.smoothScrollToPosition(0);
   }
 }

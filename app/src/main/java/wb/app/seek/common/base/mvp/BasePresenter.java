@@ -1,12 +1,7 @@
 package wb.app.seek.common.base.mvp;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 import wb.app.seek.common.http.AppService;
-import wb.app.seek.common.http.exception.ExceptionHandler;
 import wb.app.seek.common.http.retrofit.AppClient;
 import wb.app.seek.common.http.rx.LifecycleEvent;
 
@@ -17,7 +12,7 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
 
   protected String TAG = getClass().getSimpleName();
 
-  private final BehaviorSubject<LifecycleEvent> mLifecycleSubject = BehaviorSubject.create();
+  protected final BehaviorSubject<LifecycleEvent> mLifecycleSubject = BehaviorSubject.create();
 
   private V mView;
   private AppClient mAppClient;
@@ -28,6 +23,10 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
    */
   public V getView() {
     return mView;
+  }
+
+  public boolean isAttach() {
+    return mView != null;
   }
 
   public AppService getService() {
@@ -49,54 +48,54 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
     mLifecycleSubject.onNext(LifecycleEvent.DESTROY);
   }
 
-  public <T> Observable.Transformer<T, T> bindLifecycleEvent() {
-    return new Observable.Transformer<T, T>() {
-      @Override
-      public Observable<T> call(Observable<T> observable) {
-        Observable<LifecycleEvent> lifecycleEventObservable = mLifecycleSubject.takeFirst(new Func1<LifecycleEvent, Boolean>() {
-          @Override
-          public Boolean call(LifecycleEvent activityLifeCycleEvent) {
-            return activityLifeCycleEvent.equals(LifecycleEvent.DESTROY);
-          }
-        });
-
-        return observable.takeUntil(lifecycleEventObservable)
-            .subscribeOn(Schedulers.io())
-            .unsubscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map(new Func1<T, T>() {
-              @Override
-              public T call(T t) {
-                // do something
-
-//                if (t instanceof Pojo) {
-//                  Pojo pojo = (Pojo) t;
-//                  String request = pojo.getRequest();
-//                  String error = pojo.getError();
-//                  String errorCode = pojo.getError_code();
-//                  if (!TextUtils.isEmpty(error)) {
-//                    MLog.d("request = " + request + ", error = " + error + ", errorCode = " + errorCode);
-//                    throw new ApiException(error, errorCode);
-//                  }
-//                }
-                return t;
-              }
-            })
-            .onErrorResumeNext(new Func1<Throwable, Observable<? extends T>>() {
-              @Override
-              public Observable<? extends T> call(Throwable throwable) {
-                return Observable.error(ExceptionHandler.handle(throwable));
-              }
-            });
-      }
-    };
-  }
-
-//  public <T> Observable.Transformer<BaseResponse<T>, T> bindLifecycleEvent() {
-//
-//    return new Observable.Transformer<BaseResponse<T>, T>() {
+//  public <T> Observable.Transformer<T, T> bindLifecycleEvent() {
+//    return new Observable.Transformer<T, T>() {
 //      @Override
-//      public Observable<T> call(Observable<BaseResponse<T>> baseResponseObservable) {
+//      public Observable<T> call(Observable<T> observable) {
+//        Observable<LifecycleEvent> lifecycleEventObservable = mLifecycleSubject.takeFirst(new Func1<LifecycleEvent, Boolean>() {
+//          @Override
+//          public Boolean call(LifecycleEvent activityLifeCycleEvent) {
+//            return activityLifeCycleEvent.equals(LifecycleEvent.DESTROY);
+//          }
+//        });
+//
+//        return observable.takeUntil(lifecycleEventObservable)
+//            .subscribeOn(Schedulers.io())
+//            .unsubscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .map(new Func1<T, T>() {
+//              @Override
+//              public T call(T t) {
+//                // do something
+//
+////                if (t instanceof Pojo) {
+////                  Pojo pojo = (Pojo) t;
+////                  String request = pojo.getRequest();
+////                  String error = pojo.getError();
+////                  String errorCode = pojo.getError_code();
+////                  if (!TextUtils.isEmpty(error)) {
+////                    MLog.d("request = " + request + ", error = " + error + ", errorCode = " + errorCode);
+////                    throw new ApiException(error, errorCode);
+////                  }
+////                }
+//                return t;
+//              }
+//            })
+//            .onErrorResumeNext(new Func1<Throwable, Observable<? extends T>>() {
+//              @Override
+//              public Observable<? extends T> call(Throwable throwable) {
+//                return Observable.error(ExceptionHandler.handle(throwable));
+//              }
+//            });
+//      }
+//    };
+//  }
+
+//  public <T> Observable.Transformer<T, T> bindLifecycleEvent() {
+//
+//    return new Observable.Transformer<T, T>() {
+//      @Override
+//      public Observable<T> call(Observable<T> baseResponseObservable) {
 //        Observable<LifecycleEvent> lifecycleEventObservable = mLifecycleSubject.takeFirst(new Func1<LifecycleEvent, Boolean>() {
 //          @Override
 //          public Boolean call(LifecycleEvent activityLifeCycleEvent) {
@@ -106,7 +105,10 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
 //
 //        return baseResponseObservable
 //            .takeUntil(lifecycleEventObservable)
-//            .compose(new CommonTransformer<T>());
+////            .compose(new CommonTransformer<T>())
+//            .subscribeOn(Schedulers.io())
+//            .unsubscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread());
 //      }
 //    };
 //  }

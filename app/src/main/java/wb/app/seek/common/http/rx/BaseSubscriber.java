@@ -1,8 +1,8 @@
 package wb.app.seek.common.http.rx;
 
 import rx.Subscriber;
+import wb.app.library.MLog;
 import wb.app.seek.common.http.exception.ResponseException;
-import wb.app.seek.common.utils.mlog.MLog;
 
 /**
  * Created by W.b on 16/9/25.
@@ -33,18 +33,13 @@ public abstract class BaseSubscriber<T> extends Subscriber<T> {
   @Override
   public void onError(Throwable e) {
     //统一处理请求失败
+    onFinish();
     if (e instanceof ResponseException) {
       ResponseException throwable = (ResponseException) e;
       MLog.d(TAG, "onError() : " + throwable.getMessage());
 
       onFailure(throwable.getMessage(), throwable.getException());
-    } else {
-      MLog.d(TAG, "onError() : " + "未知异常");
-
-      onFailure("未知异常", "未知异常");
     }
-
-    onFinish();
   }
 
   @Override

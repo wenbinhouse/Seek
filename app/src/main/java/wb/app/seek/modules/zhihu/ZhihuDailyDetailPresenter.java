@@ -2,6 +2,7 @@ package wb.app.seek.modules.zhihu;
 
 import wb.app.seek.common.base.mvp.BasePresenter;
 import wb.app.seek.common.http.rx.BaseSubscriber;
+import wb.app.seek.common.http.rx.ResponseTransformer;
 import wb.app.seek.model.ZhihuDailyStory;
 
 /**
@@ -14,11 +15,15 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
     getView().showLoading();
 
     getService().getZhihuNewsDetail(storyId)
-        .compose(this.<ZhihuDailyStory>bindLifecycleEvent())
+        .compose(ResponseTransformer.<ZhihuDailyStory>getInstance(mLifecycleSubject))
         .subscribe(new BaseSubscriber<ZhihuDailyStory>() {
           @Override
           public void onSuccess(ZhihuDailyStory data) {
-            if (data != null && getView() != null) {
+            if (!isAttach()) {
+              return;
+            }
+
+            if (data != null) {
               getView().showTitle(data.getTitle());
               getView().showCoverImg(data.getImage());
               getView().showWeb(convertZhihuContent(data.getBody()));
@@ -27,14 +32,19 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
 
           @Override
           public void onFailure(String msg, String exception) {
-            if (getView() != null)
-              getView().showError(msg, exception);
+            if (!isAttach()) {
+              return;
+            }
+
+            getView().showError(msg, exception);
           }
 
           @Override
           public void onFinish() {
-            if (getView() != null)
-              getView().hideLoading();
+            if (!isAttach()) {
+              return;
+            }
+            getView().hideLoading();
           }
         });
   }

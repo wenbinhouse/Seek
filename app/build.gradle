@@ -61,4 +61,6 @@ dependencies {
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     //glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    //Log
+    compile 'com.github.mawb23.mlog:library:0.6.0'
 }

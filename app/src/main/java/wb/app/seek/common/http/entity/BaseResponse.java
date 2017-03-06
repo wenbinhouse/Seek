@@ -1,11 +1,11 @@
 package wb.app.seek.common.http.entity;
 
+import java.io.Serializable;
+
 /**
- * Json Model
- * <p>
- * Created by mwb on 16/9/25.
+ * Created by W.b on 2017/1/9.
  */
-public class BaseResponse<T> {
+public class BaseResponse<T> implements Serializable {
 
   private T result;
 
@@ -46,42 +46,4 @@ public class BaseResponse<T> {
   public void setError(String error) {
     this.error = error;
   }
-
-  //  private int total;
-//
-//  private String errorCode;
-//
-//  private String reason;
-//
-//  public T getResult() {
-//    return result;
-//  }
-//
-//  public void setResult(T result) {
-//    this.result = result;
-//  }
-//
-//  public int getTotal() {
-//    return total;
-//  }
-//
-//  public void setTotal(int total) {
-//    this.total = total;
-//  }
-//
-//  public String getErrorCode() {
-//    return errorCode;
-//  }
-//
-//  public void setErrorCode(String errorCode) {
-//    this.errorCode = errorCode;
-//  }
-//
-//  public String getReason() {
-//    return reason;
-//  }
-//
-//  public void setReason(String reason) {
-//    this.reason = reason;
-//  }
 }

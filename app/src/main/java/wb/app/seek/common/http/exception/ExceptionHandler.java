@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
 import javax.net.ssl.SSLHandshakeException;
 
 import retrofit2.adapter.rxjava.HttpException;
-import wb.app.seek.common.utils.mlog.MLog;
+import wb.app.library.MLog;
 
 /**
  * 异常处理
@@ -43,7 +43,7 @@ public class ExceptionHandler {
       ApiException apiException = (ApiException) e;
       String msg = apiException.getMsg();
       String exception = apiException.getException();
-      ex = new ResponseException(apiException, "接口出错");
+      ex = new ResponseException(apiException, msg);
 
     } else if (e instanceof JsonParseException
         || e instanceof JSONException

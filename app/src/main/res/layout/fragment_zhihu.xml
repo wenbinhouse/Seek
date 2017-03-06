@@ -20,33 +20,21 @@
         tools:item="@layout/item_zhihu"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/date_fab"
+        android:id="@+id/rocket_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/base_margin"
         android:layout_marginRight="@dimen/base_margin"
-        android:src="@drawable/ic_date_64"
+        android:src="@drawable/ic_rocket_64"
+        android:visibility="gone"
         app:backgroundTint="@color/color_white"
         app:borderWidth="0dp"
         app:elevation="4dp"
         app:layout_anchor="@+id/recycler_view"
         app:layout_anchorGravity="bottom|right"
         app:layout_behavior="wb.app.seek.modules.ScrollAwareFabBehavior"/>
-
-    <ImageView
-        android:id="@+id/rocket_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/base_margin"
-        android:alpha="0.3"
-        android:src="@drawable/ic_rocket_64"
-        android:visibility="gone"
-        app:layout_anchor="@+id/recycler_view"
-        app:layout_anchorGravity="bottom|center_horizontal"/>
 
   </android.support.design.widget.CoordinatorLayout>
 

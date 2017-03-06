@@ -48,4 +48,5 @@ public interface AppService {
 
   @GET("api/4/news/{storyId}")
   Observable<ZhihuDailyStory> getZhihuNewsDetail(@Path("storyId") int storyId);
+
 }
