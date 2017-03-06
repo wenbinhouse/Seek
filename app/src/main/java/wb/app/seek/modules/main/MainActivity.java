@@ -19,9 +19,11 @@ import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import wb.app.library.MLog;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
+import wb.app.seek.common.rxbus.RxBus;
+import wb.app.seek.common.rxbus.RxEvent;
+import wb.app.seek.common.rxbus.RxEventType;
 import wb.app.seek.modules.about.AboutActivity;
 import wb.app.seek.modules.setting.SettingActivity;
 import wb.app.seek.utils.DateTimeUtils;
@@ -81,7 +83,8 @@ public class MainActivity extends BaseActivity {
         month += 1;
         String monthStr = DateTimeUtils.formatDate(month);
         String dayOfMonthStr = DateTimeUtils.formatDate(dayOfMonth);
-        MLog.d(String.format("%1$d%2$s%3$s", year, monthStr, dayOfMonthStr));
+        String date = String.format("%1$d%2$s%3$s", year, monthStr, dayOfMonthStr);
+        RxBus.getInstance().post(new RxEvent(RxEventType.SCROLL_TO_TOP, date));
       }
     }, curYear, curMonth, curDayOfMonth);
     datePickerDialog.show();

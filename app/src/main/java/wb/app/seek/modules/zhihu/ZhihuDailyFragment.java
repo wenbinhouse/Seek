@@ -14,8 +14,15 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import wb.app.seek.R;
 import wb.app.seek.common.base.mvp.MvpFragment;
+import wb.app.seek.common.rxbus.RxBus;
+import wb.app.seek.common.rxbus.RxEvent;
+import wb.app.seek.common.rxbus.RxEventType;
 import wb.app.seek.common.widgets.recyclerview.OnRecyclerViewScrollListener;
 import wb.app.seek.model.ZhihuDailyNews;
 import wb.app.seek.utils.DateTimeUtils;
@@ -29,6 +36,7 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
   @BindView(R.id.refresh_layout) SwipeRefreshLayout mRefreshLayout;
   @BindView(R.id.rocket_fab) FloatingActionButton mRocketFab;
   private ZhihuDailyAdapter mZhihuListAdapter;
+  private Subscription mSubscription;
 
   public static ZhihuDailyFragment newInstance() {
     return new ZhihuDailyFragment();
@@ -49,7 +57,28 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_zhihu, container, false);
     ButterKnife.bind(this, view);
+
+    mSubscription = RxBus.getInstance().toObservable(RxEvent.class)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Action1<RxEvent>() {
+          @Override
+          public void call(RxEvent rxEvent) {
+            if (rxEvent.getType() == RxEventType.SCROLL_TO_TOP) {
+              smoothScrollTop();
+              getPresenter().refreshNews(rxEvent.getMessage());
+            }
+          }
+        });
     return view;
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    if (!mSubscription.isUnsubscribed()) {
+      mSubscription.unsubscribe();
+    }
   }
 
   @Override
@@ -83,7 +112,6 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
 
   private RecyclerView.OnScrollListener onScrollListener = new OnRecyclerViewScrollListener() {
 
-
     @Override
     protected void onRefresh(boolean isCanRefresh) {
       mRefreshLayout.setEnabled(isCanRefresh ? true : false);
@@ -98,14 +126,14 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     public void showRocket() {
       super.showRocket();
 
-      mRocketFab.setVisibility(View.VISIBLE);
+      mRocketFab.show();
     }
 
     @Override
     public void hideRocket() {
       super.hideRocket();
 
-      mRocketFab.setVisibility(View.GONE);
+      mRocketFab.hide();
     }
   };
 
@@ -152,22 +180,6 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
       case R.id.rocket_fab:
         // 快速滚到到顶部
         smoothScrollTop();
-//        final Calendar calendar = Calendar.getInstance();
-//        int curYear = calendar.get(Calendar.YEAR);
-//        int curMonth = calendar.get(Calendar.MONTH);
-//        int curDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-//        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-//          @Override
-//          public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//            smoothScrollTop();
-//
-//            month += 1;
-//            String monthStr = DateTimeUtils.formatDate(month);
-//            String dayOfMonthStr = DateTimeUtils.formatDate(dayOfMonth);
-//            getPresenter().refreshNews(String.format("%1$d%2$s%3$s", year, monthStr, dayOfMonthStr));
-//          }
-//        }, curYear, curMonth, curDayOfMonth);
-//        datePickerDialog.show();
         break;
     }
   }

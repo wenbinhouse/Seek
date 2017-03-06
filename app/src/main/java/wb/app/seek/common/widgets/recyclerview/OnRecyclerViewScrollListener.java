@@ -17,7 +17,10 @@ public abstract class OnRecyclerViewScrollListener extends RecyclerView.OnScroll
       LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
       int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
       if (firstVisibleItemPosition > 10) {
-        showRocket();
+        if (dy > 0)
+          hideRocket();
+        else
+          showRocket();
       } else {
         hideRocket();
       }
