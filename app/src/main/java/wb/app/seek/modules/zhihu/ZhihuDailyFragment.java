@@ -1,18 +1,13 @@
 package wb.app.seek.modules.zhihu;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -52,27 +47,6 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     return R.layout.fragment_zhihu;
   }
 
-  @Nullable
-  @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_zhihu, container, false);
-    ButterKnife.bind(this, view);
-
-    mSubscription = RxBus.getInstance().toObservable(RxEvent.class)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Action1<RxEvent>() {
-          @Override
-          public void call(RxEvent rxEvent) {
-            if (rxEvent.getType() == RxEventType.SCROLL_TO_TOP) {
-              smoothScrollTop();
-              getPresenter().refreshNews(rxEvent.getMessage());
-            }
-          }
-        });
-    return view;
-  }
-
   @Override
   public void onDestroy() {
     super.onDestroy();
@@ -92,6 +66,19 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
         onRefresh();
       }
     });
+
+    mSubscription = RxBus.getInstance().toObservable(RxEvent.class)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Action1<RxEvent>() {
+          @Override
+          public void call(RxEvent rxEvent) {
+            if (rxEvent.getType() == RxEventType.SCROLL_TO_TOP) {
+              smoothScrollTop();
+              getPresenter().refreshNews(rxEvent.getMessage());
+            }
+          }
+        });
   }
 
   private void initRecyclerView() {

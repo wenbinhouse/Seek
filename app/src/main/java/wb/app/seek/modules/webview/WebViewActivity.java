@@ -11,7 +11,6 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
 
@@ -29,10 +28,16 @@ public class WebViewActivity extends BaseActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_webview);
-    setTitle("");
+  }
 
-    ButterKnife.bind(this);
+  @Override
+  protected int getContentViewId() {
+    return R.layout.activity_webview;
+  }
+
+  @Override
+  protected void initComponents() {
+    setTitle("");
 
     String url = getIntent().getStringExtra(INTENT_KEY_URL);
     final String title = getIntent().getStringExtra(INTENT_KEY_TITLE);

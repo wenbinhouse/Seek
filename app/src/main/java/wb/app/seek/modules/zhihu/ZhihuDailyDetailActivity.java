@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import wb.app.seek.R;
 import wb.app.seek.common.base.mvp.MvpActivity;
 
@@ -41,10 +40,15 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_zhihu_daily_detail);
+  }
 
-    ButterKnife.bind(this);
+  @Override
+  protected int getContentViewId() {
+    return R.layout.activity_zhihu_daily_detail;
+  }
 
+  @Override
+  protected void initComponents() {
     mStoryId = getIntent().getIntExtra("storyId", -1);
 
     initToolbar();

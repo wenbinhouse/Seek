@@ -3,8 +3,9 @@ package wb.app.seek.common.base;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by W.b on 2016/11/29.
@@ -18,16 +19,22 @@ public abstract class BaseActivity extends ToolbarActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    int layoutId = getContentViewId();
+    if (isContentViewWithToolbar()) {
+      super.setContentView(layoutId);
+    } else {
+      setContentViewNoToolbar(layoutId);
+    }
+
+    ButterKnife.bind(this);
+
+    initComponents();
   }
 
-  @Override
-  public void setContentView(@LayoutRes int layoutResID) {
-    if (isContentViewWithToolbar()) {
-      super.setContentView(layoutResID);
-    } else {
-      setContentViewNoToolbar(layoutResID);
-    }
-  }
+  protected abstract int getContentViewId();
+
+  protected abstract void initComponents();
 
   protected boolean isContentViewWithToolbar() {
     return true;
@@ -39,21 +46,5 @@ public abstract class BaseActivity extends ToolbarActivity {
 
   protected void startActivity(Class<? extends BaseActivity> clz) {
     startActivity(new Intent(this, clz));
-  }
-
-  protected void showProgressDialog() {
-    if (mProgressDialog == null) {
-      mProgressDialog = new ProgressDialog(this);
-    }
-    mProgressDialog.setMessage("正在加载中...");
-    mProgressDialog.setCancelable(false);
-    mProgressDialog.setCanceledOnTouchOutside(false);
-    mProgressDialog.show();
-  }
-
-  protected void hideProgressDialog() {
-    if (mProgressDialog != null && mProgressDialog.isShowing()) {
-      mProgressDialog.dismiss();
-    }
   }
 }

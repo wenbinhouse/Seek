@@ -18,7 +18,6 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
 import wb.app.seek.common.rxbus.RxBus;
@@ -39,14 +38,21 @@ public class MainActivity extends BaseActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
+  }
 
+  @Override
+  protected int getContentViewId() {
+    return R.layout.activity_main;
+  }
+
+  @Override
+  protected void initComponents() {
     initToolbar();
 
     setupDrawerContent();
 
-    initViews();
+    mMainViewpager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+    mMainTabLayout.setupWithViewPager(mMainViewpager);
   }
 
   @Override
@@ -112,11 +118,6 @@ public class MainActivity extends BaseActivity {
         return true;
       }
     });
-  }
-
-  private void initViews() {
-    mMainViewpager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
-    mMainTabLayout.setupWithViewPager(mMainViewpager);
   }
 
   private void initToolbar() {

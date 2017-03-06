@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import butterknife.ButterKnife;
 import wb.app.seek.R;
 
 /**
@@ -15,11 +14,15 @@ public abstract class BasePreferenceActivity extends BaseActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+  }
 
-    setContentView(R.layout.activity_preference_base);
+  @Override
+  protected int getContentViewId() {
+    return R.layout.activity_preference_base;
+  }
 
-    ButterKnife.bind(this);
-
+  @Override
+  protected void initComponents() {
     getFragmentManager()
         .beginTransaction()
         .add(R.id.content_fl, getPreferenceFragment())
