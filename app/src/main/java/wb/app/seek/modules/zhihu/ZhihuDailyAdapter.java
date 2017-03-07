@@ -59,7 +59,7 @@ public class ZhihuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public void onClick(View v) {
           holder.itemView.getTag();
           if (mListener != null) {
-            mListener.onClick((int) holder.itemView.getTag());
+            mListener.onClick((int) holder.itemView.getTag(), holder.mItemCoverImg);
           }
         }
       });
@@ -134,6 +134,6 @@ public class ZhihuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
   }
 
   public interface OnItemClickListener {
-    void onClick(int id);
+    void onClick(int id, View view);
   }
 }

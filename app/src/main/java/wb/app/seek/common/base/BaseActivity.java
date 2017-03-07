@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 
@@ -44,7 +45,15 @@ public abstract class BaseActivity extends ToolbarActivity {
     return ((BaseApplication) getApplication()).getHelper();
   }
 
-  protected void startActivity(Class<? extends BaseActivity> clz) {
+  public void showToastShort(String msg) {
+    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+  }
+
+  public void startActivity(Class<? extends BaseActivity> clz) {
     startActivity(new Intent(this, clz));
+  }
+
+  public void startActivityByIntent(Intent intent) {
+    startActivity(intent);
   }
 }

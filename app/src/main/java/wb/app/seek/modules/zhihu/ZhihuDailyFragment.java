@@ -1,11 +1,15 @@
 package wb.app.seek.modules.zhihu;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,6 +25,8 @@ import wb.app.seek.common.rxbus.RxEventType;
 import wb.app.seek.common.widgets.recyclerview.OnRecyclerViewScrollListener;
 import wb.app.seek.model.ZhihuDailyNews;
 import wb.app.seek.utils.DateTimeUtils;
+
+import static wb.app.seek.modules.zhihu.ZhihuDailyDetailActivity.INTENT_KEY_STORY_ID;
 
 /**
  * Created by W.b on 2017/2/9.
@@ -87,10 +93,18 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     mZhihuListAdapter.setOnItemClickListener(new ZhihuDailyAdapter.OnItemClickListener() {
 
       @Override
-      public void onClick(int id) {
+      public void onClick(int id, View view) {
+//        Intent intent = new Intent(getActivity(), ZhihuDailyDetailActivity.class);
+//        intent.putExtra("storyId", id);
+//        getActivity().startActivity(intent);
+
+        // Lollipop 以上实现 Transition
         Intent intent = new Intent(getActivity(), ZhihuDailyDetailActivity.class);
-        intent.putExtra("storyId", id);
-        getActivity().startActivity(intent);
+        intent.putExtra(INTENT_KEY_STORY_ID, id);
+        ActivityOptionsCompat options
+            = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view, getString(R.string.transition_name_cover_image));
+        ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+        getActivity().overridePendingTransition(0, 0);
       }
     });
     mRecyclerView.setAdapter(mZhihuListAdapter);
@@ -167,6 +181,10 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
       case R.id.rocket_fab:
         // 快速滚到到顶部
         smoothScrollTop();
+        Animator anim =
+          ViewAnimationUtils.createCircularReveal(mRocketFab, 200, 200, 0, 50);
+
+        anim.start();
         break;
     }
   }

@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/half_margin"
     android:layout_marginRight="@dimen/half_margin"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground">
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -31,7 +32,8 @@
         android:layout_width="@dimen/small_image_width"
         android:layout_height="@dimen/small_image_width"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/base_margin"/>
+        android:layout_marginLeft="@dimen/base_margin"
+        android:transitionName="@string/transition_name_cover_image"/>
 
   </LinearLayout>
 

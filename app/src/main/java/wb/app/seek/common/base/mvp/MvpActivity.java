@@ -3,7 +3,6 @@ package wb.app.seek.common.base.mvp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 
 import wb.app.seek.common.base.BaseActivity;
 
@@ -41,15 +40,7 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
     super.onDestroy();
   }
 
-  public void showLoading() {
-    showProgressDialog();
-  }
-
-  public void hideLoading() {
-    hideProgressDialog();
-  }
-
   public void showError(String msg, String exception) {
-    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    showToastShort(msg);
   }
 }

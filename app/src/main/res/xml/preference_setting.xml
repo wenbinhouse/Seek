@@ -11,9 +11,9 @@
 
     <CheckBoxPreference
         android:defaultValue="true"
-        android:key="in_app_browser"
-        android:summary="应用内查看链接"
-        android:title="使用内置浏览器"/>
+        android:key="@string/setting_in_app_browser_key"
+        android:summary="@string/setting_browser_summary"
+        android:title="@string/setting_browser_title"/>
 
   </PreferenceCategory>
 

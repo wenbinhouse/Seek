@@ -1,5 +1,6 @@
 package wb.app.seek.modules.main;
 
+import android.animation.Animator;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +14,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.DatePicker;
+import android.widget.RelativeLayout;
 
 import java.util.Calendar;
 
@@ -34,6 +38,7 @@ public class MainActivity extends BaseActivity {
   @BindView(R.id.main_viewpager) ViewPager mMainViewpager;
   @BindView(R.id.main_tab_layout) TabLayout mMainTabLayout;
   @BindView(R.id.nav_view) NavigationView mNavView;
+  @BindView(R.id.reveal_root) RelativeLayout mRevealRoot;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,10 +74,42 @@ public class MainActivity extends BaseActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.main_menu_date) {
-      selectedDate();
+      revealBackground();
+//      selectedDate();
       return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  private void revealBackground() {
+    int cx = mRevealRoot.getRight();
+    int cy = mRevealRoot.getTop();
+    float finalRadius = (float) Math.hypot(mRevealRoot.getWidth(), mRevealRoot.getHeight());
+    Animator animator = ViewAnimationUtils.createCircularReveal(mRevealRoot, cx, cy, 0, finalRadius);
+//    mRevealRoot.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+    animator.setDuration(400);
+    animator.setInterpolator(new AccelerateDecelerateInterpolator());
+    animator.addListener(new Animator.AnimatorListener() {
+      @Override
+      public void onAnimationStart(Animator animation) {
+      }
+
+      @Override
+      public void onAnimationEnd(Animator animation) {
+        selectedDate();
+      }
+
+      @Override
+      public void onAnimationCancel(Animator animation) {
+
+      }
+
+      @Override
+      public void onAnimationRepeat(Animator animation) {
+
+      }
+    });
+    animator.start();
   }
 
   /**
@@ -83,7 +120,7 @@ public class MainActivity extends BaseActivity {
     int curYear = calendar.get(Calendar.YEAR);
     int curMonth = calendar.get(Calendar.MONTH);
     int curDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-    DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+    DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
       @Override
       public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         month += 1;

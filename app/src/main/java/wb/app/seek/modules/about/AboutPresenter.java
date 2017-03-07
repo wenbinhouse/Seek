@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -17,6 +18,7 @@ import wb.app.seek.modules.customtabs.WebViewFallback;
 import wb.app.seek.modules.webview.WebViewActivity;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by W.b on 2017/2/16.
@@ -26,6 +28,7 @@ public class AboutPresenter implements AboutContract.Presenter {
   private AboutContract.View mView;
   private final CustomTabsIntent.Builder mCustomTabsIntent;
   private final Activity mActivity;
+  private final boolean mIsInAppBrowser;
 
   public AboutPresenter(Activity activity, AboutContract.View view) {
     mActivity = activity;
@@ -34,6 +37,9 @@ public class AboutPresenter implements AboutContract.Presenter {
     mCustomTabsIntent = new CustomTabsIntent.Builder();
     mCustomTabsIntent.setToolbarColor(Color.WHITE);
     mCustomTabsIntent.setShowTitle(true);
+
+    SharedPreferences sp = activity.getSharedPreferences(activity.getString(R.string.shared_preferences_key), MODE_PRIVATE);
+    mIsInAppBrowser = sp.getBoolean(mActivity.getString(R.string.setting_in_app_browser_key), true);
   }
 
   @Override
@@ -46,26 +52,44 @@ public class AboutPresenter implements AboutContract.Presenter {
 
   @Override
   public void followOnGithub() {
-    CustomTabActivityHelper.openCustomTab(mActivity, mCustomTabsIntent.build()
-        , Uri.parse(mActivity.getString(R.string.github_summary))
-        , new WebViewFallback() {
-          @Override
-          public void openUri(Activity activity, Uri uri) {
-            super.openUri(activity, uri);
-          }
-        });
+    if (mIsInAppBrowser) {
+      CustomTabActivityHelper.openCustomTab(mActivity, mCustomTabsIntent.build()
+          , Uri.parse(mActivity.getString(R.string.github_summary))
+          , new WebViewFallback() {
+            @Override
+            public void openUri(Activity activity, Uri uri) {
+              super.openUri(activity, uri);
+            }
+          });
+
+    } else {
+      openUrlLeaveApp(mActivity.getString(R.string.github_summary));
+    }
+  }
+
+  private void openUrlLeaveApp(String url) {
+    try {
+      mActivity.startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
+    } catch (android.content.ActivityNotFoundException ex) {
+      mView.showBrowserNotFoundError();
+    }
   }
 
   @Override
   public void followOnJianshu() {
-    CustomTabActivityHelper.openCustomTab(mActivity, mCustomTabsIntent.build()
-        , Uri.parse(mActivity.getString(R.string.jianshu_summary))
-        , new WebViewFallback() {
-          @Override
-          public void openUri(Activity activity, Uri uri) {
-            super.openUri(activity, uri);
-          }
-        });
+    if (mIsInAppBrowser) {
+      CustomTabActivityHelper.openCustomTab(mActivity, mCustomTabsIntent.build()
+          , Uri.parse(mActivity.getString(R.string.jianshu_summary))
+          , new WebViewFallback() {
+            @Override
+            public void openUri(Activity activity, Uri uri) {
+              super.openUri(activity, uri);
+            }
+          });
+
+    } else {
+      openUrlLeaveApp(mActivity.getString(R.string.jianshu_summary));
+    }
   }
 
   @Override
@@ -81,7 +105,7 @@ public class AboutPresenter implements AboutContract.Presenter {
       intent.putExtra(Intent.EXTRA_TEXT,
           mActivity.getString(R.string.device_model) + Build.MODEL + "\n"
               + mActivity.getString(R.string.sdk_version) + Build.VERSION.RELEASE + "\n"
-              + mActivity.getString(R.string.version));
+              + mActivity.getString(R.string.version_title));
       mActivity.startActivity(intent);
     } catch (android.content.ActivityNotFoundException ex) {
       mView.showFeedbackError();

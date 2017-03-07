@@ -9,8 +9,10 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -24,6 +26,8 @@ import wb.app.seek.common.base.mvp.MvpActivity;
  */
 public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresenter> implements ZhihuDailyDetailContract.View, SwipeRefreshLayout.OnRefreshListener {
 
+  public static final String INTENT_KEY_STORY_ID = "INTENT_KEY_STORY_ID";
+
   @BindView(R.id.web_view) WebView mWebView;
   @BindView(R.id.cover_img) ImageView mCoverImg;
   @BindView(R.id.tool_bar) Toolbar mToolbar;
@@ -34,7 +38,7 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
 
   @Override
   protected ZhihuDailyDetailPresenter createPresenter() {
-    return new ZhihuDailyDetailPresenter();
+    return new ZhihuDailyDetailPresenter(this);
   }
 
   @Override
@@ -49,7 +53,7 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
 
   @Override
   protected void initComponents() {
-    mStoryId = getIntent().getIntExtra("storyId", -1);
+    mStoryId = getIntent().getIntExtra(INTENT_KEY_STORY_ID, -1);
 
     initToolbar();
 
@@ -82,6 +86,14 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
     mWebView.getSettings().setAppCacheEnabled(false);
     //加载网页图片
     mWebView.getSettings().setBlockNetworkImage(false);
+
+    mWebView.setWebViewClient(new WebViewClient() {
+      @Override
+      public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        getPresenter().openComment(view, request.getUrl().toString());
+        return true;
+      }
+    });
 
 //    mWebView.getSettings().setUseWideViewPort(true);
 //    mWebView.getSettings().setLoadWithOverviewMode(true);
@@ -145,6 +157,11 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
   @Override
   public void showWeb(String body) {
     mWebView.loadDataWithBaseURL("x-data://base", body, "text/html", "utf-8", null);
+  }
+
+  @Override
+  public void showBrowserNotFoundError() {
+
   }
 
   @Override

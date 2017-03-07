@@ -30,15 +30,7 @@ public class AboutPreferenceFragment extends PreferenceFragment implements About
 
     final AboutPresenter presenter = new AboutPresenter(getActivity(), this);
 
-    findPreference("rate").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-      @Override
-      public boolean onPreferenceClick(Preference preference) {
-        presenter.rateInAppPLay();
-        return false;
-      }
-    });
-
-    findPreference("author").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+    findPreference(getString(R.string.author_key)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
       @Override
       public boolean onPreferenceClick(Preference preference) {
         presenter.showEasterEgg();
@@ -46,7 +38,7 @@ public class AboutPreferenceFragment extends PreferenceFragment implements About
       }
     });
 
-    findPreference("github").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+    findPreference(getString(R.string.github_key)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
       @Override
       public boolean onPreferenceClick(Preference preference) {
         presenter.followOnGithub();
@@ -54,7 +46,7 @@ public class AboutPreferenceFragment extends PreferenceFragment implements About
       }
     });
 
-    findPreference("jianshu").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+    findPreference(getString(R.string.jianshu_key)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
       @Override
       public boolean onPreferenceClick(Preference preference) {
         presenter.followOnJianshu();
@@ -62,31 +54,15 @@ public class AboutPreferenceFragment extends PreferenceFragment implements About
       }
     });
 
-//    findPreference("qq").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//      @Override
-//      public boolean onPreferenceClick(Preference preference) {
-//        presenter.followOnQQ();
-//        return false;
-//      }
-//    });
-
-//    findPreference("feedback").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//      @Override
-//      public boolean onPreferenceClick(Preference preference) {
-//        presenter.feedback();
-//        return false;
-//      }
-//    });
-
-    findPreference("donate").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+    findPreference(getString(R.string.feedback_key)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
       @Override
       public boolean onPreferenceClick(Preference preference) {
-        presenter.donate();
+        presenter.feedback();
         return false;
       }
     });
 
-    findPreference("license").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+    findPreference(getString(R.string.license_key)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
       @Override
       public boolean onPreferenceClick(Preference preference) {
         presenter.openLicense();

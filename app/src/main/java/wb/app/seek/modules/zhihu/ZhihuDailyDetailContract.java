@@ -14,6 +14,8 @@ class ZhihuDailyDetailContract {
     void showTitle(String title);
 
     void showWeb(String body);
+
+    void showBrowserNotFoundError();
   }
 
   interface Presenter {

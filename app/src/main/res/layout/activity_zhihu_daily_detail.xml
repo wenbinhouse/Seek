@@ -30,7 +30,8 @@
           android:layout_height="match_parent"
           android:scaleType="centerCrop"
           android:scrollbarAlwaysDrawVerticalTrack="true"
-          android:scrollbarStyle="insideInset"/>
+          android:scrollbarStyle="insideInset"
+          android:transitionName="@string/transition_name_cover_image"/>
 
       <include layout="@layout/view_toolbar"/>
 
