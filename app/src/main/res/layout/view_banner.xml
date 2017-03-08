@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/banner_pager_height"
+             android:gravity="center"
+             android:orientation="vertical">
+
+  <android.support.v4.view.ViewPager
+      android:id="@+id/viewPager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+
+  <wb.app.seek.widgets.CircleIndicator
+      android:id="@+id/circleIndicator"
+      android:layout_width="wrap_content"
+      android:layout_height="36dp"
+      android:layout_gravity="bottom|right"
+      android:layout_marginRight="16dp"/>
+
+</FrameLayout>

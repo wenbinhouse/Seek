@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import rx.Subscription;
@@ -24,6 +26,7 @@ import wb.app.seek.common.rxbus.RxEvent;
 import wb.app.seek.common.rxbus.RxEventType;
 import wb.app.seek.common.widgets.recyclerview.OnRecyclerViewScrollListener;
 import wb.app.seek.model.ZhihuDailyNews;
+import wb.app.seek.model.ZhihuDailyStory;
 import wb.app.seek.utils.DateTimeUtils;
 
 import static wb.app.seek.modules.zhihu.ZhihuDailyDetailActivity.INTENT_KEY_STORY_ID;
@@ -65,6 +68,8 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
   protected void initComponents(View view) {
     initRecyclerView();
 
+    getPresenter().queryLatest();
+
     mRefreshLayout.setOnRefreshListener(this);
     mRefreshLayout.post(new Runnable() {
       @Override
@@ -94,10 +99,6 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
 
       @Override
       public void onClick(int id, View view) {
-//        Intent intent = new Intent(getActivity(), ZhihuDailyDetailActivity.class);
-//        intent.putExtra("storyId", id);
-//        getActivity().startActivity(intent);
-
         // Lollipop 以上实现 Transition
         Intent intent = new Intent(getActivity(), ZhihuDailyDetailActivity.class);
         intent.putExtra(INTENT_KEY_STORY_ID, id);
@@ -105,6 +106,13 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
             = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view, getString(R.string.transition_name_cover_image));
         ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
         getActivity().overridePendingTransition(0, 0);
+      }
+
+      @Override
+      public void onBannerClick(int id) {
+        Intent intent = new Intent(getActivity(), ZhihuDailyDetailActivity.class);
+        intent.putExtra(INTENT_KEY_STORY_ID, id);
+        getActivity().startActivity(intent);
       }
     });
     mRecyclerView.setAdapter(mZhihuListAdapter);
@@ -161,6 +169,11 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
   }
 
   @Override
+  public void showTopStory(List<ZhihuDailyStory> dailyStoryList) {
+    mZhihuListAdapter.showTopStory(dailyStoryList);
+  }
+
+  @Override
   public void showMoreNews(ZhihuDailyNews dailyNews) {
     mZhihuListAdapter.showMoreNews(dailyNews);
   }
@@ -182,7 +195,7 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
         // 快速滚到到顶部
         smoothScrollTop();
         Animator anim =
-          ViewAnimationUtils.createCircularReveal(mRocketFab, 200, 200, 0, 50);
+            ViewAnimationUtils.createCircularReveal(mRocketFab, 200, 200, 0, 50);
 
         anim.start();
         break;

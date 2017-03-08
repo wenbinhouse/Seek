@@ -12,6 +12,9 @@ public abstract class OnRecyclerViewScrollListener extends RecyclerView.OnScroll
   public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
     super.onScrolled(recyclerView, dx, dy);
 
+    boolean canScrollDown = false;
+    boolean canScrollUp = true;
+
     RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
     if (layoutManager instanceof LinearLayoutManager) {
       LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
@@ -24,10 +27,12 @@ public abstract class OnRecyclerViewScrollListener extends RecyclerView.OnScroll
       } else {
         hideRocket();
       }
-    }
 
-    boolean canScrollDown = recyclerView.canScrollVertically(-1);
-    boolean canScrollUp = recyclerView.canScrollVertically(1);
+      canScrollDown = recyclerView.canScrollVertically(-1);
+      if (firstVisibleItemPosition > 0) {
+        canScrollUp = recyclerView.canScrollVertically(1);
+      }
+    }
 
     //下拉刷新
     onRefresh(!canScrollDown ? true : false);

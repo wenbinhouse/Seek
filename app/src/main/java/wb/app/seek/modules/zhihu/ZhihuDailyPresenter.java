@@ -1,5 +1,7 @@
 package wb.app.seek.modules.zhihu;
 
+import android.text.TextUtils;
+
 import wb.app.seek.common.base.mvp.BasePresenter;
 import wb.app.seek.common.http.rx.BaseSubscriber;
 import wb.app.seek.common.http.rx.ResponseTransformer;
@@ -51,7 +53,7 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
   @Override
   public void loadMoreNews() {
-    if (mIsLoadingMore) {
+    if (TextUtils.isEmpty(mBeforeDay) && mIsLoadingMore) {
       return;
     }
 
@@ -84,6 +86,38 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
           @Override
           public void onFinish() {
             mIsLoadingMore = false;
+          }
+        });
+  }
+
+  @Override
+  public void queryLatest() {
+    getService().getZhiHuNewsLatest()
+        .compose(ResponseTransformer.<ZhihuDailyNews>getInstance(mLifecycleSubject))
+        .subscribe(new BaseSubscriber<ZhihuDailyNews>() {
+          @Override
+          public void onSuccess(ZhihuDailyNews data) {
+            if (!isAttach()) {
+              return;
+            }
+
+            if (data != null && data.getTop_stories() != null) {
+              getView().showTopStory(data.getTop_stories());
+            }
+          }
+
+          @Override
+          public void onFailure(String msg, String exception) {
+            if (!isAttach()) {
+              return;
+            }
+
+            getView().showError(msg, exception);
+          }
+
+          @Override
+          public void onFinish() {
+
           }
         });
   }
