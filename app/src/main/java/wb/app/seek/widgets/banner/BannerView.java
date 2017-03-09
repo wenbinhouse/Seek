@@ -15,7 +15,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import wb.app.library.MLog;
 import wb.app.seek.R;
 import wb.app.seek.model.ZhihuDailyStory;
 import wb.app.seek.widgets.CircleIndicator;
@@ -81,7 +80,6 @@ public class BannerView extends LinearLayout implements Runnable {
   }
 
   public void setBanner(List<ZhihuDailyStory> dailyStoryList) {
-    MLog.d("setBanner()");
     if (dailyStoryList != null && !mIsRunning) {
       mDailyStoryList.clear();
       mDailyStoryList.addAll(dailyStoryList);
@@ -97,7 +95,6 @@ public class BannerView extends LinearLayout implements Runnable {
    * 开始自动滑动
    */
   public void startAutoScroll() {
-    MLog.d("startAutoScroll()");
     stopAutoScroll();
     if (mViewPager.getAdapter() != null && mViewPager.getAdapter().getCount() > 1) {
       mIsRunning = true;
@@ -106,14 +103,12 @@ public class BannerView extends LinearLayout implements Runnable {
   }
 
   public void stopAutoScroll() {
-    MLog.d("stopAutoScroll()");
     mIsRunning = false;
     removeCallbacks(this);
   }
 
   @Override
   public void run() {
-    MLog.d("run()");
     if (mViewPager.getAdapter() != null) {
       if (mDailyStoryList != null && mDailyStoryList.size() > 1) {
         final int nCurrentItem = mViewPager.getCurrentItem();

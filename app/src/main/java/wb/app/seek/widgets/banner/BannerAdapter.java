@@ -3,9 +3,6 @@ package wb.app.seek.widgets.banner;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,15 +41,10 @@ public class BannerAdapter extends PagerAdapter {
 
   @Override
   public Object instantiateItem(ViewGroup container, int position) {
-    ImageView imageView = new ImageView(container.getContext());
-    Glide.with(container.getContext())
-        .load(mImageList.get(position % mImageList.size()))
-        .centerCrop()
-        .crossFade()
-        .into(imageView);
-
-    imageView.setTag(mDailyStoryList.get(position % mImageList.size()));
-    imageView.setOnClickListener(new View.OnClickListener() {
+    BannerItemView itemView = new BannerItemView(container.getContext());
+    itemView.setItem(mDailyStoryList.get(position % mDailyStoryList.size()));
+    itemView.setTag(mDailyStoryList.get(position % mImageList.size()));
+    itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         ZhihuDailyStory dailyStory = (ZhihuDailyStory) v.getTag();
@@ -62,8 +54,8 @@ public class BannerAdapter extends PagerAdapter {
       }
     });
 
-    container.addView(imageView);
-    return imageView;
+    container.addView(itemView);
+    return itemView;
   }
 
   public void setBanner(List<ZhihuDailyStory> dailyStoryList) {
