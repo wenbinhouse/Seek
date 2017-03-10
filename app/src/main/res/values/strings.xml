@@ -70,6 +70,8 @@
   <string name="setting_in_app_browser_key">in_app_browser</string>
   <string name="setting_browser_summary">应用内查看链接</string>
   <string name="setting_browser_title">使用内置浏览器</string>
+  <string name="night_mode_key">night_mode</string>
+  <string name="night_mode_title">夜间模式</string>
 
   <string name="shared_preferences_key">user_settings</string>
 

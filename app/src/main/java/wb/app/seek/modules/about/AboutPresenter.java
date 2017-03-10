@@ -5,7 +5,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -13,12 +12,13 @@ import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.AlertDialog;
 
 import wb.app.seek.R;
+import wb.app.seek.common.base.BaseApplication;
+import wb.app.seek.common.utils.SPUtils;
 import wb.app.seek.modules.customtabs.CustomTabActivityHelper;
 import wb.app.seek.modules.customtabs.WebViewFallback;
 import wb.app.seek.modules.webview.WebViewActivity;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by W.b on 2017/2/16.
@@ -30,6 +30,7 @@ public class AboutPresenter implements AboutContract.Presenter {
   private final Activity mActivity;
   private final boolean mIsInAppBrowser;
 
+
   public AboutPresenter(Activity activity, AboutContract.View view) {
     mActivity = activity;
     mView = view;
@@ -38,8 +39,8 @@ public class AboutPresenter implements AboutContract.Presenter {
     mCustomTabsIntent.setToolbarColor(Color.WHITE);
     mCustomTabsIntent.setShowTitle(true);
 
-    SharedPreferences sp = activity.getSharedPreferences(activity.getString(R.string.shared_preferences_key), MODE_PRIVATE);
-    mIsInAppBrowser = sp.getBoolean(mActivity.getString(R.string.setting_in_app_browser_key), true);
+    SPUtils spUtils = BaseApplication.getInstance().getHelper().getSpUtils();
+    mIsInAppBrowser = spUtils.getBoolean(mActivity.getString(R.string.setting_in_app_browser_key), true);
   }
 
   @Override

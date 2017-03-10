@@ -11,6 +11,8 @@
 
   <color name="color_gap">#efefef</color>
 
+  <color name="color_reveal">#aa009688</color>
+
   //分割线颜色
   <color name="color_divider">#efefef</color>
 

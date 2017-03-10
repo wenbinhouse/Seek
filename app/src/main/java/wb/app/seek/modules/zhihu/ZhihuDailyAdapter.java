@@ -15,7 +15,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import wb.app.library.MLog;
 import wb.app.seek.R;
 import wb.app.seek.model.ZhihuDailyNews;
 import wb.app.seek.model.ZhihuDailyStory;
@@ -78,7 +77,6 @@ public class ZhihuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
       holder.mItemLoadingStatusTv.setText(mHasMore ? mContext.getText(R.string.loading_more) : mContext.getText(R.string.no_more));
 
     } else if (viewHolder instanceof HeaderViewHolder) {
-      MLog.d("Adapter");
       HeaderViewHolder holder = (HeaderViewHolder) viewHolder;
       holder.mBannerView.setBanner(mDailyStoryList);
       holder.mBannerView.setBannerClickListener(new BannerView.BannerClickListener() {

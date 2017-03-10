@@ -22,7 +22,8 @@
         app:expandedTitleTextAppearance="?android:attr/textAppearanceMedium"
         app:layout_collapseMode="pin"
         app:layout_collapseParallaxMultiplier="0.1"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+        app:title="">
 
       <ImageView
           android:id="@+id/cover_img"

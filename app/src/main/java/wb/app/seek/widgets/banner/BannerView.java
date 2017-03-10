@@ -80,7 +80,12 @@ public class BannerView extends LinearLayout implements Runnable {
   }
 
   public void setBanner(List<ZhihuDailyStory> dailyStoryList) {
-    if (dailyStoryList != null && !mIsRunning) {
+    if (hasBanner()) {
+      startAutoScroll();
+      return;
+    }
+
+    if (dailyStoryList != null && dailyStoryList.size() > 0 && !mIsRunning) {
       mDailyStoryList.clear();
       mDailyStoryList.addAll(dailyStoryList);
       mAdapter.setBanner(dailyStoryList);
@@ -89,6 +94,10 @@ public class BannerView extends LinearLayout implements Runnable {
 
       startAutoScroll();
     }
+  }
+
+  private boolean hasBanner() {
+    return mDailyStoryList != null && mDailyStoryList.size() > 0;
   }
 
   /**

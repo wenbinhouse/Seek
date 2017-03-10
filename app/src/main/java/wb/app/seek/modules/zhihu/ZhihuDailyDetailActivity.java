@@ -9,7 +9,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -89,8 +88,8 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
 
     mWebView.setWebViewClient(new WebViewClient() {
       @Override
-      public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-        getPresenter().openComment(view, request.getUrl().toString());
+      public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        getPresenter().openComment(view, url);
         return true;
       }
     });

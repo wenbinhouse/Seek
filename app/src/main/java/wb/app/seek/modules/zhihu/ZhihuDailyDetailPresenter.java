@@ -2,28 +2,25 @@ package wb.app.seek.modules.zhihu;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.webkit.WebView;
 
 import wb.app.seek.R;
+import wb.app.seek.common.base.BaseApplication;
 import wb.app.seek.common.base.mvp.BasePresenter;
 import wb.app.seek.common.http.rx.BaseSubscriber;
 import wb.app.seek.common.http.rx.ResponseTransformer;
+import wb.app.seek.common.utils.SPUtils;
 import wb.app.seek.model.ZhihuDailyStory;
 import wb.app.seek.modules.customtabs.CustomTabActivityHelper;
 import wb.app.seek.modules.customtabs.WebViewFallback;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by W.b on 2017/2/10.
  */
 public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailContract.View> implements ZhihuDailyDetailContract.Presenter {
-
-  private final CustomTabsIntent.Builder mCustomTabsIntent;
 
   private final Activity mActivity;
   private final boolean mIsInAppBrowser;
@@ -31,12 +28,8 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
   public ZhihuDailyDetailPresenter(Activity activity) {
     mActivity = activity;
 
-    mCustomTabsIntent = new CustomTabsIntent.Builder();
-    mCustomTabsIntent.setToolbarColor(Color.WHITE);
-    mCustomTabsIntent.setShowTitle(true);
-
-    SharedPreferences sp = activity.getSharedPreferences("user_settings", MODE_PRIVATE);
-    mIsInAppBrowser = sp.getBoolean(mActivity.getString(R.string.setting_in_app_browser_key), true);
+    SPUtils spUtils = BaseApplication.getInstance().getHelper().getSpUtils();
+    mIsInAppBrowser = spUtils.getBoolean(mActivity.getString(R.string.setting_in_app_browser_key), true);
   }
 
   @Override
@@ -114,9 +107,13 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
 
   public void openComment(WebView view, String url) {
     if (mIsInAppBrowser) {
-      CustomTabActivityHelper.openCustomTab(mActivity, mCustomTabsIntent.build()
-          , Uri.parse(url)
-          , new WebViewFallback() {
+      CustomTabsIntent.Builder customTabsIntent = new CustomTabsIntent.Builder();
+      customTabsIntent.setToolbarColor(Color.WHITE);
+      customTabsIntent.setShowTitle(true);
+      CustomTabActivityHelper.openCustomTab(mActivity,
+          customTabsIntent.build(),
+          Uri.parse(url),
+          new WebViewFallback() {
             @Override
             public void openUri(Activity activity, Uri uri) {
               super.openUri(activity, uri);

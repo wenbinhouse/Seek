@@ -1,13 +1,16 @@
 package wb.app.seek.modules.main;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
@@ -74,42 +78,38 @@ public class MainActivity extends BaseActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.main_menu_date) {
-      revealBackground();
+      revealView();
 //      selectedDate();
       return true;
     }
     return super.onOptionsItemSelected(item);
   }
 
-  private void revealBackground() {
-    int cx = mRevealRoot.getRight();
-    int cy = mRevealRoot.getTop();
-    float finalRadius = (float) Math.hypot(mRevealRoot.getWidth(), mRevealRoot.getHeight());
-    Animator animator = ViewAnimationUtils.createCircularReveal(mRevealRoot, cx, cy, 0, finalRadius);
-//    mRevealRoot.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
-    animator.setDuration(400);
-    animator.setInterpolator(new AccelerateDecelerateInterpolator());
-    animator.addListener(new Animator.AnimatorListener() {
-      @Override
-      public void onAnimationStart(Animator animation) {
-      }
+  private void revealView() {
+    int cx = (mRevealRoot.getLeft() + mRevealRoot.getRight()) / 2;
+    int cy = (mRevealRoot.getTop() + mRevealRoot.getBottom()) / 2;
 
+    createAnimateReveal(mRevealRoot, R.color.color_reveal, cx, cy);
+  }
+
+  private Animator createAnimateReveal(ViewGroup viewRoot, @ColorRes int color, int x, int y) {
+    float finalRadius = (float) Math.hypot(viewRoot.getWidth(), viewRoot.getHeight());
+
+    Animator anim = ViewAnimationUtils.createCircularReveal(viewRoot, x, y, 0, finalRadius);
+    viewRoot.setBackgroundColor(ContextCompat.getColor(this, color));
+    anim.setDuration(500);
+    anim.setInterpolator(new AccelerateDecelerateInterpolator());
+    anim.addListener(new AnimatorListenerAdapter() {
       @Override
       public void onAnimationEnd(Animator animation) {
+        super.onAnimationEnd(animation);
+
+        mRevealRoot.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.transparent));
         selectedDate();
       }
-
-      @Override
-      public void onAnimationCancel(Animator animation) {
-
-      }
-
-      @Override
-      public void onAnimationRepeat(Animator animation) {
-
-      }
     });
-    animator.start();
+    anim.start();
+    return anim;
   }
 
   /**
