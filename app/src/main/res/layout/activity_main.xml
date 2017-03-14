@@ -12,13 +12,47 @@
   <include layout="@layout/layout_main_content"/>
 
   <!-- 抽屉 -->
-  <android.support.design.widget.NavigationView
-      android:id="@+id/nav_view"
-      android:layout_width="wrap_content"
+  <LinearLayout
+      android:id="@+id/drawer_layout"
+      android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_gravity="start"
+      android:background="@color/viewBackgroundColor"
       android:fitsSystemWindows="true"
-      app:headerLayout="@layout/view_nav_header"
-      app:menu="@menu/menu_drawer"/>
+      android:orientation="vertical">
+
+    <include layout="@layout/view_nav_header"/>
+
+    <wb.app.seek.widgets.DrawerItemView
+        android:id="@+id/nav_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:divImage="@drawable/ic_home_32"
+        app:divText="@string/nav_home"/>
+
+    <wb.app.seek.widgets.DrawerItemView
+        android:id="@+id/nav_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:divImage="@drawable/ic_setting_32"
+        app:divText="@string/nav_setting"/>
+
+    <wb.app.seek.widgets.DrawerItemView
+        android:id="@+id/nav_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:divImage="@drawable/ic_about_32"
+        app:divText="@string/nav_about"/>
+
+  </LinearLayout>
+
+  <!--<android.support.design.widget.NavigationView-->
+  <!--android:id="@+id/nav_view"-->
+  <!--android:layout_width="wrap_content"-->
+  <!--android:layout_height="match_parent"-->
+  <!--android:layout_gravity="start"-->
+  <!--android:fitsSystemWindows="true"-->
+  <!--app:headerLayout="@layout/view_nav_header"-->
+  <!--app:menu="@menu/menu_drawer"/>-->
 
 </android.support.v4.widget.DrawerLayout>

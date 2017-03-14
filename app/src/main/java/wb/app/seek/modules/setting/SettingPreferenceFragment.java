@@ -3,6 +3,7 @@ package wb.app.seek.modules.setting;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 
 import wb.app.seek.R;
@@ -33,6 +34,16 @@ public class SettingPreferenceFragment extends PreferenceFragment implements Set
       @Override
       public boolean onPreferenceClick(Preference preference) {
         presenter.setInAppBrowser(preference);
+        return false;
+      }
+    });
+
+    findPreference(getString(R.string.night_mode_key)).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+      @Override
+      public boolean onPreferenceClick(Preference preference) {
+//        presenter.setNightMode(preference);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        getActivity().recreate();
         return false;
       }
     });

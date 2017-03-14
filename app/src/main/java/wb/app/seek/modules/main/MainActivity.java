@@ -6,9 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -17,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -26,6 +25,7 @@ import android.widget.RelativeLayout;
 import java.util.Calendar;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
 import wb.app.seek.common.rxbus.RxBus;
@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity {
   @BindView(R.id.drawer_main_layout) DrawerLayout mDrawerLayout;
   @BindView(R.id.main_viewpager) ViewPager mMainViewpager;
   @BindView(R.id.main_tab_layout) TabLayout mMainTabLayout;
-  @BindView(R.id.nav_view) NavigationView mNavView;
+  //  @BindView(R.id.nav_view) NavigationView mNavView;
   @BindView(R.id.reveal_root) RelativeLayout mRevealRoot;
 
   @Override
@@ -78,8 +78,8 @@ public class MainActivity extends BaseActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.main_menu_date) {
-      revealView();
-//      selectedDate();
+//      revealView();
+      selectedDate();
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -134,27 +134,27 @@ public class MainActivity extends BaseActivity {
   }
 
   private void setupDrawerContent() {
-    mNavView.setCheckedItem(R.id.nav_home);
-
-    mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-      @Override
-      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-          case R.id.nav_home:
-            break;
-
-          case R.id.nav_setting:
-            startActivity(new Intent(MainActivity.this, SettingActivity.class));
-            break;
-
-          case R.id.nav_about:
-            startActivity(new Intent(MainActivity.this, AboutActivity.class));
-            break;
-        }
-        mDrawerLayout.closeDrawers();
-        return true;
-      }
-    });
+//    mNavView.setCheckedItem(R.id.nav_home);
+//
+//    mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//      @Override
+//      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//          case R.id.nav_home:
+//            break;
+//
+//          case R.id.nav_setting:
+//            startActivity(new Intent(MainActivity.this, SettingActivity.class));
+//            break;
+//
+//          case R.id.nav_about:
+//            startActivity(new Intent(MainActivity.this, AboutActivity.class));
+//            break;
+//        }
+//        mDrawerLayout.closeDrawers();
+//        return true;
+//      }
+//    });
   }
 
   private void initToolbar() {
@@ -164,5 +164,30 @@ public class MainActivity extends BaseActivity {
         this, mDrawerLayout, mMainToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     mDrawerLayout.addDrawerListener(toggle);
     toggle.syncState();
+  }
+
+  @OnClick({R.id.nav_home, R.id.nav_setting, R.id.nav_about, R.id.drawer_layout})
+  public void onClick(View view) {
+    switch (view.getId()) {
+      case R.id.nav_home:
+        break;
+
+      case R.id.nav_setting:
+        startActivity(new Intent(MainActivity.this, SettingActivity.class));
+        break;
+
+      case R.id.nav_about:
+        startActivity(new Intent(MainActivity.this, AboutActivity.class));
+        break;
+
+      case R.id.drawer_layout:
+        break;
+    }
+
+    closeDrawer();
+  }
+
+  public void closeDrawer() {
+    mDrawerLayout.closeDrawers();
   }
 }

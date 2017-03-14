@@ -18,4 +18,6 @@
   <dimen name="tool_bar_height">48dp</dimen>
 
   <dimen name="banner_pager_height">192dp</dimen>
+
+  <dimen name="drawer_item_height">78dp</dimen>
 </resources>

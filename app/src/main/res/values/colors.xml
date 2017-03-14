@@ -47,4 +47,7 @@
 
   //三级字体 深色 色值 用于：文章内容或线框
   <color name="color_h3_dark">#999999</color>
+
+  <color name="viewBackgroundColor">@color/color_white</color>
+  <color name="textColor">@color/color_h2_dark</color>
 </resources>

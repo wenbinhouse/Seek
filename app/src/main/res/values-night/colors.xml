@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="viewBackgroundColor">#3F3F3F</color>
+  <color name="textColor">#8A9599</color>
+
+  <color name="color_divider">#4F4F4F</color>
+</resources>

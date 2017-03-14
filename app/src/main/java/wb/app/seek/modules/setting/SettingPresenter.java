@@ -28,4 +28,20 @@ public class SettingPresenter implements SettingContract.Presenter {
     String key = mActivity.getString(R.string.setting_in_app_browser_key);
     mSpUtils.putBoolean(key, preference.getSharedPreferences().getBoolean(key, false));
   }
+
+  @Override
+  public void setNightMode(Preference preference) {
+//    mSpUtils.putBoolean(SPKey.UI_MODE, preference.getSharedPreferences().getBoolean(SPKey.UI_MODE, false));
+//
+//    if ((mActivity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+//        == Configuration.UI_MODE_NIGHT_YES) {
+//      mSpUtils.putInt(SPKey.UI_MODE, AppCompatDelegate.MODE_NIGHT_NO);
+//      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//    } else {
+//      mSpUtils.putInt(SPKey.UI_MODE, AppCompatDelegate.MODE_NIGHT_YES);
+//      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//    }
+//    mActivity.getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+//    mActivity.recreate();
+  }
 }

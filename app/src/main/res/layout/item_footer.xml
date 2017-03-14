@@ -20,6 +20,7 @@
       android:layout_height="wrap_content"
       android:gravity="center_vertical"
       android:text="@string/loading_more"
+      android:textColor="@color/textColor"
       android:textSize="@dimen/text_size_h3"/>
 
 </LinearLayout>

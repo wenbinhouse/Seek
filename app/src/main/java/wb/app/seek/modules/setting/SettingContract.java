@@ -13,5 +13,7 @@ public class SettingContract {
 
   interface Presenter {
     void setInAppBrowser(Preference preference);
+
+    void setNightMode(Preference preference);
   }
 }

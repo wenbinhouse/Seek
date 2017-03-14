@@ -5,9 +5,10 @@
     android:id="@+id/tool_bar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/tool_bar_height"
-    android:background="@android:color/white"
+    android:background="@color/viewBackgroundColor"
     android:elevation="@dimen/pixel_1"
     app:layout_collapseMode="pin"
-    app:navigationIcon="?attr/homeAsUpIndicator">
+    app:navigationIcon="?attr/homeAsUpIndicator"
+    app:titleTextColor="@color/textColor">
 
 </android.support.v7.widget.Toolbar>

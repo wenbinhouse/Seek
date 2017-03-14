@@ -2,6 +2,7 @@ package wb.app.seek.modules.zhihu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
@@ -84,14 +85,13 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
     // use the css file from local assets folder,not from network
     String css = "<link rel=\"stylesheet\" href=\"file:///android_asset/zhihu_daily.css\" type=\"text/css\">";
 
-
     // 根据主题的不同确定不同的加载内容
     // load content judging by different theme
     String theme = "<body className=\"\" onload=\"onLoaded()\">";
-//    if ((context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
-//        == Configuration.UI_MODE_NIGHT_YES){
-//      theme = "<body className=\"\" onload=\"onLoaded()\" class=\"night\">";
-//    }
+    if ((mActivity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+        == Configuration.UI_MODE_NIGHT_YES){
+      theme = "<body className=\"\" onload=\"onLoaded()\" class=\"night\">";
+    }
 
     return new StringBuilder()
         .append("<!DOCTYPE html>\n")
