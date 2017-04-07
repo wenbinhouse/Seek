@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseApplication;
 import wb.app.seek.common.base.mvp.BasePresenter;
+import wb.app.seek.common.utils.SPKey;
 import wb.app.seek.common.utils.SPUtils;
 import wb.app.seek.modules.customtabs.CustomTabActivityHelper;
 import wb.app.seek.modules.customtabs.WebViewFallback;
@@ -38,7 +39,7 @@ public class AboutPresenter extends BasePresenter<AboutContract.View> implements
     mCustomTabsIntent.setShowTitle(true);
 
     SPUtils spUtils = BaseApplication.getInstance().getHelper().getSpUtils();
-    mIsInAppBrowser = spUtils.getBoolean(mActivity.getString(R.string.setting_in_app_browser_key), true);
+    mIsInAppBrowser = spUtils.getBoolean(SPKey.IN_APP_BROWSER, true);
   }
 
   @Override

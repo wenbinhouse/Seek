@@ -61,8 +61,4 @@ public class SettingItemView extends LinearLayout {
   public CheckBox getCheckBox() {
     return mCheckBox;
   }
-
-  public void setChecked(boolean isChecked) {
-    mCheckBox.setChecked(isChecked);
-  }
 }

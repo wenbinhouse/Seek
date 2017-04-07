@@ -37,6 +37,7 @@
         android:id="@+id/nightModeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:sivChecked="false"
         app:sivShowCheck="true"
         app:sivText="@string/night_mode_title"/>
 

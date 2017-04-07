@@ -3,12 +3,12 @@ package wb.app.seek.modules.setting;
 import android.app.Activity;
 import android.widget.CheckBox;
 
-import wb.app.seek.R;
 import wb.app.seek.common.base.BaseApplication;
 import wb.app.seek.common.base.mvp.BasePresenter;
 import wb.app.seek.common.rxbus.RxBus;
 import wb.app.seek.common.rxbus.RxEvent;
 import wb.app.seek.common.rxbus.RxEventType;
+import wb.app.seek.common.utils.SPKey;
 import wb.app.seek.common.utils.SPUtils;
 
 /**
@@ -27,35 +27,31 @@ public class SettingPresenter extends BasePresenter<SettingContract.View> implem
 
   @Override
   public void initView() {
-    String browserKey = mActivity.getString(R.string.setting_in_app_browser_key);
-    ((SettingActivity) getView()).getBrowserInAppView().getCheckBox().setChecked(mSpUtils.getBoolean(browserKey));
+    ((SettingActivity) getView()).getBrowserInAppView().getCheckBox().setChecked(mSpUtils.getBoolean(SPKey.IN_APP_BROWSER));
 
-    String nightModeKey = mActivity.getString(R.string.night_mode_key);
-    ((SettingActivity) getView()).getNightModeView().getCheckBox().setChecked(mSpUtils.getBoolean(nightModeKey));
+    ((SettingActivity) getView()).getNightModeView().getCheckBox().setChecked(mSpUtils.getBoolean(SPKey.DAY_NIGHT_MODE));
   }
 
   @Override
   public void setInAppBrowser() {
     CheckBox checkBox = ((SettingActivity) getView()).getBrowserInAppView().getCheckBox();
-    String key = mActivity.getString(R.string.setting_in_app_browser_key);
 
-    boolean isChecked = mSpUtils.getBoolean(key);
+    boolean isChecked = checkBox.isChecked();
 
     checkBox.setChecked(!isChecked);
 
-    mSpUtils.putBoolean(key, !isChecked);
+    mSpUtils.putBoolean(SPKey.IN_APP_BROWSER, !isChecked);
   }
 
   @Override
   public void setNightMode() {
     CheckBox checkBox = ((SettingActivity) getView()).getNightModeView().getCheckBox();
-    String key = mActivity.getString(R.string.night_mode_key);
 
-    boolean isChecked = mSpUtils.getBoolean(key);
+    boolean isChecked = checkBox.isChecked();
 
     checkBox.setChecked(!isChecked);
 
-    mSpUtils.putBoolean(key, !isChecked);
+    mSpUtils.putBoolean(SPKey.DAY_NIGHT_MODE, !isChecked);
 
     RxBus.getInstance().post(new RxEvent(RxEventType.DAY_NIGHT_MODE, String.valueOf(!isChecked)));
 
