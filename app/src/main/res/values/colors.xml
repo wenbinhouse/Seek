@@ -59,4 +59,5 @@
   <color name="textColor">@color/color_h2_dark</color>
   <color name="indicatorColor">@color/color_white</color>
   <color name="bannerTextColor">@color/color_white</color>
+  <color name="backIconColor">@color/color_h2_dark</color>
 </resources>

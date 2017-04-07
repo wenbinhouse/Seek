@@ -149,7 +149,10 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
 
   @Override
   public void showTitle(String title) {
-    mToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.color_white));
+    // 设置收缩的表填颜色
+    mToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.textColor));
+    // 设置展开的标题颜色
+    mToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.bannerTextColor));
     mToolbarLayout.setTitle(title);
   }
 

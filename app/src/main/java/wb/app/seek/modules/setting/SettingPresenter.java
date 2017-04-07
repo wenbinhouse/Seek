@@ -17,7 +17,6 @@ import wb.app.seek.common.utils.SPUtils;
 public class SettingPresenter extends BasePresenter<SettingContract.View> implements SettingContract.Presenter {
 
   private final Activity mActivity;
-  //  private final SettingContract.View mView;
   private final SPUtils mSpUtils;
 
   public SettingPresenter(Activity activity) {
@@ -25,13 +24,6 @@ public class SettingPresenter extends BasePresenter<SettingContract.View> implem
 
     mSpUtils = BaseApplication.getInstance().getHelper().getSpUtils();
   }
-
-//  public SettingPresenter(Activity activity, SettingContract.View view) {
-//    mActivity = activity;
-//    mView = view;
-//
-//    mSpUtils = BaseApplication.getInstance().getHelper().getSpUtils();
-//  }
 
   @Override
   public void initView() {

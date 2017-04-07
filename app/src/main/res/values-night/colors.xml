@@ -5,6 +5,7 @@
   <color name="textColor">@color/night_text_color</color>
   <color name="indicatorColor">@color/color_h2_dark</color>
   <color name="bannerTextColor">@color/night_text_color</color>
+  <color name="backIconColor">@color/night_text_color</color>
 
   <color name="color_divider">#4F4F4F</color>
 </resources>
