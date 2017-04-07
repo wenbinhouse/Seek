@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/viewBackgroundColor"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0dp"
+            android:orientation="vertical"
+            android:scrollbars="none">
 
-</LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:padding="@dimen/base_margin">
+
+    <TextView
+        style="@style/SettingTitleStyle"
+        android:text="@string/setting_base"/>
+
+    <wb.app.seek.widgets.SettingItemView
+        android:id="@+id/browserInAppView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sivChecked="true"
+        app:sivShowCheck="true"
+        app:sivSubText="@string/setting_browser_title"
+        app:sivText="@string/setting_browser_summary"/>
+
+    <View style="@style/VerticalDividerStyle"/>
+
+    <wb.app.seek.widgets.SettingItemView
+        android:id="@+id/nightModeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sivShowCheck="true"
+        app:sivText="@string/night_mode_title"/>
+
+  </LinearLayout>
+
+</ScrollView>

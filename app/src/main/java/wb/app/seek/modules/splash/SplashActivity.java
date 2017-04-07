@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
 import wb.app.seek.modules.main.MainActivity;
@@ -39,7 +40,9 @@ public class SplashActivity extends BaseActivity {
   }
 
   private void launchMain() {
-    Observable.timer(2, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+    Observable.timer(2, TimeUnit.SECONDS)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Action1<Long>() {
           @Override
           public void call(Long aLong) {

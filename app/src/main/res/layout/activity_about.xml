@@ -1,13 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/color_white"
-              android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/viewBackgroundColor"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0dp"
+            android:orientation="vertical"
+            android:scrollbars="none">
 
-  <FrameLayout
-      android:id="@+id/content_fl"
+  <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:padding="@dimen/base_margin">
 
-</LinearLayout>
+    <TextView
+        style="@style/SettingTitleStyle"
+        android:text="@string/about_app_name"/>
+
+    <wb.app.seek.widgets.SettingItemView
+        android:id="@+id/versionView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sivText="@string/version_title"/>
+
+    <TextView
+        style="@style/SettingTitleStyle"
+        android:text="@string/author_str"/>
+
+    <wb.app.seek.widgets.SettingItemView
+        android:id="@+id/authorView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sivSubText="@string/author_summary"
+        app:sivText="@string/author_title"/>
+
+    <View style="@style/VerticalDividerStyle"/>
+
+    <wb.app.seek.widgets.SettingItemView
+        android:id="@+id/githubView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sivSubText="@string/github_summary"
+        app:sivText="@string/github_title"/>
+
+    <View style="@style/VerticalDividerStyle"/>
+
+    <wb.app.seek.widgets.SettingItemView
+        android:id="@+id/jianshuView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sivSubText="@string/jianshu_summary"
+        app:sivText="@string/jianshu_title"/>
+
+    <TextView
+        style="@style/SettingTitleStyle"
+        android:text="@string/support_str"/>
+
+    <wb.app.seek.widgets.SettingItemView
+        android:id="@+id/feedbackView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sivSubText="@string/feedback_summary"
+        app:sivText="@string/feedback_title"/>
+
+    <View style="@style/VerticalDividerStyle"/>
+
+    <wb.app.seek.widgets.SettingItemView
+        android:id="@+id/licenseView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sivSubText="@string/license_summary"
+        app:sivText="@string/license_title"/>
+
+  </LinearLayout>
+
+</ScrollView>

@@ -40,6 +40,14 @@
         android:screenOrientation="portrait"/>
 
     <activity
+        android:name=".modules.setting.SettingActivity"
+        android:screenOrientation="portrait"/>
+
+    <activity
+        android:name=".modules.about.AboutActivity"
+        android:screenOrientation="portrait"/>
+
+    <activity
         android:name=".modules.about.AboutActivity"
         android:screenOrientation="portrait"/>
 

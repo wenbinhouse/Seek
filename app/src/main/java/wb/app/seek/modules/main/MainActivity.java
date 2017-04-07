@@ -4,14 +4,17 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,14 +26,23 @@ import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+import wb.app.library.MLog;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
 import wb.app.seek.common.rxbus.RxBus;
 import wb.app.seek.common.rxbus.RxEvent;
 import wb.app.seek.common.rxbus.RxEventType;
+import wb.app.seek.common.utils.SPKey;
+import wb.app.seek.common.utils.SPUtils;
 import wb.app.seek.modules.about.AboutActivity;
 import wb.app.seek.modules.setting.SettingActivity;
 import wb.app.seek.utils.DateTimeUtils;
@@ -41,12 +53,22 @@ public class MainActivity extends BaseActivity {
   @BindView(R.id.drawer_main_layout) DrawerLayout mDrawerLayout;
   @BindView(R.id.main_viewpager) ViewPager mMainViewpager;
   @BindView(R.id.main_tab_layout) TabLayout mMainTabLayout;
-  //  @BindView(R.id.nav_view) NavigationView mNavView;
   @BindView(R.id.reveal_root) RelativeLayout mRevealRoot;
+  private long mLastTimeMillis;
+  private Subscription mSubscription;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    MLog.d("onCreate");
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (!mSubscription.isUnsubscribed()) {
+      mSubscription.unsubscribe();
+    }
   }
 
   @Override
@@ -58,10 +80,47 @@ public class MainActivity extends BaseActivity {
   protected void initComponents() {
     initToolbar();
 
-    setupDrawerContent();
-
     mMainViewpager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
     mMainTabLayout.setupWithViewPager(mMainViewpager);
+
+    mSubscription = RxBus.getInstance().toObservable(RxEvent.class)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Action1<RxEvent>() {
+          @Override
+          public void call(final RxEvent rxEvent) {
+            if (rxEvent.getType() == RxEventType.DAY_NIGHT_MODE) {
+              // 延时切换日夜间模式
+              Observable.timer(500, TimeUnit.MILLISECONDS)
+                  .subscribeOn(Schedulers.io())
+                  .observeOn(AndroidSchedulers.mainThread())
+                  .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                      switchDayNightMode(rxEvent.getMessage());
+                    }
+                  });
+            }
+          }
+        });
+  }
+
+  /**
+   * 切换日间模式和夜间模式
+   */
+  private void switchDayNightMode(String message) {
+    MLog.d("night mode : " + message);
+    SPUtils spUtils = getHelper().getSpUtils();
+    if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK)
+        == Configuration.UI_MODE_NIGHT_YES) {
+      spUtils.putInt(SPKey.UI_MODE, AppCompatDelegate.MODE_NIGHT_NO);
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    } else {
+      spUtils.putInt(SPKey.UI_MODE, AppCompatDelegate.MODE_NIGHT_YES);
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    }
+    getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+    recreate();
   }
 
   @Override
@@ -78,11 +137,26 @@ public class MainActivity extends BaseActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     if (item.getItemId() == R.id.main_menu_date) {
-//      revealView();
-      selectedDate();
+      revealView();
+//      selectedDate();
       return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public void onBackPressed() {
+    if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+      closeDrawer();
+    } else {
+      long currentTimeMillis = System.currentTimeMillis();
+      if (currentTimeMillis - mLastTimeMillis > 2000) {
+        showToastShort("再按一次退出程序");
+        mLastTimeMillis = currentTimeMillis;
+      } else {
+        super.onBackPressed();
+      }
+    }
   }
 
   private void revealView() {
@@ -92,6 +166,9 @@ public class MainActivity extends BaseActivity {
     createAnimateReveal(mRevealRoot, R.color.color_reveal, cx, cy);
   }
 
+  /**
+   * 创建扩散动画
+   */
   private Animator createAnimateReveal(ViewGroup viewRoot, @ColorRes int color, int x, int y) {
     float finalRadius = (float) Math.hypot(viewRoot.getWidth(), viewRoot.getHeight());
 
@@ -100,12 +177,28 @@ public class MainActivity extends BaseActivity {
     anim.setDuration(500);
     anim.setInterpolator(new AccelerateDecelerateInterpolator());
     anim.addListener(new AnimatorListenerAdapter() {
+
+      @Override
+      public void onAnimationStart(Animator animation) {
+        super.onAnimationStart(animation);
+
+        Observable.timer(150, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Action1<Long>() {
+              @Override
+              public void call(Long aLong) {
+                selectedDate();
+              }
+            });
+      }
+
       @Override
       public void onAnimationEnd(Animator animation) {
         super.onAnimationEnd(animation);
 
         mRevealRoot.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.transparent));
-        selectedDate();
+//        selectedDate();
       }
     });
     anim.start();
@@ -133,30 +226,6 @@ public class MainActivity extends BaseActivity {
     datePickerDialog.show();
   }
 
-  private void setupDrawerContent() {
-//    mNavView.setCheckedItem(R.id.nav_home);
-//
-//    mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//      @Override
-//      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//          case R.id.nav_home:
-//            break;
-//
-//          case R.id.nav_setting:
-//            startActivity(new Intent(MainActivity.this, SettingActivity.class));
-//            break;
-//
-//          case R.id.nav_about:
-//            startActivity(new Intent(MainActivity.this, AboutActivity.class));
-//            break;
-//        }
-//        mDrawerLayout.closeDrawers();
-//        return true;
-//      }
-//    });
-  }
-
   private void initToolbar() {
     setSupportActionBar(mMainToolbar);
 
@@ -164,6 +233,16 @@ public class MainActivity extends BaseActivity {
         this, mDrawerLayout, mMainToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     mDrawerLayout.addDrawerListener(toggle);
     toggle.syncState();
+
+    // change the ActionBarDrawerToggle icon
+//    toggle.setDrawerIndicatorEnabled(false);
+//    mMainToolbar.setNavigationIcon(R.drawable.ic_date_48);
+//    mMainToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View v) {
+//        mDrawerLayout.openDrawer(GravityCompat.START);
+//      }
+//    });
   }
 
   @OnClick({R.id.nav_home, R.id.nav_setting, R.id.nav_about, R.id.drawer_layout})

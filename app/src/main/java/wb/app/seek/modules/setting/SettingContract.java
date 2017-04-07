@@ -1,19 +1,21 @@
 package wb.app.seek.modules.setting;
 
-import android.preference.Preference;
+import wb.app.seek.common.base.mvp.IView;
 
 /**
  * Created by W.b on 2017/2/16.
  */
 public class SettingContract {
 
-  interface View {
+  interface View extends IView {
 
   }
 
   interface Presenter {
-    void setInAppBrowser(Preference preference);
+    void initView();
 
-    void setNightMode(Preference preference);
+    void setInAppBrowser();
+
+    void setNightMode();
   }
 }

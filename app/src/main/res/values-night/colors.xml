@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="viewBackgroundColor">#3F3F3F</color>
-  <color name="textColor">#8A9599</color>
+
+  <color name="viewBackgroundColor">@color/color_background_night</color>
+  <color name="textColor">@color/night_text_color</color>
+  <color name="indicatorColor">@color/color_h2_dark</color>
+  <color name="bannerTextColor">@color/night_text_color</color>
 
   <color name="color_divider">#4F4F4F</color>
 </resources>

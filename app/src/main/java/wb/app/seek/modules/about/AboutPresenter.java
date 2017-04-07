@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseApplication;
+import wb.app.seek.common.base.mvp.BasePresenter;
 import wb.app.seek.common.utils.SPUtils;
 import wb.app.seek.modules.customtabs.CustomTabActivityHelper;
 import wb.app.seek.modules.customtabs.WebViewFallback;
@@ -23,17 +24,14 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 /**
  * Created by W.b on 2017/2/16.
  */
-public class AboutPresenter implements AboutContract.Presenter {
+public class AboutPresenter extends BasePresenter<AboutContract.View> implements AboutContract.Presenter {
 
-  private AboutContract.View mView;
   private final CustomTabsIntent.Builder mCustomTabsIntent;
   private final Activity mActivity;
   private final boolean mIsInAppBrowser;
 
-
-  public AboutPresenter(Activity activity, AboutContract.View view) {
+  public AboutPresenter(Activity activity) {
     mActivity = activity;
-    mView = view;
 
     mCustomTabsIntent = new CustomTabsIntent.Builder();
     mCustomTabsIntent.setToolbarColor(Color.WHITE);
@@ -72,7 +70,7 @@ public class AboutPresenter implements AboutContract.Presenter {
     try {
       mActivity.startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
     } catch (android.content.ActivityNotFoundException ex) {
-      mView.showBrowserNotFoundError();
+      getView().showBrowserNotFoundError();
     }
   }
 
@@ -109,7 +107,7 @@ public class AboutPresenter implements AboutContract.Presenter {
               + mActivity.getString(R.string.version_title));
       mActivity.startActivity(intent);
     } catch (android.content.ActivityNotFoundException ex) {
-      mView.showFeedbackError();
+      getView().showFeedbackError();
     }
   }
 
@@ -125,7 +123,7 @@ public class AboutPresenter implements AboutContract.Presenter {
             ClipData clipData = ClipData.newPlainText("text", mActivity.getString(R.string.donate_account));
             manager.setPrimaryClip(clipData);
 
-            mView.showDonateToast();
+            getView().showDonateToast();
           }
         })
         .show();

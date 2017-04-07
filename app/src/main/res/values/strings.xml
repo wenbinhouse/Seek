@@ -22,12 +22,14 @@
 
   <!-- 关于 -->
   <string name="about_title">关于</string>
+  <string name="about_app_name">Seek</string>
   <string name="version_title">版本: V1.0.0</string>
 
   <string name="rate_summary">如果你喜欢 Seek, 请在应用商店给它一个好评吧</string>
   <string name="rate_key">rate</string>
   <string name="rate_title">为 Seek 评价</string>
 
+  <string name="author_str">作者</string>
   <string name="author_summary">福建 厦门</string>
   <string name="author_key">author</string>
   <string name="author_title">mawb23</string>
@@ -44,6 +46,7 @@
   <string name="qq_key">qq</string>
   <string name="qq_title">在 qq 联系我</string>
 
+  <string name="support_str">支持</string>
   <string name="feedback_summary">帮助我改进 Seek</string>
   <string name="feedback_key">feedback</string>
   <string name="feedback_title">反馈与建议</string>
@@ -72,6 +75,7 @@
   <string name="setting_browser_title">使用内置浏览器</string>
   <string name="night_mode_key">night_mode</string>
   <string name="night_mode_title">夜间模式</string>
+  <string name="setting_base">基本设置</string>
 
   <string name="shared_preferences_key">user_settings</string>
 

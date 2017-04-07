@@ -7,15 +7,23 @@
   </declare-styleable>
 
   <declare-styleable name="BezelImageView">
-    <attr name="maskDrawable" format="reference" />
-    <attr name="borderDrawable" format="reference" />
-    <attr name="desaturateOnPress" format="boolean" />
+    <attr name="maskDrawable" format="reference"/>
+    <attr name="borderDrawable" format="reference"/>
+    <attr name="desaturateOnPress" format="boolean"/>
   </declare-styleable>
 
   <!-- DrawerItemView -->
   <declare-styleable name="DrawerItemView">
     <attr name="divText" format="string"/>
     <attr name="divImage" format="reference"/>
+  </declare-styleable>
+
+  <!-- SettingItemView -->
+  <declare-styleable name="SettingItemView">
+    <attr name="sivText" format="string"/>
+    <attr name="sivSubText" format="string"/>
+    <attr name="sivShowCheck" format="boolean"/>
+    <attr name="sivChecked" format="boolean"/>
   </declare-styleable>
 
 </resources>

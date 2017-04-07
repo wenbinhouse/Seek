@@ -8,7 +8,6 @@ import com.squareup.leakcanary.LeakCanary;
 import wb.app.library.MLog;
 import wb.app.seek.BuildConfig;
 import wb.app.seek.common.utils.SPKey;
-import wb.app.seek.common.utils.SPUtils;
 
 /**
  * Created by W.b on 2016/12/29.
@@ -28,8 +27,7 @@ public class BaseApplication extends Application {
 
     MLog.init(BuildConfig.DEBUG);
 
-    SPUtils spUtils = getHelper().getSpUtils();
-    int uiMode = spUtils.getInt(SPKey.UI_MODE);
+    int uiMode = getHelper().getSpUtils().getInt(SPKey.UI_MODE);
     if (uiMode == AppCompatDelegate.MODE_NIGHT_NO) {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     } else if (uiMode == AppCompatDelegate.MODE_NIGHT_YES) {
