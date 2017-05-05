@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import wb.app.seek.common.base.mvp.BasePresenter;
 import wb.app.seek.common.http.rx.BaseSubscriber;
 import wb.app.seek.common.http.rx.ResponseTransformer;
+import wb.app.seek.common.utils.DateTimeUtils;
 import wb.app.seek.modules.model.ZhihuDailyNews;
 
 /**
@@ -16,10 +17,10 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
     @Override
     public void refreshNews(String date) {
-//        if (!DateTimeUtils.isValid(date)) {
-//            getView().showError("日期不能小于2013-05-20", "");
-//            return;
-//        }
+        if (!DateTimeUtils.isValid(date)) {
+            getView().showError("日期不能小于2013-05-20", "");
+            return;
+        }
 
         getView().showLoading();
 
