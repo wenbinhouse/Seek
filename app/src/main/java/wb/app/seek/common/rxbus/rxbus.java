@@ -10,30 +10,30 @@ import rx.subjects.Subject;
  */
 public class RxBus {
 
-  private static RxBus mInstance;
-  private final Subject<Object, Object> mBus;
+    private static RxBus mInstance;
+    private final Subject<Object, Object> mBus;
 
-  private RxBus() {
-    mBus = new SerializedSubject<>(PublishSubject.create());
-  }
-
-  public static RxBus getInstance() {
-    if (mInstance == null) {
-      synchronized (RxBus.class) {
-        if (mInstance == null) {
-          mInstance = new RxBus();
-        }
-      }
+    private RxBus() {
+        mBus = new SerializedSubject<>(PublishSubject.create());
     }
 
-    return mInstance;
-  }
+    public static RxBus getInstance() {
+        if (mInstance == null) {
+            synchronized (RxBus.class) {
+                if (mInstance == null) {
+                    mInstance = new RxBus();
+                }
+            }
+        }
 
-  public void post(Object o) {
-    mBus.onNext(o);
-  }
+        return mInstance;
+    }
 
-  public <T> Observable<T> toObservable(Class<T> eventType) {
-    return mBus.ofType(eventType);
-  }
+    public void post(Object o) {
+        mBus.onNext(o);
+    }
+
+    public <T> Observable<T> toObservable(Class<T> eventType) {
+        return mBus.ofType(eventType);
+    }
 }

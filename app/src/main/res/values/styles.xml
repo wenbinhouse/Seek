@@ -1,70 +1,70 @@
 <resources>
 
-  <!-- Base application theme. -->
-  <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
-  <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-  <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-  <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-  <!--<item name="colorAccent">@color/colorPrimary</item>-->
+    <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+    <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+    <!--<item name="colorAccent">@color/colorPrimary</item>-->
 
-  <!--<item name="android:windowContentTransitions">true</item>-->
-  <!--</style>-->
+    <!--<item name="android:windowContentTransitions">true</item>-->
+    <!--</style>-->
 
-  <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-    <!-- Customize your theme here. -->
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorPrimary</item>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
 
-    <!-- 修改 toolbar 左边箭头颜色 -->
-    <item name="android:colorControlNormal">@color/backIconColor</item>
+        <!-- 修改 toolbar 左边箭头颜色 -->
+        <item name="android:colorControlNormal">@color/backIconColor</item>
 
-    <item name="android:windowContentTransitions">true</item>
-  </style>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
 
-  <style name="TranslucentTheme" parent="AppTheme">
-    <item name="android:windowIsTranslucent">true</item>
-    <item name="android:windowBackground">@android:color/transparent</item>
-  </style>
+    <style name="TranslucentTheme" parent="AppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 
-  <style name="VerticalDividerStyle">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">@dimen/pixel_1</item>
-    <item name="android:background">@color/color_divider</item>
-  </style>
+    <style name="VerticalDividerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/pixel_1</item>
+        <item name="android:background">@color/color_divider</item>
+    </style>
 
-  <style name="MyTabLayoutStyle" parent="Widget.Design.TabLayout">
-    <item name="tabIndicatorColor">@color/color_h2_dark</item>
-    <item name="tabBackground">@color/color_white</item>
-    <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
-    <item name="tabSelectedTextColor">?android:textColorPrimary</item>
-  </style>
+    <style name="MyTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/color_h2_dark</item>
+        <item name="tabBackground">@color/color_white</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
 
-  <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
-    <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
-    <item name="android:colorAccent">@color/colorPrimary</item>
-  </style>
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
+        <item name="android:colorAccent">@color/colorPrimary</item>
+    </style>
 
-  <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
-    <item name="android:headerBackground">@color/colorPrimary</item>
-  </style>
+    <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/colorPrimary</item>
+    </style>
 
-  <style name="WindowAnimationFadeInOut">
-    <item name="android:windowEnterAnimation">@anim/fade_in</item>
-    <item name="android:windowExitAnimation">@anim/fade_out</item>
-  </style>
+    <style name="WindowAnimationFadeInOut">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
 
-  <style name="SettingTitleStyle">
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:textColor">@color/textColor</item>
-    <item name="android:textSize">@dimen/text_size_h2</item>
-    <item name="android:paddingLeft">@dimen/half_margin</item>
-  </style>
+    <style name="SettingTitleStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/text_size_h2</item>
+        <item name="android:paddingLeft">@dimen/half_margin</item>
+    </style>
 
-  <style name="asd" parent="android:Widget">
-    <item name="elevation">10dp</item>
-    <item name="android:background">@color/color_h1_dark</item>
-  </style>
+    <style name="asd" parent="android:Widget">
+        <item name="elevation">10dp</item>
+        <item name="android:background">@color/color_h1_dark</item>
+    </style>
 
 </resources>

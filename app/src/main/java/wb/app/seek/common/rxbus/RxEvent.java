@@ -5,19 +5,19 @@ package wb.app.seek.common.rxbus;
  */
 public class RxEvent {
 
-  private int type;
-  private String message;
+    private int type;
+    private String message;
 
-  public RxEvent(int type, String message) {
-    this.type = type;
-    this.message = message;
-  }
+    public RxEvent(int type, String message) {
+        this.type = type;
+        this.message = message;
+    }
 
-  public int getType() {
-    return type;
-  }
+    public int getType() {
+        return type;
+    }
 
-  public String getMessage() {
-    return message;
-  }
+    public String getMessage() {
+        return message;
+    }
 }

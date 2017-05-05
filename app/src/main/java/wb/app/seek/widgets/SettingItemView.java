@@ -19,46 +19,46 @@ import wb.app.seek.R;
  */
 public class SettingItemView extends LinearLayout {
 
-  @BindView(R.id.titleTv) TextView mTitleTv;
-  @BindView(R.id.subTitleTv) TextView mSubTitleTv;
-  @BindView(R.id.checkBox) CheckBox mCheckBox;
+    @BindView(R.id.titleTv) TextView mTitleTv;
+    @BindView(R.id.subTitleTv) TextView mSubTitleTv;
+    @BindView(R.id.checkBox) CheckBox mCheckBox;
 
-  public SettingItemView(Context context) {
-    this(context, null);
-  }
-
-  public SettingItemView(Context context, @Nullable AttributeSet attrs) {
-    super(context, attrs);
-    LayoutInflater.from(context).inflate(R.layout.view_setting_item, this);
-    ButterKnife.bind(this);
-
-    if (attrs != null) {
-      TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingItemView);
-      String title = ta.getString(R.styleable.SettingItemView_sivText);
-      String subTitle = ta.getString(R.styleable.SettingItemView_sivSubText);
-      boolean showCheck = ta.getBoolean(R.styleable.SettingItemView_sivShowCheck, false);
-      boolean isChecked = ta.getBoolean(R.styleable.SettingItemView_sivChecked, false);
-      ta.recycle();
-
-      if (!TextUtils.isEmpty(title)) {
-        mTitleTv.setText(title);
-      }
-
-      if (!TextUtils.isEmpty(subTitle)) {
-        mSubTitleTv.setText(subTitle);
-        mSubTitleTv.setVisibility(VISIBLE);
-      }
-
-      if (showCheck) {
-        mCheckBox.setChecked(isChecked);
-        mCheckBox.setVisibility(VISIBLE);
-      } else {
-        mCheckBox.setVisibility(GONE);
-      }
+    public SettingItemView(Context context) {
+        this(context, null);
     }
-  }
 
-  public CheckBox getCheckBox() {
-    return mCheckBox;
-  }
+    public SettingItemView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        LayoutInflater.from(context).inflate(R.layout.view_setting_item, this);
+        ButterKnife.bind(this);
+
+        if (attrs != null) {
+            TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.SettingItemView);
+            String title = ta.getString(R.styleable.SettingItemView_sivText);
+            String subTitle = ta.getString(R.styleable.SettingItemView_sivSubText);
+            boolean showCheck = ta.getBoolean(R.styleable.SettingItemView_sivShowCheck, false);
+            boolean isChecked = ta.getBoolean(R.styleable.SettingItemView_sivChecked, false);
+            ta.recycle();
+
+            if (!TextUtils.isEmpty(title)) {
+                mTitleTv.setText(title);
+            }
+
+            if (!TextUtils.isEmpty(subTitle)) {
+                mSubTitleTv.setText(subTitle);
+                mSubTitleTv.setVisibility(VISIBLE);
+            }
+
+            if (showCheck) {
+                mCheckBox.setChecked(isChecked);
+                mCheckBox.setVisibility(VISIBLE);
+            } else {
+                mCheckBox.setVisibility(GONE);
+            }
+        }
+    }
+
+    public CheckBox getCheckBox() {
+        return mCheckBox;
+    }
 }

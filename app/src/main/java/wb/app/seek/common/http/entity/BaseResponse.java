@@ -7,43 +7,43 @@ import java.io.Serializable;
  */
 public class BaseResponse<T> implements Serializable {
 
-  private T result;
+    private T result;
 
-  private String request;
+    private String request;
 
-  private String error_code;
+    private String error_code;
 
-  private String error;
+    private String error;
 
-  public T getResult() {
-    return result;
-  }
+    public T getResult() {
+        return result;
+    }
 
-  public void setResult(T result) {
-    this.result = result;
-  }
+    public void setResult(T result) {
+        this.result = result;
+    }
 
-  public String getRequest() {
-    return request;
-  }
+    public String getRequest() {
+        return request;
+    }
 
-  public void setRequest(String request) {
-    this.request = request;
-  }
+    public void setRequest(String request) {
+        this.request = request;
+    }
 
-  public String getError_code() {
-    return error_code;
-  }
+    public String getError_code() {
+        return error_code;
+    }
 
-  public void setError_code(String error_code) {
-    this.error_code = error_code;
-  }
+    public void setError_code(String error_code) {
+        this.error_code = error_code;
+    }
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public void setError(String error) {
-    this.error = error;
-  }
+    public void setError(String error) {
+        this.error = error;
+    }
 }

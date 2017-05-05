@@ -11,42 +11,42 @@ import rx.subjects.BehaviorSubject;
  */
 public class ResponseTransformer<T> implements Observable.Transformer<T, T> {
 
-  private static ResponseTransformer mResponseTransformer = null;
+    private static ResponseTransformer mResponseTransformer = null;
 
-  private BehaviorSubject<LifecycleEvent> mLifecycleSubject;
+    private BehaviorSubject<LifecycleEvent> mLifecycleSubject;
 
-  private ResponseTransformer() {
-  }
-
-  public static <T> ResponseTransformer<T> getInstance(BehaviorSubject<LifecycleEvent> lifecycleSubject) {
-    if (mResponseTransformer == null) {
-      synchronized (ResponseTransformer.class) {
-        if (mResponseTransformer == null) {
-          mResponseTransformer = new ResponseTransformer();
-        }
-      }
+    private ResponseTransformer() {
     }
 
-    mResponseTransformer.setBehaviorSubject(lifecycleSubject);
+    public static <T> ResponseTransformer<T> getInstance(BehaviorSubject<LifecycleEvent> lifecycleSubject) {
+        if (mResponseTransformer == null) {
+            synchronized (ResponseTransformer.class) {
+                if (mResponseTransformer == null) {
+                    mResponseTransformer = new ResponseTransformer();
+                }
+            }
+        }
 
-    return mResponseTransformer;
-  }
+        mResponseTransformer.setBehaviorSubject(lifecycleSubject);
 
-  private void setBehaviorSubject(BehaviorSubject<LifecycleEvent> lifecycleSubject) {
-    mLifecycleSubject = lifecycleSubject;
-  }
+        return mResponseTransformer;
+    }
 
-  @Override
-  public Observable<T> call(Observable<T> tObservable) {
-    Observable<LifecycleEvent> lifecycleEventObservable = mLifecycleSubject.takeFirst(new Func1<LifecycleEvent, Boolean>() {
-      @Override
-      public Boolean call(LifecycleEvent lifecycleEvent) {
-        return lifecycleEvent.equals(LifecycleEvent.DESTROY);
-      }
-    });
+    private void setBehaviorSubject(BehaviorSubject<LifecycleEvent> lifecycleSubject) {
+        mLifecycleSubject = lifecycleSubject;
+    }
 
-    return tObservable.takeUntil(lifecycleEventObservable)
-        .compose(new SchedulersTransformer<T>())
-        .compose(ErrorTransformer.<T>getInstance());
-  }
+    @Override
+    public Observable<T> call(Observable<T> tObservable) {
+        Observable<LifecycleEvent> lifecycleEventObservable = mLifecycleSubject.takeFirst(new Func1<LifecycleEvent, Boolean>() {
+            @Override
+            public Boolean call(LifecycleEvent lifecycleEvent) {
+                return lifecycleEvent.equals(LifecycleEvent.DESTROY);
+            }
+        });
+
+        return tObservable.takeUntil(lifecycleEventObservable)
+                .compose(new SchedulersTransformer<T>())
+                .compose(ErrorTransformer.<T>getInstance());
+    }
 }

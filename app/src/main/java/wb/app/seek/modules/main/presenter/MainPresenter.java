@@ -1,4 +1,4 @@
-package wb.app.seek.modules.main;
+package wb.app.seek.modules.main.presenter;
 
 import wb.app.seek.common.base.mvp.BasePresenter;
 

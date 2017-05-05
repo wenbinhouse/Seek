@@ -1,4 +1,4 @@
-package wb.app.seek.modules.zhihu;
+package wb.app.seek.modules.zhihu.presenter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import wb.app.seek.common.base.mvp.BasePresenter;
 import wb.app.seek.common.http.rx.BaseSubscriber;
 import wb.app.seek.common.http.rx.ResponseTransformer;
 import wb.app.seek.common.utils.SPUtils;
-import wb.app.seek.model.ZhihuDailyStory;
+import wb.app.seek.modules.model.ZhihuDailyStory;
 import wb.app.seek.modules.customtabs.CustomTabActivityHelper;
 import wb.app.seek.modules.customtabs.WebViewFallback;
 

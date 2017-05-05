@@ -11,10 +11,10 @@ import wb.app.seek.modules.webview.WebViewActivity;
  */
 public class WebViewFallback implements CustomTabActivityHelper.CustomTabFallback {
 
-  @Override
-  public void openUri(Activity activity, Uri uri) {
-    Intent intent = new Intent(activity, WebViewActivity.class);
-    intent.putExtra(WebViewActivity.INTENT_KEY_URL, uri.toString());
-    activity.startActivity(intent);
-  }
+    @Override
+    public void openUri(Activity activity, Uri uri) {
+        Intent intent = new Intent(activity, WebViewActivity.class);
+        intent.putExtra(WebViewActivity.INTENT_KEY_URL, uri.toString());
+        activity.startActivity(intent);
+    }
 }

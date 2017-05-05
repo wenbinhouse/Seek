@@ -5,24 +5,24 @@ package wb.app.seek.common.http.rx;
  */
 public enum LifecycleEvent {
 
-  ATTACH_VIEW,
+    ATTACH_VIEW,
 
-  /**
-   * Activity Events
-   */
-  CREATE,
-  START,
-  RESUME,
-  PAUSE,
-  STOP,
-  DESTROY,
+    /**
+     * Activity Events
+     */
+    CREATE,
+    START,
+    RESUME,
+    PAUSE,
+    STOP,
+    DESTROY,
 
-  /**
-   * Fragment Events
-   */
-  ATTACH,
-  CREATE_VIEW,
-  DESTROY_VIEW,
-  DETACH
+    /**
+     * Fragment Events
+     */
+    ATTACH,
+    CREATE_VIEW,
+    DESTROY_VIEW,
+    DETACH
 
 }

@@ -1,4 +1,4 @@
-package wb.app.seek.utils;
+package wb.app.seek.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

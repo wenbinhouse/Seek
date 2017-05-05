@@ -5,9 +5,9 @@ package wb.app.seek.common.rxbus;
  */
 public interface RxEventType {
 
-  // 列表滑动到顶部
-  int SCROLL_TO_TOP = 0;
+    // 列表滑动到顶部
+    int SCROLL_TO_TOP = 0;
 
-  // 夜间模式切换
-  int DAY_NIGHT_MODE = 1;
+    // 夜间模式切换
+    int DAY_NIGHT_MODE = 1;
 }

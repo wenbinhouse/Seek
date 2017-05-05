@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import wb.app.seek.model.ZhihuDailyStory;
+import wb.app.seek.modules.model.ZhihuDailyStory;
 
 /**
  * Created by W.b on 2017/3/7.

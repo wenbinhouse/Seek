@@ -13,33 +13,33 @@ import wb.app.library.MLog;
  */
 public class AppUtils {
 
-  private AppUtils() {
-    throw new UnsupportedOperationException("u can't instantiate me...");
-  }
-
-  /**
-   * 获取App包名
-   *
-   * @param context 上下文
-   * @return App包名
-   */
-  public static String getAppPackageName(Context context) {
-    return context.getPackageName();
-  }
-
-  /**
-   * 获取应用版本号
-   */
-  public static String getAppVersion(Context context) {
-    try {
-      PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-      int versionCode = packageInfo.versionCode;
-      String versionName = packageInfo.versionName;
-      MLog.d("versionCode = " + versionCode + ", versionName = " + versionName);
-      return versionName;
-    } catch (PackageManager.NameNotFoundException e) {
-      e.printStackTrace();
-      return "";
+    private AppUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
     }
-  }
+
+    /**
+     * 获取App包名
+     *
+     * @param context 上下文
+     * @return App包名
+     */
+    public static String getAppPackageName(Context context) {
+        return context.getPackageName();
+    }
+
+    /**
+     * 获取应用版本号
+     */
+    public static String getAppVersion(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            int versionCode = packageInfo.versionCode;
+            String versionName = packageInfo.versionName;
+            MLog.d("versionCode = " + versionCode + ", versionName = " + versionName);
+            return versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }

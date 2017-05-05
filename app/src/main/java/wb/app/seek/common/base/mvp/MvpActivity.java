@@ -11,36 +11,53 @@ import wb.app.seek.common.base.BaseActivity;
  */
 public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity implements IView {
 
-  private String TAG = getClass().getSimpleName();
+    private String TAG = getClass().getSimpleName();
 
-  public P getPresenter() {
-    return mPresenter;
-  }
-
-  private P mPresenter;
-
-  protected abstract P createPresenter();
-
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    mPresenter = createPresenter();
-    if (mPresenter != null) {
-      mPresenter.attachView(this);
+    public P getPresenter() {
+        return mPresenter;
     }
-    super.onCreate(savedInstanceState);
-    Log.e(TAG, "onCreate()");
-  }
 
-  @Override
-  protected void onDestroy() {
-    Log.e(TAG, "onDestroy()");
-    if (mPresenter != null) {
-      mPresenter.detachView();
+    private P mPresenter;
+
+    protected abstract P createPresenter();
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mPresenter = createPresenter();
+        if (mPresenter != null) {
+            mPresenter.attachView(this);
+        }
+        super.onCreate(savedInstanceState);
+        Log.e(TAG, "onCreate()");
     }
-    super.onDestroy();
-  }
 
-  public void showError(String msg, String exception) {
-    showToastShort(msg);
-  }
+    //--------------- 公共的界面回调
+    @Override
+    protected void onDestroy() {
+        Log.e(TAG, "onDestroy()");
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String msg, String exception) {
+        showToastShort(msg);
+    }
+
+    @Override
+    public void showNoMore() {
+
+    }
 }

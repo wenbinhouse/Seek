@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import wb.app.seek.R;
-import wb.app.seek.model.ZhihuDailyStory;
+import wb.app.seek.modules.model.ZhihuDailyStory;
 
 /**
  * Created by W.b on 09/03/2017.

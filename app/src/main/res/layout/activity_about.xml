@@ -9,74 +9,80 @@
             android:orientation="vertical"
             android:scrollbars="none">
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:paddingBottom="@dimen/base_margin"
-      android:paddingLeft="@dimen/half_margin"
-      android:paddingRight="@dimen/half_margin"
-      android:paddingTop="@dimen/base_margin">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/base_margin"
+            android:paddingLeft="@dimen/half_margin"
+            android:paddingRight="@dimen/half_margin"
+            android:paddingTop="@dimen/base_margin">
 
-    <TextView
-        style="@style/SettingTitleStyle"
-        android:text="@string/about_app_name"/>
+        <TextView
+                style="@style/SettingTitleStyle"
+                android:text="@string/about_app_name"/>
 
-    <wb.app.seek.widgets.SettingItemView
-        android:id="@+id/versionView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sivText="@string/version_title"/>
+        <View
+                style="@style/VerticalDividerStyle"
+                android:layout_marginTop="@dimen/half_margin"/>
 
-    <TextView
-        style="@style/SettingTitleStyle"
-        android:text="@string/author_str"/>
+        <wb.app.seek.widgets.SettingItemView
+                android:id="@+id/versionView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sivText="@string/version_title"/>
 
-    <wb.app.seek.widgets.SettingItemView
-        android:id="@+id/authorView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sivSubText="@string/author_summary"
-        app:sivText="@string/author_title"/>
+        <TextView
+                style="@style/SettingTitleStyle"
+                android:text="@string/author_str"/>
 
-    <View style="@style/VerticalDividerStyle"/>
+        <View
+                style="@style/VerticalDividerStyle"
+                android:layout_marginTop="@dimen/half_margin"/>
 
-    <wb.app.seek.widgets.SettingItemView
-        android:id="@+id/githubView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sivSubText="@string/github_summary"
-        app:sivText="@string/github_title"/>
+        <wb.app.seek.widgets.SettingItemView
+                android:id="@+id/authorView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sivSubText="@string/author_summary"
+                app:sivText="@string/author_title"/>
 
-    <View style="@style/VerticalDividerStyle"/>
+        <wb.app.seek.widgets.SettingItemView
+                android:id="@+id/githubView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sivSubText="@string/github_summary"
+                app:sivText="@string/github_title"/>
 
-    <wb.app.seek.widgets.SettingItemView
-        android:id="@+id/jianshuView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sivSubText="@string/jianshu_summary"
-        app:sivText="@string/jianshu_title"/>
+        <wb.app.seek.widgets.SettingItemView
+                android:id="@+id/jianshuView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sivSubText="@string/jianshu_summary"
+                app:sivText="@string/jianshu_title"/>
 
-    <TextView
-        style="@style/SettingTitleStyle"
-        android:text="@string/support_str"/>
+        <TextView
+                style="@style/SettingTitleStyle"
+                android:text="@string/support_str"/>
 
-    <wb.app.seek.widgets.SettingItemView
-        android:id="@+id/feedbackView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sivSubText="@string/feedback_summary"
-        app:sivText="@string/feedback_title"/>
+        <View
+                style="@style/VerticalDividerStyle"
+                android:layout_marginTop="@dimen/half_margin"/>
 
-    <View style="@style/VerticalDividerStyle"/>
+        <wb.app.seek.widgets.SettingItemView
+                android:id="@+id/feedbackView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sivSubText="@string/feedback_summary"
+                app:sivText="@string/feedback_title"/>
 
-    <wb.app.seek.widgets.SettingItemView
-        android:id="@+id/licenseView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sivSubText="@string/license_summary"
-        app:sivText="@string/license_title"/>
+        <wb.app.seek.widgets.SettingItemView
+                android:id="@+id/licenseView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sivSubText="@string/license_summary"
+                app:sivText="@string/license_title"/>
 
-  </LinearLayout>
+    </LinearLayout>
 
 </ScrollView>

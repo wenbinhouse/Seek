@@ -1,4 +1,4 @@
-package wb.app.seek.common.widgets;
+package wb.app.seek.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -2,20 +2,12 @@
 
 一个新闻阅读 APP，还在不断完善中
 
-seek 翻译为
-
-- 寻找；探索
-
-大多数时候公司级项目因为一些局限，很难使用一些新的开源项目或者技术, 写这个项目的本意就是为了使用目前流行的开源项目和技术, 作为平时的研究积累。
-
-所以在这个项目中使用了大量的流行的开源项目和技术，比如 MVP 模式、 retrofit (okhttp)、 RxJava (RxAndroid)、 RxBus (替代 EventBus)、 butterknife、 glide、 leakcanary 等等
+在这个项目中使用了大量的当前流行的开源项目和技术，比如 MVP 模式、 retrofit (okhttp)、 RxJava (RxAndroid)、 RxBus (替代 EventBus)、 butterknife、 glide、 leakcanary 等等
 
 尽管已经尽力做到最好，但是难免会有认知理解的偏差，如果你发现项目中有任何问题，可以给我提建议，也欢迎发起 pr
 
 - Email: [mwbdevelop@gmail.com](mwbdevelop@gmail.com)
 - Blog: [http://www.jianshu.com/u/4f328937e30c](http://www.jianshu.com/u/4f328937e30c)
-
-#### 预览
 
 #### 感谢
 
@@ -30,6 +22,8 @@ seek 翻译为
 
 #### License
 ```
+Copyright 2017 mawb23
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at

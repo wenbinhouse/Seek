@@ -15,43 +15,43 @@ import wb.app.seek.common.utils.SPUtils;
  */
 public class BaseApplication extends Application {
 
-  private static BaseApplication mInstance;
-  private SeekHelper mHelper;
+    private static BaseApplication mInstance;
+    private SeekHelper mHelper;
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-    mInstance = this;
+        mInstance = this;
 
-    mHelper = SeekHelper.getInstance();
+        mHelper = SeekHelper.getInstance();
 
-    MLog.init(BuildConfig.DEBUG);
+        MLog.init(BuildConfig.DEBUG);
 
-    SPUtils spUtils = getHelper().getSpUtils();
-    int uiMode = spUtils.getInt(SPKey.UI_MODE);
-    if (uiMode == AppCompatDelegate.MODE_NIGHT_NO) {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-    } else if (uiMode == AppCompatDelegate.MODE_NIGHT_YES) {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        SPUtils spUtils = getHelper().getSpUtils();
+        int uiMode = spUtils.getInt(SPKey.UI_MODE);
+        if (uiMode == AppCompatDelegate.MODE_NIGHT_NO) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else if (uiMode == AppCompatDelegate.MODE_NIGHT_YES) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+        spUtils.putBoolean(SPKey.IN_APP_BROWSER, true);
+
+        //初始化内存泄露检测
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
-    spUtils.putBoolean(SPKey.IN_APP_BROWSER, true);
-
-    //初始化内存泄露检测
-    if (LeakCanary.isInAnalyzerProcess(this)) {
-      // This process is dedicated to LeakCanary for heap analysis.
-      // You should not init your app in this process.
-      return;
+    public static BaseApplication getInstance() {
+        return mInstance;
     }
-    LeakCanary.install(this);
-  }
 
-  public static BaseApplication getInstance() {
-    return mInstance;
-  }
-
-  public SeekHelper getHelper() {
-    return mHelper;
-  }
+    public SeekHelper getHelper() {
+        return mHelper;
+    }
 }

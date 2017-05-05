@@ -22,40 +22,40 @@ import wb.app.library.MLog;
  */
 public class ExceptionHandler {
 
-  private static String TAG = "ExceptionHandler";
+    private static String TAG = "ExceptionHandler";
 
-  public static ResponseException handle(Throwable e) {
-    MLog.d(TAG, "exception : " + e.getClass().getSimpleName() + ", message : " + e.getMessage());
-    ResponseException ex = null;
-    if (e instanceof IllegalStateException) {
+    public static ResponseException handle(Throwable e) {
+        MLog.d(TAG, "exception : " + e.getClass().getSimpleName() + ", message : " + e.getMessage());
+        ResponseException ex = null;
+        if (e instanceof IllegalStateException) {
 
-    } else if (e instanceof ConnectException || e.getCause() instanceof ConnectException
-        || e instanceof UnknownHostException || e.getCause() instanceof UnknownHostException) {
-      ex = new ResponseException(e, "网络出错,请检查网络");
+        } else if (e instanceof ConnectException || e.getCause() instanceof ConnectException
+                || e instanceof UnknownHostException || e.getCause() instanceof UnknownHostException) {
+            ex = new ResponseException(e, "网络出错,请检查网络");
 
-    } else if (e instanceof SocketTimeoutException) {
-      ex = new ResponseException(e, "网络出错,请检查网络");
+        } else if (e instanceof SocketTimeoutException) {
+            ex = new ResponseException(e, "网络出错,请检查网络");
 
-    } else if (e instanceof HttpException) {
-      ex = new ResponseException(e, "网络出错,请检查网络");
+        } else if (e instanceof HttpException) {
+            ex = new ResponseException(e, "网络出错,请检查网络");
 
-    } else if (e instanceof ApiException) {
-      ApiException apiException = (ApiException) e;
-      String msg = apiException.getMsg();
-      String exception = apiException.getException();
-      ex = new ResponseException(apiException, msg);
+        } else if (e instanceof ApiException) {
+            ApiException apiException = (ApiException) e;
+            String msg = apiException.getMsg();
+            String exception = apiException.getException();
+            ex = new ResponseException(apiException, msg);
 
-    } else if (e instanceof JsonParseException
-        || e instanceof JSONException
-        || e instanceof ParseException) {
-      ex = new ResponseException(e, "解析错误");
+        } else if (e instanceof JsonParseException
+                || e instanceof JSONException
+                || e instanceof ParseException) {
+            ex = new ResponseException(e, "解析错误");
 
-    } else if (e instanceof SSLHandshakeException) {
-      ex = new ResponseException(e, "证书验证错误");
+        } else if (e instanceof SSLHandshakeException) {
+            ex = new ResponseException(e, "证书验证错误");
 
-    } else {
-      ex = new ResponseException(e, "未知错误");
+        } else {
+            ex = new ResponseException(e, "未知错误");
+        }
+        return ex;
     }
-    return ex;
-  }
 }

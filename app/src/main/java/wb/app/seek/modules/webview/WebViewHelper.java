@@ -7,7 +7,7 @@ import android.webkit.WebView;
  */
 public class WebViewHelper {
 
-  public static void initWebView(WebView webView) {
+    public static void initWebView(WebView webView) {
 
-  }
+    }
 }

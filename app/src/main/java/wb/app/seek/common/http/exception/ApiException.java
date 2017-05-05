@@ -5,23 +5,23 @@ package wb.app.seek.common.http.exception;
  */
 public class ApiException extends RuntimeException {
 
-  private String mMsg;
-  private String mException;
+    private String mMsg;
+    private String mException;
 
-  public ApiException(String msg, String exception) {
-    mMsg = msg;
-    mException = exception;
-  }
+    public ApiException(String msg, String exception) {
+        mMsg = msg;
+        mException = exception;
+    }
 
-  public ApiException(String detailMessage) {
-    super(detailMessage);
-  }
+    public ApiException(String detailMessage) {
+        super(detailMessage);
+    }
 
-  public String getMsg() {
-    return mMsg;
-  }
+    public String getMsg() {
+        return mMsg;
+    }
 
-  public String getException() {
-    return mException;
-  }
+    public String getException() {
+        return mException;
+    }
 }

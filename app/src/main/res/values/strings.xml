@@ -1,84 +1,84 @@
 <resources>
-  <string name="app_name">Seek</string>
+    <string name="app_name">Seek</string>
 
-  <string name="navigation_drawer_open">Open navigation drawer</string>
-  <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
-  <string name="zhihu_daily_title">知乎日报</string>
-  <string name="gank_title">干货</string>
+    <string name="zhihu_daily_title">知乎日报</string>
+    <string name="gank_title">干货</string>
 
-  <string name="nav_home">首页</string>
-  <string name="nav_setting">设置</string>
-  <string name="nav_about">关于</string>
-  <string name="nav_date">选择日期</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_setting">设置</string>
+    <string name="nav_about">关于</string>
+    <string name="nav_date">选择日期</string>
 
-  <string name="loading_more">加载中…</string>
-  <string name="no_more">没有更多了</string>
+    <string name="loading_more">加载中…</string>
+    <string name="no_more">没有更多了</string>
 
-  <string name="confirm">确定</string>
+    <string name="confirm">确定</string>
 
-  <!-- 启动页 -->
-  <string name="splash_title">Seek</string>
+    <!-- 启动页 -->
+    <string name="splash_title">Seek</string>
 
-  <!-- 关于 -->
-  <string name="about_title">关于</string>
-  <string name="about_app_name">Seek</string>
-  <string name="version_title">版本: V1.0.0</string>
+    <!-- 关于 -->
+    <string name="about_title">关于</string>
+    <string name="about_app_name">Seek</string>
+    <string name="version_title">版本: V1.0.0</string>
 
-  <string name="rate_summary">如果你喜欢 Seek, 请在应用商店给它一个好评吧</string>
-  <string name="rate_key">rate</string>
-  <string name="rate_title">为 Seek 评价</string>
+    <string name="rate_summary">如果你喜欢 Seek, 请在应用商店给它一个好评吧</string>
+    <string name="rate_key">rate</string>
+    <string name="rate_title">为 Seek 评价</string>
 
-  <string name="author_str">作者</string>
-  <string name="author_summary">福建 厦门</string>
-  <string name="author_key">author</string>
-  <string name="author_title">mawb23</string>
+    <string name="author_str">作者</string>
+    <string name="author_summary">福建 厦门</string>
+    <string name="author_key">author</string>
+    <string name="author_title">mawb23</string>
 
-  <string name="github_summary">https://github.com/mawb23</string>
-  <string name="github_key">github</string>
-  <string name="github_title">在 github 关注我</string>
+    <string name="github_summary">https://github.com/mawb23</string>
+    <string name="github_key">github</string>
+    <string name="github_title">在 github 关注我</string>
 
-  <string name="jianshu_summary">http://www.jianshu.com/u/4f328937e30c</string>
-  <string name="jianshu_key">jianshu</string>
-  <string name="jianshu_title">在 简书 关注我</string>
+    <string name="jianshu_summary">http://www.jianshu.com/u/4f328937e30c</string>
+    <string name="jianshu_key">jianshu</string>
+    <string name="jianshu_title">在 简书 关注我</string>
 
-  <string name="qq_summary">1459808168</string>
-  <string name="qq_key">qq</string>
-  <string name="qq_title">在 qq 联系我</string>
+    <string name="qq_summary">1459808168</string>
+    <string name="qq_key">qq</string>
+    <string name="qq_title">在 qq 联系我</string>
 
-  <string name="support_str">支持</string>
-  <string name="feedback_summary">帮助我改进 Seek</string>
-  <string name="feedback_key">feedback</string>
-  <string name="feedback_title">反馈与建议</string>
+    <string name="support_str">支持</string>
+    <string name="feedback_summary">帮助我改进 Seek</string>
+    <string name="feedback_key">feedback</string>
+    <string name="feedback_title">反馈与建议</string>
 
-  <string name="donate_summary">如果觉得 Seek 对你有帮助，可以请我喝杯咖啡表示支持</string>
-  <string name="donate_key">donate</string>
-  <string name="donate_title">请我喝杯咖啡</string>
+    <string name="donate_summary">如果觉得 Seek 对你有帮助，可以请我喝杯咖啡表示支持</string>
+    <string name="donate_key">donate</string>
+    <string name="donate_title">请我喝杯咖啡</string>
 
-  <string name="license_summary">本 App 仅学习交流使用，请勿用于商业用途</string>
-  <string name="license_key">license</string>
-  <string name="license_title">开源许可</string>
+    <string name="license_summary">本 App 仅学习交流使用，请勿用于商业用途</string>
+    <string name="license_key">license</string>
+    <string name="license_title">开源许可</string>
 
-  <string name="mail_to">mailto:mwb223@163.com</string>
-  <string name="mail_topic">使用反馈与建议</string>
-  <string name="device_model">设备型号:</string>
-  <string name="sdk_version">SDK版本:</string>
+    <string name="mail_to">mailto:mwbdevelop@gmail.com</string>
+    <string name="mail_topic">使用反馈与建议</string>
+    <string name="device_model">设备型号:</string>
+    <string name="sdk_version">SDK版本:</string>
 
-  <string name="donate">捐赠开发者</string>
-  <string name="donate_message">支付宝账号将会复制到剪切板，进入支付宝粘贴账号完成捐赠，感谢您的支持！</string>
-  <string name="donate_account">mwb223@163.com</string>
+    <string name="donate">捐赠开发者</string>
+    <string name="donate_message">支付宝账号将会复制到剪切板，进入支付宝粘贴账号完成捐赠，感谢您的支持！</string>
+    <string name="donate_account">mwb223@163.com</string>
 
-  <!-- 设置 -->
-  <string name="setting_title">设置</string>
-  <string name="setting_in_app_browser_key">in_app_browser</string>
-  <string name="setting_browser_summary">应用内查看链接</string>
-  <string name="setting_browser_title">使用内置浏览器</string>
-  <string name="night_mode_key">night_mode</string>
-  <string name="night_mode_title">夜间模式</string>
-  <string name="setting_base">基本设置</string>
+    <!-- 设置 -->
+    <string name="setting_title">设置</string>
+    <string name="setting_in_app_browser_key">in_app_browser</string>
+    <string name="setting_browser_summary">应用内查看链接</string>
+    <string name="setting_browser_title">使用内置浏览器</string>
+    <string name="night_mode_key">night_mode</string>
+    <string name="night_mode_title">夜间模式</string>
+    <string name="setting_base">基本设置</string>
 
-  <string name="shared_preferences_key">user_settings</string>
+    <string name="shared_preferences_key">user_settings</string>
 
-  <string name="transition_name_cover_image">封面图片</string>
+    <string name="transition_name_cover_image">封面图片</string>
 
 </resources>

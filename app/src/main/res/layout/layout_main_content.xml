@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-  <!--<android.support.design.widget.AppBarLayout-->
-  <!--android:id="@+id/appbar"-->
-  <!--android:layout_width="match_parent"-->
-  <!--android:layout_height="wrap_content">-->
+    <!--<android.support.design.widget.AppBarLayout-->
+    <!--android:id="@+id/appbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
 
-  <include layout="@layout/view_toolbar"/>
+    <include layout="@layout/view_toolbar"/>
 
-  <android.support.design.widget.TabLayout
-      android:id="@+id/main_tab_layout"
-      style="@style/MyTabLayoutStyle"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:visibility="gone"/>
+    <android.support.design.widget.TabLayout
+            android:id="@+id/main_tab_layout"
+            style="@style/MyTabLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
-  <!--</android.support.design.widget.AppBarLayout>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
 
-  <android.support.v4.view.ViewPager
-      android:id="@+id/main_viewpager"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_below="@+id/tool_bar"/>
+    <android.support.v4.view.ViewPager
+            android:id="@+id/main_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tool_bar"/>
 
-  <RelativeLayout
-      android:id="@+id/reveal_root"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+    <RelativeLayout
+            android:id="@+id/reveal_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 </RelativeLayout>

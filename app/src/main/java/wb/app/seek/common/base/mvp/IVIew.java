@@ -5,9 +5,21 @@ package wb.app.seek.common.base.mvp;
  */
 public interface IView {
 
-  void showLoading();
+    // TODO 显示加载进度条
+    void showLoading();
 
-  void hideLoading();
+    // TODO 隐藏加载进度条
+    void hideLoading();
 
-  void showError(String msg, String exception);
+    // TODO 显示异常信息
+    void showError(String msg, String exception);
+
+//    // TODO 显示网络异常界面
+//    void showNetEorror();
+//
+//    // TODO 显示数据为空界面
+//    void showEmpty();
+
+    // TODO 显示没有更多数据
+    void showNoMore();
 }

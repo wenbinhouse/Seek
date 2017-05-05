@@ -1,4 +1,4 @@
-package wb.app.seek.modules.zhihu;
+package wb.app.seek.modules.zhihu.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -16,8 +16,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import wb.app.seek.R;
-import wb.app.seek.model.ZhihuDailyNews;
-import wb.app.seek.model.ZhihuDailyStory;
+import wb.app.seek.modules.model.ZhihuDailyNews;
+import wb.app.seek.modules.model.ZhihuDailyStory;
 import wb.app.seek.widgets.banner.BannerView;
 
 /**

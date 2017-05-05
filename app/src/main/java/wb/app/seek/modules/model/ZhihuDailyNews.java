@@ -1,4 +1,4 @@
-package wb.app.seek.model;
+package wb.app.seek.modules.model;
 
 import java.util.List;
 

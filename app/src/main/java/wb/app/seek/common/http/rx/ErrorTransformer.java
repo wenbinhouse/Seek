@@ -12,41 +12,41 @@ import wb.app.seek.common.http.exception.ExceptionHandler;
  */
 public class ErrorTransformer<T> implements Observable.Transformer<T, T> {
 
-  private static ErrorTransformer mErrorTransformer = null;
+    private static ErrorTransformer mErrorTransformer = null;
 
-  private ErrorTransformer() {
-  }
-
-  public static <T> ErrorTransformer<T> getInstance() {
-    if (mErrorTransformer == null) {
-      synchronized (ErrorTransformer.class) {
-        if (mErrorTransformer == null) {
-          mErrorTransformer = new ErrorTransformer();
-        }
-      }
+    private ErrorTransformer() {
     }
 
-    return mErrorTransformer;
-  }
-
-  @Override
-  public Observable<T> call(Observable<T> tObservable) {
-    return tObservable
-        .map(new Func1<T, T>() {
-          @Override
-          public T call(T t) {
-            if (t == null) {
-              throw new ApiException("接口出错", "接口出错");
+    public static <T> ErrorTransformer<T> getInstance() {
+        if (mErrorTransformer == null) {
+            synchronized (ErrorTransformer.class) {
+                if (mErrorTransformer == null) {
+                    mErrorTransformer = new ErrorTransformer();
+                }
             }
+        }
 
-            return t;
-          }
-        })
-        .onErrorResumeNext(new Func1<Throwable, Observable<? extends T>>() {
-          @Override
-          public Observable<? extends T> call(Throwable throwable) {
-            return Observable.error(ExceptionHandler.handle(throwable));
-          }
-        });
-  }
+        return mErrorTransformer;
+    }
+
+    @Override
+    public Observable<T> call(Observable<T> tObservable) {
+        return tObservable
+                .map(new Func1<T, T>() {
+                    @Override
+                    public T call(T t) {
+                        if (t == null) {
+                            throw new ApiException("接口出错", "接口出错");
+                        }
+
+                        return t;
+                    }
+                })
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends T>>() {
+                    @Override
+                    public Observable<? extends T> call(Throwable throwable) {
+                        return Observable.error(ExceptionHandler.handle(throwable));
+                    }
+                });
+    }
 }

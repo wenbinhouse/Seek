@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/half_margin"
-    android:layout_marginRight="@dimen/half_margin"
-    android:background="?android:attr/selectableItemBackground"
-    android:orientation="vertical">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/half_margin"
+        android:layout_marginRight="@dimen/half_margin"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="vertical">
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/half_margin"
-      android:layout_marginTop="@dimen/half_margin"
-      android:orientation="horizontal"
-      android:paddingLeft="@dimen/half_margin"
-      android:paddingRight="@dimen/half_margin">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/half_margin"
+            android:layout_marginTop="@dimen/half_margin"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/half_margin"
+            android:paddingRight="@dimen/half_margin">
 
-    <TextView
-        android:id="@+id/item_title_tv"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:maxLines="3"
-        android:textColor="@color/textColor"
-        android:textSize="@dimen/text_size_h1"/>
+        <TextView
+                android:id="@+id/item_title_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="3"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/text_size_h1"/>
 
-    <ImageView
-        android:id="@+id/item_cover_img"
-        android:layout_width="@dimen/small_image_width"
-        android:layout_height="@dimen/small_image_width"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/base_margin"
-        android:transitionName="@string/transition_name_cover_image"/>
+        <ImageView
+                android:id="@+id/item_cover_img"
+                android:layout_width="@dimen/small_image_width"
+                android:layout_height="@dimen/small_image_width"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/base_margin"
+                android:transitionName="@string/transition_name_cover_image"/>
 
-  </LinearLayout>
+    </LinearLayout>
 
-  <View style="@style/VerticalDividerStyle"/>
+    <View style="@style/VerticalDividerStyle"/>
 
 </LinearLayout>

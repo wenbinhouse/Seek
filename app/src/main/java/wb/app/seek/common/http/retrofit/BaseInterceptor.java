@@ -18,50 +18,50 @@ import wb.app.library.MLog;
  */
 public class BaseInterceptor implements Interceptor {
 
-  private String TAG = "BaseInterceptor";
+    private String TAG = "BaseInterceptor";
 
-  private Map<String, String> mHeaders;
-  private Map<String, String> mParams;
+    private Map<String, String> mHeaders;
+    private Map<String, String> mParams;
 
-  public BaseInterceptor(Map<String, String> header, Map<String, String> params) {
-    this.mHeaders = header;
-    this.mParams = params;
-  }
-
-  @Override
-  public Response intercept(Chain chain) throws IOException {
-
-    Request request = chain.request();
-    HttpUrl httpUrl = request.url();
-    Request.Builder requestBuilder = request.newBuilder();
-    HttpUrl.Builder httpUrlBuilder = httpUrl.newBuilder();
-
-    StringBuffer sb = new StringBuffer();
-
-    if (mHeaders != null && mHeaders.size() > 0) {
-      sb.append("headers : ");
-      for (String key : mHeaders.keySet()) {
-        if (!TextUtils.isEmpty(mHeaders.get(key))) {
-          sb.append("\nkey = " + key + ", param = " + mHeaders.get(key));
-          requestBuilder.addHeader(key, mHeaders.get(key)).build();
-        }
-      }
+    public BaseInterceptor(Map<String, String> header, Map<String, String> params) {
+        this.mHeaders = header;
+        this.mParams = params;
     }
 
-    if (mParams != null && mParams.size() > 0) {
-      sb.append("\nparams : ");
-      HttpUrl newHttpUrl = null;
-      for (String key : mParams.keySet()) {
-        if (!TextUtils.isEmpty(mParams.get(key))) {
-          sb.append("\nkey = " + key + ", param = " + mParams.get(key));
-          newHttpUrl = httpUrlBuilder.addQueryParameter(key, mParams.get(key)).build();
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+
+        Request request = chain.request();
+        HttpUrl httpUrl = request.url();
+        Request.Builder requestBuilder = request.newBuilder();
+        HttpUrl.Builder httpUrlBuilder = httpUrl.newBuilder();
+
+        StringBuffer sb = new StringBuffer();
+
+        if (mHeaders != null && mHeaders.size() > 0) {
+            sb.append("headers : ");
+            for (String key : mHeaders.keySet()) {
+                if (!TextUtils.isEmpty(mHeaders.get(key))) {
+                    sb.append("\nkey = " + key + ", param = " + mHeaders.get(key));
+                    requestBuilder.addHeader(key, mHeaders.get(key)).build();
+                }
+            }
         }
-      }
-      requestBuilder.url(newHttpUrl).build();
+
+        if (mParams != null && mParams.size() > 0) {
+            sb.append("\nparams : ");
+            HttpUrl newHttpUrl = null;
+            for (String key : mParams.keySet()) {
+                if (!TextUtils.isEmpty(mParams.get(key))) {
+                    sb.append("\nkey = " + key + ", param = " + mParams.get(key));
+                    newHttpUrl = httpUrlBuilder.addQueryParameter(key, mParams.get(key)).build();
+                }
+            }
+            requestBuilder.url(newHttpUrl).build();
+        }
+
+        MLog.d(TAG, sb.toString());
+
+        return chain.proceed(requestBuilder.build());
     }
-
-    MLog.d(TAG, sb.toString());
-
-    return chain.proceed(requestBuilder.build());
-  }
 }

@@ -10,41 +10,35 @@ import wb.app.seek.common.http.rx.LifecycleEvent;
  */
 public class BasePresenter<V extends IView> implements IPresenter<V> {
 
-  protected String TAG = getClass().getSimpleName();
+    protected String TAG = getClass().getSimpleName();
 
-  protected final BehaviorSubject<LifecycleEvent> mLifecycleSubject = BehaviorSubject.create();
+    protected final BehaviorSubject<LifecycleEvent> mLifecycleSubject = BehaviorSubject.create();
 
-  private V mView;
-  private AppClient mAppClient;
+    private V mView;
 
-  /**
-   * @return
-   * @Exception NullPointerException
-   */
-  public V getView() {
-    return mView;
-  }
+    public V getView() {
+        return mView;
+    }
 
-  public boolean isAttach() {
-    return mView != null;
-  }
+    public boolean isAttach() {
+        return mView != null;
+    }
 
-  public AppService getService() {
-    return mService;
-  }
+    public AppService getService() {
+        return mService;
+    }
 
-  private AppService mService;
+    private AppService mService;
 
-  @Override
-  public void attachView(V view) {
-    this.mView = view;
-    mAppClient = AppClient.getInstance();
-    mService = mAppClient.getService();
-  }
+    @Override
+    public void attachView(V view) {
+        this.mView = view;
+        mService = AppClient.getInstance().getService();
+    }
 
-  @Override
-  public void detachView() {
-    this.mView = null;
-    mLifecycleSubject.onNext(LifecycleEvent.DESTROY);
-  }
+    @Override
+    public void detachView() {
+        this.mView = null;
+        mLifecycleSubject.onNext(LifecycleEvent.DESTROY);
+    }
 }

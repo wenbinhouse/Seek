@@ -13,47 +13,47 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends ToolbarActivity {
 
-  private String TAG = getClass().getSimpleName();
+    private String TAG = getClass().getSimpleName();
 
-  private ProgressDialog mProgressDialog;
+    private ProgressDialog mProgressDialog;
 
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    int layoutId = getContentViewId();
-    if (isContentViewWithToolbar()) {
-      super.setContentView(layoutId);
-    } else {
-      setContentViewNoToolbar(layoutId);
+        int layoutId = getContentViewId();
+        if (isContentViewWithToolbar()) {
+            super.setContentView(layoutId);
+        } else {
+            setContentViewNoToolbar(layoutId);
+        }
+
+        ButterKnife.bind(this);
+
+        initComponents();
     }
 
-    ButterKnife.bind(this);
+    protected abstract int getContentViewId();
 
-    initComponents();
-  }
+    protected abstract void initComponents();
 
-  protected abstract int getContentViewId();
+    protected boolean isContentViewWithToolbar() {
+        return true;
+    }
 
-  protected abstract void initComponents();
+    public SeekHelper getHelper() {
+        return ((BaseApplication) getApplication()).getHelper();
+    }
 
-  protected boolean isContentViewWithToolbar() {
-    return true;
-  }
+    public void showToastShort(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 
-  public SeekHelper getHelper() {
-    return ((BaseApplication) getApplication()).getHelper();
-  }
+    public void startActivity(Class<? extends BaseActivity> clz) {
+        startActivity(new Intent(this, clz));
+    }
 
-  public void showToastShort(String msg) {
-    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-  }
-
-  public void startActivity(Class<? extends BaseActivity> clz) {
-    startActivity(new Intent(this, clz));
-  }
-
-  public void startActivityByIntent(Intent intent) {
-    startActivity(intent);
-  }
+    public void startActivityByIntent(Intent intent) {
+        startActivity(intent);
+    }
 }

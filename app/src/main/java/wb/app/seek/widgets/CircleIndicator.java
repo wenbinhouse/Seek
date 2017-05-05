@@ -261,7 +261,7 @@ public class CircleIndicator extends LinearLayout {
 
   private void createIndicators() {
     removeAllViews();
-//    int count = mViewpager.getAdapter().getCount();
+//    int count = mViewpager.initAdapter().getCount();
     int count = mMaxCount;
     if (count <= 0) {
       return;

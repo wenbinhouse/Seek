@@ -9,8 +9,8 @@ import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 import rx.Observable;
-import wb.app.seek.model.ZhihuDailyNews;
-import wb.app.seek.model.ZhihuDailyStory;
+import wb.app.seek.modules.model.ZhihuDailyNews;
+import wb.app.seek.modules.model.ZhihuDailyStory;
 
 /**
  * Created by W.b on 16/9/24.

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wb.app.seek.R;
-import wb.app.seek.model.ZhihuDailyStory;
+import wb.app.seek.modules.model.ZhihuDailyStory;
 import wb.app.seek.widgets.CircleIndicator;
 
 /**

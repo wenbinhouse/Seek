@@ -11,37 +11,37 @@ import wb.app.seek.common.utils.ScreenUtils;
  */
 public class SeekHelper {
 
-  private static SeekHelper mHelper = new SeekHelper();
-  private final SPUtils mSpUtils;
-  private final DisplayMetrics mDisplayMetrics;
+    private static SeekHelper mHelper = new SeekHelper();
+    private final SPUtils mSpUtils;
+    private final DisplayMetrics mDisplayMetrics;
 
-  public SeekHelper() {
-    BaseApplication context = BaseApplication.getInstance();
+    public SeekHelper() {
+        BaseApplication context = BaseApplication.getInstance();
 
-    //SharedPreferences
-    mSpUtils = new SPUtils(context, AppUtils.getAppPackageName(context));
+        //SharedPreferences
+        mSpUtils = new SPUtils(context, AppUtils.getAppPackageName(context));
 
-    //屏幕尺寸
-    mDisplayMetrics = ScreenUtils.getScreenInfo(context);
-  }
-
-  public static SeekHelper getInstance() {
-    if (mHelper == null) {
-      mHelper = new SeekHelper();
+        //屏幕尺寸
+        mDisplayMetrics = ScreenUtils.getScreenInfo(context);
     }
 
-    return mHelper;
-  }
+    public static SeekHelper getInstance() {
+        if (mHelper == null) {
+            mHelper = new SeekHelper();
+        }
 
-  public int getScreenWidth() {
-    return mDisplayMetrics.widthPixels;
-  }
+        return mHelper;
+    }
 
-  public int getScreenHeight() {
-    return mDisplayMetrics.heightPixels;
-  }
+    public int getScreenWidth() {
+        return mDisplayMetrics.widthPixels;
+    }
 
-  public SPUtils getSpUtils() {
-    return mSpUtils;
-  }
+    public int getScreenHeight() {
+        return mDisplayMetrics.heightPixels;
+    }
+
+    public SPUtils getSpUtils() {
+        return mSpUtils;
+    }
 }

@@ -9,38 +9,40 @@
             android:orientation="vertical"
             android:scrollbars="none">
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:paddingBottom="@dimen/base_margin"
-      android:paddingLeft="@dimen/half_margin"
-      android:paddingRight="@dimen/half_margin"
-      android:paddingTop="@dimen/base_margin">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/base_margin"
+            android:paddingLeft="@dimen/half_margin"
+            android:paddingRight="@dimen/half_margin"
+            android:paddingTop="@dimen/base_margin">
 
-    <TextView
-        style="@style/SettingTitleStyle"
-        android:text="@string/setting_base"/>
+        <TextView
+                style="@style/SettingTitleStyle"
+                android:text="@string/setting_base"/>
 
-    <wb.app.seek.widgets.SettingItemView
-        android:id="@+id/browserInAppView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sivChecked="true"
-        app:sivShowCheck="true"
-        app:sivSubText="@string/setting_browser_title"
-        app:sivText="@string/setting_browser_summary"/>
+        <View
+                style="@style/VerticalDividerStyle"
+                android:layout_marginTop="@dimen/half_margin"/>
 
-    <View style="@style/VerticalDividerStyle"/>
+        <wb.app.seek.widgets.SettingItemView
+                android:id="@+id/browserInAppView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sivChecked="true"
+                app:sivShowCheck="true"
+                app:sivSubText="@string/setting_browser_title"
+                app:sivText="@string/setting_browser_summary"/>
 
-    <wb.app.seek.widgets.SettingItemView
-        android:id="@+id/nightModeView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:sivChecked="false"
-        app:sivShowCheck="true"
-        app:sivText="@string/night_mode_title"/>
+        <wb.app.seek.widgets.SettingItemView
+                android:id="@+id/nightModeView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:sivChecked="false"
+                app:sivShowCheck="true"
+                app:sivText="@string/night_mode_title"/>
 
-  </LinearLayout>
+    </LinearLayout>
 
 </ScrollView>

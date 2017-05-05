@@ -1,4 +1,4 @@
-package wb.app.seek.modules.splash;
+package wb.app.seek.modules.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
-import wb.app.seek.modules.main.MainActivity;
 
 /**
  * Created by W.b on 2017/1/9.
