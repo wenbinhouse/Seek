@@ -5,7 +5,13 @@ package wb.app.seek.common.base.mvp;
  */
 public interface IPresenter<V extends IView> {
 
+    /**
+     * 绑定 view
+     */
     void attachView(V view);
 
+    /**
+     * 解绑 view 避免内存泄漏
+     */
     void detachView();
 }
