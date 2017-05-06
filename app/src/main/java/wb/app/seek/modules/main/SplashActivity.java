@@ -1,6 +1,5 @@
 package wb.app.seek.modules.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -18,36 +17,37 @@ import wb.app.seek.common.base.BaseActivity;
  */
 public class SplashActivity extends BaseActivity {
 
-  @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-  }
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-  @Override
-  protected int getContentViewId() {
-    return R.layout.activity_splash;
-  }
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_splash;
+    }
 
-  @Override
-  protected void initComponents() {
-    launchMain();
-  }
+    @Override
+    protected void initComponents() {
+        launchMain();
+    }
 
-  @Override
-  protected boolean isContentViewWithToolbar() {
-    return false;
-  }
+    @Override
+    protected boolean isContentViewWithToolbar() {
+        return false;
+    }
 
-  private void launchMain() {
-    Observable.timer(2, TimeUnit.SECONDS)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Action1<Long>() {
-          @Override
-          public void call(Long aLong) {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            finish();
-          }
-        });
-  }
+    private void launchMain() {
+        Observable.timer(2, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+//                        startActivity(TestActivity.class);
+                        startActivity(MainActivity.class);
+                        finish();
+                    }
+                });
+    }
 }

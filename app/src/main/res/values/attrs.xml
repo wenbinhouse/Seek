@@ -26,4 +26,12 @@
         <attr name="sivChecked" format="boolean"/>
     </declare-styleable>
 
+    <!-- MultiStatusLayout -->
+    <declare-styleable name="MultiStatusLayout">
+        <attr name="msl_content_view" format="reference"/>
+        <attr name="msl_content_view_id" format="reference"/>
+        <attr name="msl_no_network_view" format="reference"/>
+        <attr name="msl_empty_view" format="reference"/>
+    </declare-styleable>
+
 </resources>

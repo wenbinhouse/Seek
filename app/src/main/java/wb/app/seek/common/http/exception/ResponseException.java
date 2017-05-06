@@ -5,18 +5,13 @@ package wb.app.seek.common.http.exception;
  */
 public class ResponseException extends RuntimeException {
 
-    public String mMessage;
-    private String mException;
+    private String mMessage;
+    private int mErrorCode;
 
-    public ResponseException(Throwable throwable, String message) {
+    public ResponseException(Throwable throwable, String message, int errorCode) {
         super(throwable);
         mMessage = message;
-    }
-
-    public ResponseException(Throwable throwable, String msg, String exception) {
-        super(throwable);
-        mMessage = msg;
-        mException = exception;
+        mErrorCode = errorCode;
     }
 
     @Override
@@ -24,7 +19,7 @@ public class ResponseException extends RuntimeException {
         return mMessage;
     }
 
-    public String getException() {
-        return mException;
+    public int getErrorCode() {
+        return mErrorCode;
     }
 }

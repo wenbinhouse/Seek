@@ -13,7 +13,7 @@ public abstract class BaseSubscriber<T> extends Subscriber<T> {
 
     public abstract void onSuccess(T data);
 
-    public abstract void onFailure(String msg, String exception);
+    public abstract void onFailure(String msg, int errorCode);
 
     public abstract void onFinish();
 
@@ -36,7 +36,7 @@ public abstract class BaseSubscriber<T> extends Subscriber<T> {
             ResponseException throwable = (ResponseException) e;
             MLog.d(TAG, "onError() : " + throwable.getMessage());
 
-            onFailure(throwable.getMessage(), throwable.getException());
+            onFailure(throwable.getMessage(), throwable.getErrorCode());
         }
     }
 

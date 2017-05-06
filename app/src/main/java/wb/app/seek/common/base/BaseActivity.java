@@ -1,6 +1,5 @@
 package wb.app.seek.common.base;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +14,13 @@ public abstract class BaseActivity extends ToolbarActivity {
 
     private String TAG = getClass().getSimpleName();
 
-    private ProgressDialog mProgressDialog;
+    protected abstract int getContentViewId();
+
+    protected abstract void initComponents();
+
+    protected boolean isContentViewWithToolbar() {
+        return true;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,14 +38,6 @@ public abstract class BaseActivity extends ToolbarActivity {
         initComponents();
     }
 
-    protected abstract int getContentViewId();
-
-    protected abstract void initComponents();
-
-    protected boolean isContentViewWithToolbar() {
-        return true;
-    }
-
     public SeekHelper getHelper() {
         return ((BaseApplication) getApplication()).getHelper();
     }
@@ -52,6 +49,7 @@ public abstract class BaseActivity extends ToolbarActivity {
     public void startActivity(Class<? extends BaseActivity> clz) {
         startActivity(new Intent(this, clz));
     }
+
 
     public void startActivityByIntent(Intent intent) {
         startActivity(intent);

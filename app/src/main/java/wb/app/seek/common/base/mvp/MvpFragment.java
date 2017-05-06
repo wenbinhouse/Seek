@@ -83,9 +83,19 @@ public abstract class MvpFragment<P extends BasePresenter> extends BaseFragment 
     }
 
     @Override
-    public void showError(String msg, String exception) {
+    public void showError(String msg) {
         if (getActivity() instanceof BaseActivity)
             ((BaseActivity) getActivity()).showToastShort(msg);
+    }
+
+    @Override
+    public void showNetErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
     }
 
     @Override

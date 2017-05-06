@@ -52,8 +52,18 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
     }
 
     @Override
-    public void showError(String msg, String exception) {
+    public void showError(String msg) {
         showToastShort(msg);
+    }
+
+    @Override
+    public void showNetErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+
     }
 
     @Override

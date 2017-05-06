@@ -54,12 +54,12 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
           }
 
           @Override
-          public void onFailure(String msg, String exception) {
+          public void onFailure(String msg, int errorCode) {
             if (!isAttach()) {
               return;
             }
 
-            getView().showError(msg, exception);
+            getView().showError(msg);
           }
 
           @Override

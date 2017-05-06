@@ -59,7 +59,7 @@ public class ResponseBodyTransformer implements Observable.Transformer<ResponseB
                     @Override
                     public String call(ResponseBody responseBody) {
                         if (responseBody == null) {
-                            throw new ApiException("接口异常", "接口异常");
+                            throw new ApiException("接口异常");
                         }
 
                         String response = "";

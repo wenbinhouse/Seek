@@ -36,7 +36,7 @@ public class ErrorTransformer<T> implements Observable.Transformer<T, T> {
                     @Override
                     public T call(T t) {
                         if (t == null) {
-                            throw new ApiException("接口出错", "接口出错");
+                            throw new ApiException("接口出错");
                         }
 
                         return t;

@@ -121,8 +121,8 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
     }
 
     @Override
-    public void showError(String msg, String exception) {
-        super.showError(msg, exception);
+    public void showError(String msg) {
+        super.showError(msg);
     }
 
     @Override

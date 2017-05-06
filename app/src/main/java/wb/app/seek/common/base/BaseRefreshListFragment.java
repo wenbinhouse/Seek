@@ -27,6 +27,7 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
     private List<T> mData = new ArrayList<>();
     private BaseRecyclerAdapter mAdapter;
     private LoadingFooterView mFooterView;
+    private boolean mIsNoMore;//是否还有更多
 
     /**
      * 布局管理器
@@ -139,7 +140,7 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
             canScrollUp = recyclerView.canScrollVertically(1);
 
             // 上拉加载更多
-            if (!canScrollUp) {
+            if (!mIsNoMore && !canScrollUp) {
                 mFooterView.setState(LoadingFooterView.STATE_LOADING);
             }
         }
@@ -159,7 +160,7 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
 //                onRefresh();
 
             // 上拉加载更多
-            if (!canScrollUp) {
+            if (!mIsNoMore && !canScrollUp) {
                 queryMore();
             }
         }
@@ -167,6 +168,7 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
 
     @Override
     public void showLoading() {
+        mIsNoMore = false;
         startRefreshAnim();
     }
 
@@ -177,7 +179,18 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
     }
 
     @Override
+    public void showNetErrorView() {
+        super.showNetErrorView();
+    }
+
+    @Override
+    public void showEmptyView() {
+        super.showEmptyView();
+    }
+
+    @Override
     public void showNoMore() {
+        mIsNoMore = true;
         mFooterView.setState(LoadingFooterView.STATE_END);
     }
 
