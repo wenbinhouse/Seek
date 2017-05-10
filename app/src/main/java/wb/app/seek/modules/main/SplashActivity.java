@@ -5,10 +5,11 @@ import android.support.annotation.Nullable;
 
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
 
@@ -38,13 +39,13 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void launchMain() {
+        // 延时进入主页
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Long>() {
+                .subscribe(new Consumer<Long>() {
                     @Override
-                    public void call(Long aLong) {
-//                        startActivity(TestActivity.class);
+                    public void accept(@NonNull Long aLong) throws Exception {
                         startActivity(MainActivity.class);
                         finish();
                     }

@@ -2,7 +2,7 @@ package wb.app.seek.modules.zhihu.presenter;
 
 import java.util.List;
 
-import wb.app.seek.common.base.mvp.IView;
+import wb.app.seek.common.base.mvp.impl.IView;
 import wb.app.seek.modules.model.ZhihuDailyNews;
 import wb.app.seek.modules.model.ZhihuDailyStory;
 

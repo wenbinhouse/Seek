@@ -1,9 +1,8 @@
 package wb.app.seek.common.rxbus;
 
-import rx.Observable;
-import rx.subjects.PublishSubject;
-import rx.subjects.SerializedSubject;
-import rx.subjects.Subject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+import wb.app.seek.common.http.rx.RxSchedulers;
 
 /**
  * Created by W.b on 2017/3/6.
@@ -11,10 +10,12 @@ import rx.subjects.Subject;
 public class RxBus {
 
     private static RxBus mInstance;
-    private final Subject<Object, Object> mBus;
+    //    private final Subject<Object, Object> mBus;
+    private PublishSubject<Object> mBus;
 
     private RxBus() {
-        mBus = new SerializedSubject<>(PublishSubject.create());
+//        mBus = new SerializedSubject<>(PublishSubject.create());
+        mBus = PublishSubject.create();
     }
 
     public static RxBus getInstance() {
@@ -33,7 +34,12 @@ public class RxBus {
         mBus.onNext(o);
     }
 
-    public <T> Observable<T> toObservable(Class<T> eventType) {
-        return mBus.ofType(eventType);
+    public <T> Observable<T> toObservable(Class<T> event) {
+        return mBus.ofType(event)
+                .compose(RxSchedulers.<T>io2Main());
     }
+
+//    public <T> Observable<T> toObservable(Class<T> eventType) {
+//        return mBus.ofType(eventType);
+//    }
 }

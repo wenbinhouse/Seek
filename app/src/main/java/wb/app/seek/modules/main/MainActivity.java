@@ -30,23 +30,23 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import wb.app.library.MLog;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
 import wb.app.seek.common.rxbus.RxBus;
 import wb.app.seek.common.rxbus.RxEvent;
 import wb.app.seek.common.rxbus.RxEventType;
+import wb.app.seek.common.utils.DateTimeUtils;
 import wb.app.seek.common.utils.SPKey;
 import wb.app.seek.common.utils.SPUtils;
 import wb.app.seek.modules.about.AboutActivity;
 import wb.app.seek.modules.main.adapter.MainPagerAdapter;
 import wb.app.seek.modules.setting.SettingActivity;
-import wb.app.seek.common.utils.DateTimeUtils;
 
 public class MainActivity extends BaseActivity {
 
@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_tab_layout) TabLayout mMainTabLayout;
     @BindView(R.id.reveal_root) RelativeLayout mRevealRoot;
     private long mLastTimeMillis;
-    private Subscription mSubscription;
+//    private Subscription mSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,9 +66,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (!mSubscription.isUnsubscribed()) {
-            mSubscription.unsubscribe();
-        }
+//        if (!mSubscription.isUnsubscribed()) {
+//            mSubscription.unsubscribe();
+//        }
     }
 
     @Override
@@ -83,20 +83,18 @@ public class MainActivity extends BaseActivity {
         mMainViewpager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
         mMainTabLayout.setupWithViewPager(mMainViewpager);
 
-        mSubscription = RxBus.getInstance().toObservable(RxEvent.class)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<RxEvent>() {
+        // 延时切换日夜间模式
+        RxBus.getInstance().toObservable(RxEvent.class)
+                .subscribe(new Consumer<RxEvent>() {
                     @Override
-                    public void call(final RxEvent rxEvent) {
+                    public void accept(@NonNull final RxEvent rxEvent) throws Exception {
                         if (rxEvent.getType() == RxEventType.DAY_NIGHT_MODE) {
-                            // 延时切换日夜间模式
                             Observable.timer(500, TimeUnit.MILLISECONDS)
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(new Action1<Long>() {
+                                    .subscribe(new Consumer<Long>() {
                                         @Override
-                                        public void call(Long aLong) {
+                                        public void accept(@NonNull Long aLong) throws Exception {
                                             switchDayNightMode(rxEvent.getMessage());
                                         }
                                     });
@@ -182,15 +180,15 @@ public class MainActivity extends BaseActivity {
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
 
-                Observable.timer(150, TimeUnit.MILLISECONDS)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action1<Long>() {
-                            @Override
-                            public void call(Long aLong) {
-                                selectedDate();
-                            }
-                        });
+//                Observable.timer(150, TimeUnit.MILLISECONDS)
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new Action1<Long>() {
+//                            @Override
+//                            public void call(Long aLong) {
+//                                selectedDate();
+//                            }
+//                        });
             }
 
             @Override

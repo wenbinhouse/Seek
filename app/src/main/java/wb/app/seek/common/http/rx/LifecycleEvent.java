@@ -3,26 +3,43 @@ package wb.app.seek.common.http.rx;
 /**
  * Created by W.b on 2016/12/28.
  */
-public enum LifecycleEvent {
+public class LifecycleEvent {
 
-    ATTACH_VIEW,
+    /**
+     * Presenter Events
+     */
+    public enum PresenterLifecycle {
+
+        ATTACH_VIEW,
+
+        DETACH_VIEW
+    }
 
     /**
      * Activity Events
      */
-    CREATE,
-    START,
-    RESUME,
-    PAUSE,
-    STOP,
-    DESTROY,
+    public enum ActivityLifecycle {
+        CREATE,
+        START,
+        RESUME,
+        PAUSE,
+        STOP,
+        DESTROY
+    }
 
     /**
      * Fragment Events
      */
-    ATTACH,
-    CREATE_VIEW,
-    DESTROY_VIEW,
-    DETACH
-
+    public enum FragmentLifecycle {
+        ATTACH,
+        CREATE,
+        CREATE_VIEW,
+        START,
+        RESUME,
+        PAUSE,
+        STOP,
+        DESTROY_VIEW,
+        DESTROY,
+        DETACH
+    }
 }

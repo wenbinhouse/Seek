@@ -55,10 +55,6 @@
                 android:name=".modules.webview.WebViewActivity"
                 android:screenOrientation="portrait"/>
 
-        <activity
-                android:name=".modules.multistatuslayout.TestActivity"
-                android:screenOrientation="portrait"/>
-
     </application>
 
 </manifest>

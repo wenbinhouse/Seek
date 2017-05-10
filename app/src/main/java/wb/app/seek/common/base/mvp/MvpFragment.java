@@ -6,9 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import wb.app.seek.common.base.BaseActivity;
 import wb.app.seek.common.base.BaseFragment;
+import wb.app.seek.common.base.mvp.impl.IView;
 
 /**
  * Created by W.b on 2016/12/29.
@@ -84,8 +85,7 @@ public abstract class MvpFragment<P extends BasePresenter> extends BaseFragment 
 
     @Override
     public void showError(String msg) {
-        if (getActivity() instanceof BaseActivity)
-            ((BaseActivity) getActivity()).showToastShort(msg);
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

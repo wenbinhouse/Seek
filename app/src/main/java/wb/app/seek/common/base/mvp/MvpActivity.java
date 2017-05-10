@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import wb.app.seek.common.base.BaseActivity;
+import wb.app.seek.common.base.mvp.impl.IView;
 
 /**
  * Created by W.b on 2016/11/29.

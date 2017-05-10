@@ -1,6 +1,8 @@
 package wb.app.seek.common.base.mvp;
 
-import rx.subjects.BehaviorSubject;
+import io.reactivex.subjects.BehaviorSubject;
+import wb.app.seek.common.base.mvp.impl.IPresenter;
+import wb.app.seek.common.base.mvp.impl.IView;
 import wb.app.seek.common.http.AppService;
 import wb.app.seek.common.http.retrofit.AppClient;
 import wb.app.seek.common.http.rx.LifecycleEvent;
@@ -12,7 +14,7 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
 
     protected String TAG = getClass().getSimpleName();
 
-    protected final BehaviorSubject<LifecycleEvent> mLifecycleSubject = BehaviorSubject.create();
+    protected BehaviorSubject<LifecycleEvent.PresenterLifecycle> mLifecycleEventBehaviorSubject = BehaviorSubject.create();
 
     private V mView;
 
@@ -32,13 +34,14 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
 
     @Override
     public void attachView(V view) {
+        mLifecycleEventBehaviorSubject.onNext(LifecycleEvent.PresenterLifecycle.ATTACH_VIEW);
         this.mView = view;
         mService = AppClient.getInstance().getService();
     }
 
     @Override
     public void detachView() {
+        mLifecycleEventBehaviorSubject.onNext(LifecycleEvent.PresenterLifecycle.DETACH_VIEW);
         this.mView = null;
-        mLifecycleSubject.onNext(LifecycleEvent.DESTROY);
     }
 }

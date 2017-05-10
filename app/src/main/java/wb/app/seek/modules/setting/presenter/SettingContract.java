@@ -1,6 +1,6 @@
 package wb.app.seek.modules.setting.presenter;
 
-import wb.app.seek.common.base.mvp.IView;
+import wb.app.seek.common.base.mvp.impl.IView;
 
 /**
  * Created by W.b on 2017/2/16.

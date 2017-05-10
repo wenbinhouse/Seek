@@ -1,4 +1,4 @@
-package wb.app.seek.common.base.mvp;
+package wb.app.seek.common.base.mvp.impl;
 
 /**
  * Created by W.b on 2017/2/15.

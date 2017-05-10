@@ -9,10 +9,8 @@ import android.view.View;
 
 import java.util.List;
 
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseRefreshListFragment;
 import wb.app.seek.common.rxbus.RxBus;
@@ -33,7 +31,7 @@ import static wb.app.seek.modules.zhihu.ZhihuDailyDetailActivity.INTENT_KEY_STOR
  */
 public class ZhihuDailyFragmentNew extends BaseRefreshListFragment<ZhihuDailyStory, ZhihuDailyPresenter> implements ZhihuDailyContract.View {
 
-    private Subscription mSubscription;
+//    private Subscription mSubscription;
 
     public static ZhihuDailyFragmentNew newInstance() {
         return new ZhihuDailyFragmentNew();
@@ -53,12 +51,11 @@ public class ZhihuDailyFragmentNew extends BaseRefreshListFragment<ZhihuDailySto
     protected void initComponents(View view) {
         super.initComponents(view);
 
-        mSubscription = RxBus.getInstance().toObservable(RxEvent.class)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<RxEvent>() {
+        // 选择时间后刷新列表
+        RxBus.getInstance().toObservable(RxEvent.class)
+                .subscribe(new Consumer<RxEvent>() {
                     @Override
-                    public void call(RxEvent rxEvent) {
+                    public void accept(@NonNull RxEvent rxEvent) throws Exception {
                         if (rxEvent.getType() == RxEventType.SCROLL_TO_TOP) {
                             smoothScrollTop();
                             getPresenter().refreshNews(rxEvent.getMessage());
@@ -70,9 +67,9 @@ public class ZhihuDailyFragmentNew extends BaseRefreshListFragment<ZhihuDailySto
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!mSubscription.isUnsubscribed()) {
-            mSubscription.unsubscribe();
-        }
+//        if (!mSubscription.isUnsubscribed()) {
+//            mSubscription.unsubscribe();
+//        }
     }
 
     @Override

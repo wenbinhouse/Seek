@@ -4,8 +4,8 @@ import android.text.TextUtils;
 
 import wb.app.seek.common.base.mvp.BasePresenter;
 import wb.app.seek.common.http.exception.ExceptionHandler;
-import wb.app.seek.common.http.rx.BaseSubscriber;
-import wb.app.seek.common.http.rx.ResponseTransformer;
+import wb.app.seek.common.http.rx.BaseObserver;
+import wb.app.seek.common.http.rx.LifecycleTransformer;
 import wb.app.seek.common.utils.DateTimeUtils;
 import wb.app.seek.modules.model.ZhihuDailyNews;
 
@@ -26,34 +26,34 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
         getView().showLoading();
 
         getService().getZhihuNewsByDate(date)
-                .compose(ResponseTransformer.<ZhihuDailyNews>getInstance(mLifecycleSubject))
-                .subscribe(new BaseSubscriber<ZhihuDailyNews>() {
+                .compose(new LifecycleTransformer<ZhihuDailyNews>(mLifecycleEventBehaviorSubject))
+                .subscribe(new BaseObserver<ZhihuDailyNews>() {
                     @Override
                     public void onSuccess(ZhihuDailyNews data) {
-                        if (data == null || data.getStories() == null || data.getStories().size() == 0)
+                        if (data.getStories() == null || data.getStories().size() == 0)
                             getView().showEmptyView();
 
-                        if (data != null)
-                            mBeforeDay = data.getDate();
+                        mBeforeDay = data.getDate();
 
-                        if (isAttach())
-                            getView().showNews(data);
+//                        if (isAttach())
+                        getView().showNews(data);
+
                     }
 
                     @Override
                     public void onFailure(String msg, int errorCode) {
-                        if (isAttach()) {
-                            getView().showError(msg);
-                            if (errorCode == ExceptionHandler.NETWORK_EXCEPTION) {
-                                getView().showNetErrorView();
-                            }
+//                        if (isAttach()) {
+                        getView().showError(msg);
+                        if (errorCode == ExceptionHandler.NETWORK_EXCEPTION) {
+                            getView().showNetErrorView();
                         }
+//                        }
                     }
 
                     @Override
                     public void onFinish() {
-                        if (isAttach())
-                            getView().hideLoading();
+//                        if (isAttach())
+                        getView().hideLoading();
                     }
                 });
     }
@@ -65,16 +65,15 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
         }
 
         getService().getZhihuNewsByDate(mBeforeDay)
-                .compose(ResponseTransformer.<ZhihuDailyNews>getInstance(mLifecycleSubject))
-                .subscribe(new BaseSubscriber<ZhihuDailyNews>() {
-
+                .compose(new LifecycleTransformer<ZhihuDailyNews>(mLifecycleEventBehaviorSubject))
+                .subscribe(new BaseObserver<ZhihuDailyNews>() {
                     @Override
                     public void onSuccess(ZhihuDailyNews data) {
-                        if (!isAttach()) {
-                            return;
-                        }
+//                        if (!isAttach()) {
+//                            return;
+//                        }
 
-                        if (data != null && data.getStories() != null && data.getStories().size() > 0) {
+                        if (data.getStories() != null && data.getStories().size() > 0) {
                             mBeforeDay = data.getDate();
                             getView().showMoreNews(data);
                         } else {
@@ -84,13 +83,13 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
                     @Override
                     public void onFailure(String msg, int errorCode) {
-                        if (isAttach())
-                            getView().showError(msg);
+//                        if (isAttach())
+                        getView().showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
-
+                        getView().hideLoading();
                     }
                 });
     }
@@ -98,30 +97,31 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
     @Override
     public void queryLatest() {
         getService().getZhiHuNewsLatest()
-                .compose(ResponseTransformer.<ZhihuDailyNews>getInstance(mLifecycleSubject))
-                .subscribe(new BaseSubscriber<ZhihuDailyNews>() {
+                .compose(new LifecycleTransformer<ZhihuDailyNews>(mLifecycleEventBehaviorSubject))
+                .subscribe(new BaseObserver<ZhihuDailyNews>() {
                     @Override
                     public void onSuccess(ZhihuDailyNews data) {
-                        if (!isAttach()) {
-                            return;
-                        }
+//                        if (!isAttach()) {
+//                            return;
+//                        }
 
-                        if (data != null && data.getTop_stories() != null) {
+                        if (data.getTop_stories() != null) {
                             getView().showTopStory(data.getTop_stories());
                         }
                     }
 
                     @Override
                     public void onFailure(String msg, int errorCode) {
-                        if (!isAttach()) {
-                            return;
-                        }
+//                        if (!isAttach()) {
+//                            return;
+//                        }
 
                         getView().showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
+                        getView().hideLoading();
                     }
                 });
     }

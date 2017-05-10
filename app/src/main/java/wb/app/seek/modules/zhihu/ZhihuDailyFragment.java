@@ -15,15 +15,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 import wb.app.seek.R;
 import wb.app.seek.common.base.mvp.MvpFragment;
-import wb.app.seek.common.rxbus.RxBus;
-import wb.app.seek.common.rxbus.RxEvent;
-import wb.app.seek.common.rxbus.RxEventType;
 import wb.app.seek.common.utils.DateTimeUtils;
 import wb.app.seek.modules.model.ZhihuDailyNews;
 import wb.app.seek.modules.model.ZhihuDailyStory;
@@ -43,7 +36,7 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     @BindView(R.id.refresh_layout) SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.rocket_fab) FloatingActionButton mRocketFab;
     private ZhihuDailyAdapter mZhihuListAdapter;
-    private Subscription mSubscription;
+//    private Subscription mSubscription;
 
     public static ZhihuDailyFragment newInstance() {
         return new ZhihuDailyFragment();
@@ -62,9 +55,9 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!mSubscription.isUnsubscribed()) {
-            mSubscription.unsubscribe();
-        }
+//        if (!mSubscription.isUnsubscribed()) {
+//            mSubscription.unsubscribe();
+//        }
     }
 
     @Override
@@ -81,18 +74,18 @@ public class ZhihuDailyFragment extends MvpFragment<ZhihuDailyPresenter> impleme
             }
         });
 
-        mSubscription = RxBus.getInstance().toObservable(RxEvent.class)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<RxEvent>() {
-                    @Override
-                    public void call(RxEvent rxEvent) {
-                        if (rxEvent.getType() == RxEventType.SCROLL_TO_TOP) {
-                            smoothScrollTop();
-                            getPresenter().refreshNews(rxEvent.getMessage());
-                        }
-                    }
-                });
+//        mSubscription = RxBus.getInstance().toObservable(RxEvent.class)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Action1<RxEvent>() {
+//                    @Override
+//                    public void call(RxEvent rxEvent) {
+//                        if (rxEvent.getType() == RxEventType.SCROLL_TO_TOP) {
+//                            smoothScrollTop();
+//                            getPresenter().refreshNews(rxEvent.getMessage());
+//                        }
+//                    }
+//                });
     }
 
     private void initRecyclerView() {

@@ -9,6 +9,7 @@ public class ApiException extends RuntimeException {
 
     public ApiException(String detailMessage) {
         super(detailMessage);
+        mMsg = detailMessage;
     }
 
     public String getMsg() {
