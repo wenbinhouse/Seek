@@ -21,8 +21,10 @@ import wb.app.library.MLog;
 public class ExceptionHandler {
 
     private static String TAG = "ExceptionHandler";
-    private static final String SOCKETTIMEOUT_EXCEPTION = "网络连接超时，请检查您的网络状态，稍后重试";
-    private static final String CONNECT_EXCEPTION = "网络连接异常，请检查您的网络状态";
+    private static final String SOCKET_TIMEOUT_EXCEPTION_MSG = "网络连接超时，请检查您的网络状态，稍后重试";
+    private static final String CONNECT_EXCEPTION_MSG = "网络连接异常，请检查您的网络状态";
+    private static final String PARSE_EXCEPTION_MSG = "数据解析异常，稍后重试";
+    private static final String UNKNOWN_EXCEPTION_MSG = "未知错误，稍后重试";
 
     public static final int API_EXCEPTION = 0;
     public static final int NETWORK_EXCEPTION = 1;
@@ -36,13 +38,13 @@ public class ExceptionHandler {
 
         } else if (e instanceof ConnectException || e.getCause() instanceof ConnectException
                 || e instanceof UnknownHostException || e.getCause() instanceof UnknownHostException) {
-            ex = new ResponseException(e, "网络连接异常，请检查您的网络状态", NETWORK_EXCEPTION);
+            ex = new ResponseException(e, CONNECT_EXCEPTION_MSG, NETWORK_EXCEPTION);
 
         } else if (e instanceof SocketTimeoutException) {
-            ex = new ResponseException(e, "网络连接超时，请检查您的网络状态", NETWORK_EXCEPTION);
+            ex = new ResponseException(e, SOCKET_TIMEOUT_EXCEPTION_MSG, NETWORK_EXCEPTION);
 
         } else if (e instanceof HttpException) {
-            ex = new ResponseException(e, "网络连接异常，请检查您的网络状态", NETWORK_EXCEPTION);
+            ex = new ResponseException(e, CONNECT_EXCEPTION_MSG, NETWORK_EXCEPTION);
 
         } else if (e instanceof ApiException) {
             ApiException apiException = (ApiException) e;
@@ -52,7 +54,7 @@ public class ExceptionHandler {
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException) {
-            ex = new ResponseException(e, "数据解析异常，稍后重试", PARSE_EXCEPTION);
+            ex = new ResponseException(e, PARSE_EXCEPTION_MSG, PARSE_EXCEPTION);
 
         }
 //        else if (e instanceof SSLHandshakeException) {
@@ -60,7 +62,7 @@ public class ExceptionHandler {
 //
 //        }
         else {
-            ex = new ResponseException(e, "未知错误", UNKNOWN_EXCEPTION);
+            ex = new ResponseException(e, UNKNOWN_EXCEPTION_MSG, UNKNOWN_EXCEPTION);
         }
         return ex;
     }
