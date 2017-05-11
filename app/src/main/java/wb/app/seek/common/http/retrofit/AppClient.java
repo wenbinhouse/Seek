@@ -15,6 +15,8 @@ import wb.app.seek.BuildConfig;
 import wb.app.seek.common.http.AppService;
 
 /**
+ * http client
+ * <p>
  * Created by W.b on 16/11/25.
  */
 public class AppClient {

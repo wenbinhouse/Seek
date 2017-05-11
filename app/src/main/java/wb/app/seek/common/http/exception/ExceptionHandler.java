@@ -14,7 +14,7 @@ import retrofit2.HttpException;
 import wb.app.library.MLog;
 
 /**
- * 异常处理
+ * 统一的异常处理
  * <p>
  * Created by W.b on 16/9/25.
  */

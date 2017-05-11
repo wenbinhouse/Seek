@@ -12,8 +12,7 @@ import java.util.List;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import wb.app.seek.R;
-import wb.app.seek.common.base.BaseRefreshListFragment;
-import wb.app.seek.common.rxbus.RxBus;
+import wb.app.seek.common.base.list.BaseRefreshListFragment;
 import wb.app.seek.common.rxbus.RxEvent;
 import wb.app.seek.common.rxbus.RxEventType;
 import wb.app.seek.common.utils.DateTimeUtils;
@@ -24,14 +23,10 @@ import wb.app.seek.modules.zhihu.presenter.ZhihuDailyContract;
 import wb.app.seek.modules.zhihu.presenter.ZhihuDailyPresenter;
 import wb.app.seek.widgets.recyclerview.BaseRecyclerAdapter;
 
-import static wb.app.seek.modules.zhihu.ZhihuDailyDetailActivity.INTENT_KEY_STORY_ID;
-
 /**
  * Created by W.b on 04/05/2017.
  */
 public class ZhihuDailyFragmentNew extends BaseRefreshListFragment<ZhihuDailyStory, ZhihuDailyPresenter> implements ZhihuDailyContract.View {
-
-//    private Subscription mSubscription;
 
     public static ZhihuDailyFragmentNew newInstance() {
         return new ZhihuDailyFragmentNew();
@@ -52,24 +47,15 @@ public class ZhihuDailyFragmentNew extends BaseRefreshListFragment<ZhihuDailySto
         super.initComponents(view);
 
         // 选择时间后刷新列表
-        RxBus.getInstance().toObservable(RxEvent.class)
-                .subscribe(new Consumer<RxEvent>() {
-                    @Override
-                    public void accept(@NonNull RxEvent rxEvent) throws Exception {
-                        if (rxEvent.getType() == RxEventType.SCROLL_TO_TOP) {
-                            smoothScrollTop();
-                            getPresenter().refreshNews(rxEvent.getMessage());
-                        }
-                    }
-                });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//        if (!mSubscription.isUnsubscribed()) {
-//            mSubscription.unsubscribe();
-//        }
+        registerEvent(new Consumer<RxEvent>() {
+            @Override
+            public void accept(@NonNull RxEvent rxEvent) throws Exception {
+                if (rxEvent.getType() == RxEventType.SCROLL_TO_TOP) {
+                    smoothScrollTop();
+                    getPresenter().refreshNews(rxEvent.getMessage());
+                }
+            }
+        });
     }
 
     @Override
@@ -80,7 +66,7 @@ public class ZhihuDailyFragmentNew extends BaseRefreshListFragment<ZhihuDailySto
             public void onClick(int id, View view) {
                 // Lollipop 以上实现 Transition
                 Intent intent = new Intent(getActivity(), ZhihuDailyDetailActivity.class);
-                intent.putExtra(INTENT_KEY_STORY_ID, id);
+                intent.putExtra(ZhihuDailyDetailActivity.INTENT_KEY_STORY_ID, id);
                 ActivityOptionsCompat options
                         = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view, getString(R.string.transition_name_cover_image));
                 ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
@@ -90,7 +76,7 @@ public class ZhihuDailyFragmentNew extends BaseRefreshListFragment<ZhihuDailySto
             @Override
             public void onBannerClick(int id) {
                 Intent intent = new Intent(getActivity(), ZhihuDailyDetailActivity.class);
-                intent.putExtra(INTENT_KEY_STORY_ID, id);
+                intent.putExtra(ZhihuDailyDetailActivity.INTENT_KEY_STORY_ID, id);
                 getActivity().startActivity(intent);
             }
         });

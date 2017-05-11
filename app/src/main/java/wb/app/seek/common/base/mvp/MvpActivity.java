@@ -2,7 +2,6 @@ package wb.app.seek.common.base.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import wb.app.seek.common.base.BaseActivity;
 import wb.app.seek.common.base.mvp.impl.IView;
@@ -29,19 +28,17 @@ public abstract class MvpActivity<P extends BasePresenter> extends BaseActivity 
             mPresenter.attachView(this);
         }
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "onCreate()");
     }
 
-    //--------------- 公共的界面回调
     @Override
     protected void onDestroy() {
-        Log.e(TAG, "onDestroy()");
         if (mPresenter != null) {
             mPresenter.detachView();
         }
         super.onDestroy();
     }
 
+    //--------------- 公共的界面回调
     @Override
     public void showLoading() {
 

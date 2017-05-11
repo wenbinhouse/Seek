@@ -3,15 +3,14 @@ package wb.app.seek.common.http.rx;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import wb.app.library.MLog;
 import wb.app.seek.common.http.exception.ResponseException;
 
 /**
+ * 观察者 Observer
+ * <p>
  * Created by W.b on 09/05/2017.
  */
 public abstract class BaseObserver<T> implements Observer<T> {
-
-    private static final String TAG = "BaseObserver ";
 
     private Disposable mDisposable;
 
@@ -31,13 +30,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onNext(@NonNull T t) {
-        MLog.d(TAG + "onNext : disposed = " + mDisposable.isDisposed());
-
-        if (!mDisposable.isDisposed()) {
-            onSuccess(t);
-        } else {
-            onFinish();
-        }
+        onSuccess(t);
     }
 
     @Override
@@ -49,10 +42,12 @@ public abstract class BaseObserver<T> implements Observer<T> {
             onFailure("未知异常", -1);
         }
         onFinish();
+        mDisposable.dispose();// 解除订阅
     }
 
     @Override
     public void onComplete() {
         onFinish();
+        mDisposable.dispose();// 解除订阅
     }
 }

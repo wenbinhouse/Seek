@@ -5,16 +5,16 @@ import io.reactivex.subjects.PublishSubject;
 import wb.app.seek.common.http.rx.RxSchedulers;
 
 /**
+ * RxBus 事件
+ * <p>
  * Created by W.b on 2017/3/6.
  */
 public class RxBus {
 
-    private static RxBus mInstance;
-    //    private final Subject<Object, Object> mBus;
+    private volatile static RxBus mInstance;
     private PublishSubject<Object> mBus;
 
     private RxBus() {
-//        mBus = new SerializedSubject<>(PublishSubject.create());
         mBus = PublishSubject.create();
     }
 
@@ -38,8 +38,4 @@ public class RxBus {
         return mBus.ofType(event)
                 .compose(RxSchedulers.<T>io2Main());
     }
-
-//    public <T> Observable<T> toObservable(Class<T> eventType) {
-//        return mBus.ofType(eventType);
-//    }
 }

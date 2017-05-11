@@ -18,12 +18,12 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
 
     private V mView;
 
+    /**
+     * @return View
+     * @Exception NullPointerException
+     */
     public V getView() {
         return mView;
-    }
-
-    public boolean isAttach() {
-        return mView != null;
     }
 
     public AppService getService() {
@@ -43,5 +43,10 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
     public void detachView() {
         mLifecycleEventBehaviorSubject.onNext(LifecycleEvent.PresenterLifecycle.DETACH_VIEW);
         this.mView = null;
+    }
+
+    @Override
+    public boolean isAttachView() {
+        return mView != null;
     }
 }

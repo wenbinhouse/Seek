@@ -38,7 +38,6 @@ import io.reactivex.schedulers.Schedulers;
 import wb.app.library.MLog;
 import wb.app.seek.R;
 import wb.app.seek.common.base.BaseActivity;
-import wb.app.seek.common.rxbus.RxBus;
 import wb.app.seek.common.rxbus.RxEvent;
 import wb.app.seek.common.rxbus.RxEventType;
 import wb.app.seek.common.utils.DateTimeUtils;
@@ -56,19 +55,10 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_tab_layout) TabLayout mMainTabLayout;
     @BindView(R.id.reveal_root) RelativeLayout mRevealRoot;
     private long mLastTimeMillis;
-//    private Subscription mSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        if (!mSubscription.isUnsubscribed()) {
-//            mSubscription.unsubscribe();
-//        }
     }
 
     @Override
@@ -84,23 +74,22 @@ public class MainActivity extends BaseActivity {
         mMainTabLayout.setupWithViewPager(mMainViewpager);
 
         // 延时切换日夜间模式
-        RxBus.getInstance().toObservable(RxEvent.class)
-                .subscribe(new Consumer<RxEvent>() {
-                    @Override
-                    public void accept(@NonNull final RxEvent rxEvent) throws Exception {
-                        if (rxEvent.getType() == RxEventType.DAY_NIGHT_MODE) {
-                            Observable.timer(500, TimeUnit.MILLISECONDS)
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(new Consumer<Long>() {
-                                        @Override
-                                        public void accept(@NonNull Long aLong) throws Exception {
-                                            switchDayNightMode(rxEvent.getMessage());
-                                        }
-                                    });
-                        }
-                    }
-                });
+        registerEvent(new Consumer<RxEvent>() {
+            @Override
+            public void accept(@NonNull final RxEvent rxEvent) throws Exception {
+                if (rxEvent.getType() == RxEventType.DAY_NIGHT_MODE) {
+                    Observable.timer(500, TimeUnit.MILLISECONDS)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Long>() {
+                                @Override
+                                public void accept(@NonNull Long aLong) throws Exception {
+                                    switchDayNightMode(rxEvent.getMessage());
+                                }
+                            });
+                }
+            }
+        });
     }
 
     /**
@@ -147,13 +136,13 @@ public class MainActivity extends BaseActivity {
         if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeDrawer();
         } else {
-            long currentTimeMillis = System.currentTimeMillis();
-            if (currentTimeMillis - mLastTimeMillis > 2000) {
-                showToastShort("再按一次退出程序");
-                mLastTimeMillis = currentTimeMillis;
-            } else {
+//            long currentTimeMillis = System.currentTimeMillis();
+//            if (currentTimeMillis - mLastTimeMillis > 2000) {
+//                showToastShort("再按一次退出程序");
+//                mLastTimeMillis = currentTimeMillis;
+//            } else {
                 super.onBackPressed();
-            }
+//            }
         }
     }
 
@@ -179,16 +168,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onAnimationStart(Animator animation) {
                 super.onAnimationStart(animation);
-
-//                Observable.timer(150, TimeUnit.MILLISECONDS)
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(new Action1<Long>() {
-//                            @Override
-//                            public void call(Long aLong) {
-//                                selectedDate();
-//                            }
-//                        });
             }
 
             @Override
@@ -217,7 +196,8 @@ public class MainActivity extends BaseActivity {
                 String monthStr = DateTimeUtils.formatDate(month);
                 String dayOfMonthStr = DateTimeUtils.formatDate(dayOfMonth);
                 String date = String.format("%1$d%2$s%3$s", year, monthStr, dayOfMonthStr);
-                RxBus.getInstance().post(new RxEvent(RxEventType.SCROLL_TO_TOP, date));
+                // 发送事件，通知列表更新
+                postEvent(new RxEvent(RxEventType.SCROLL_TO_TOP, date));
             }
         }, curYear, curMonth, curDayOfMonth);
         datePickerDialog.show();

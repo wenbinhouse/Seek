@@ -35,6 +35,9 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
 
     @Override
     public void getDetail(int storyId) {
+        if (!isAttachView())
+            return;
+
         getView().showLoading();
 
         getService().getZhihuNewsDetail(storyId)
@@ -42,9 +45,9 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
                 .subscribe(new BaseObserver<ZhihuDailyStory>() {
                     @Override
                     public void onSuccess(ZhihuDailyStory data) {
-//                        if (!isAttach()) {
-//                            return;
-//                        }
+                        if (!isAttachView()) {
+                            return;
+                        }
 
                         getView().showTitle(data.getTitle());
                         getView().showCoverImg(data.getImage());
@@ -53,18 +56,18 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
 
                     @Override
                     public void onFailure(String msg, int errorCode) {
-//                        if (!isAttach()) {
-//                            return;
-//                        }
+                        if (!isAttachView()) {
+                            return;
+                        }
 
                         getView().showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
-//                        if (!isAttach()) {
-//                            return;
-//                        }
+                        if (!isAttachView()) {
+                            return;
+                        }
 
                         getView().hideLoading();
                     }

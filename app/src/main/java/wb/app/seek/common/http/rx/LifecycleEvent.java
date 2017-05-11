@@ -1,6 +1,8 @@
 package wb.app.seek.common.http.rx;
 
 /**
+ * 生命周期事件
+ * <p>
  * Created by W.b on 2016/12/28.
  */
 public class LifecycleEvent {

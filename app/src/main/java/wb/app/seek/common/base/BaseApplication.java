@@ -26,8 +26,10 @@ public class BaseApplication extends Application {
 
         mHelper = SeekHelper.getInstance();
 
+        // 日志打印工具
         MLog.init(BuildConfig.DEBUG);
 
+        // 夜间模式开关
         SPUtils spUtils = getHelper().getSpUtils();
         int uiMode = spUtils.getInt(SPKey.UI_MODE);
         if (uiMode == AppCompatDelegate.MODE_NIGHT_NO) {

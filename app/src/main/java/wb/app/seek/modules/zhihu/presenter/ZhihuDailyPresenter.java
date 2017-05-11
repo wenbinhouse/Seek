@@ -18,6 +18,9 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
     @Override
     public void refreshNews(String date) {
+        if (!isAttachView())
+            return;
+
         if (!DateTimeUtils.isValid(date)) {
             getView().showError("日期不能小于2013-05-20");
             return;
@@ -30,29 +33,33 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
                 .subscribe(new BaseObserver<ZhihuDailyNews>() {
                     @Override
                     public void onSuccess(ZhihuDailyNews data) {
+                        if (!isAttachView())
+                            return;
+
                         if (data.getStories() == null || data.getStories().size() == 0)
                             getView().showEmptyView();
 
                         mBeforeDay = data.getDate();
 
-//                        if (isAttach())
                         getView().showNews(data);
-
                     }
 
                     @Override
                     public void onFailure(String msg, int errorCode) {
-//                        if (isAttach()) {
+                        if (!isAttachView())
+                            return;
+
                         getView().showError(msg);
                         if (errorCode == ExceptionHandler.NETWORK_EXCEPTION) {
                             getView().showNetErrorView();
                         }
-//                        }
                     }
 
                     @Override
                     public void onFinish() {
-//                        if (isAttach())
+                        if (!isAttachView())
+                            return;
+
                         getView().hideLoading();
                     }
                 });
@@ -60,6 +67,9 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
     @Override
     public void loadMoreNews() {
+        if (!isAttachView())
+            return;
+
         if (TextUtils.isEmpty(mBeforeDay)) {
             return;
         }
@@ -69,9 +79,8 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
                 .subscribe(new BaseObserver<ZhihuDailyNews>() {
                     @Override
                     public void onSuccess(ZhihuDailyNews data) {
-//                        if (!isAttach()) {
-//                            return;
-//                        }
+                        if (!isAttachView())
+                            return;
 
                         if (data.getStories() != null && data.getStories().size() > 0) {
                             mBeforeDay = data.getDate();
@@ -83,12 +92,17 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
                     @Override
                     public void onFailure(String msg, int errorCode) {
-//                        if (isAttach())
+                        if (!isAttachView())
+                            return;
+
                         getView().showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
+                        if (!isAttachView())
+                            return;
+
                         getView().hideLoading();
                     }
                 });
@@ -96,14 +110,16 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
     @Override
     public void queryLatest() {
+        if (!isAttachView())
+            return;
+
         getService().getZhiHuNewsLatest()
                 .compose(new LifecycleTransformer<ZhihuDailyNews>(mLifecycleEventBehaviorSubject))
                 .subscribe(new BaseObserver<ZhihuDailyNews>() {
                     @Override
                     public void onSuccess(ZhihuDailyNews data) {
-//                        if (!isAttach()) {
-//                            return;
-//                        }
+                        if (!isAttachView())
+                            return;
 
                         if (data.getTop_stories() != null) {
                             getView().showTopStory(data.getTop_stories());
@@ -112,15 +128,17 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
 
                     @Override
                     public void onFailure(String msg, int errorCode) {
-//                        if (!isAttach()) {
-//                            return;
-//                        }
+                        if (!isAttachView())
+                            return;
 
                         getView().showError(msg);
                     }
 
                     @Override
                     public void onFinish() {
+                        if (!isAttachView())
+                            return;
+
                         getView().hideLoading();
                     }
                 });

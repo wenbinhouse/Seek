@@ -2,6 +2,7 @@ package wb.app.seek.modules.zhihu;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -60,7 +61,12 @@ public class ZhihuDailyDetailActivity extends MvpActivity<ZhihuDailyDetailPresen
 
         initWebView();
 
-        getPresenter().getDetail(mStoryId);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getPresenter().getDetail(mStoryId);
+            }
+        }, 3000);
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
+import wb.app.seek.common.base.toolbar.ToolbarActivity;
 
 /**
  * Created by W.b on 2016/11/29.

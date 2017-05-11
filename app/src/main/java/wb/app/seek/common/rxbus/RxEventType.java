@@ -1,6 +1,8 @@
 package wb.app.seek.common.rxbus;
 
 /**
+ * RxBus 事件类型，用于接收事件时区分
+ * <p>
  * Created by W.b on 2017/3/6.
  */
 public interface RxEventType {

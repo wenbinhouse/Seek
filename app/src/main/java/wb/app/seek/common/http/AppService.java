@@ -13,6 +13,8 @@ import wb.app.seek.modules.model.ZhihuDailyNews;
 import wb.app.seek.modules.model.ZhihuDailyStory;
 
 /**
+ * API
+ * <p>
  * Created by W.b on 16/9/24.
  */
 public interface AppService {

@@ -1,7 +1,6 @@
-package wb.app.seek.common.base;
+package wb.app.seek.common.base.toolbar;
 
 import android.support.annotation.LayoutRes;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -10,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import wb.app.seek.R;
+import wb.app.seek.common.base.rx.RxActivity;
 
 /**
+ * 封装了 Toolbar
+ * <p>
  * Created by W.b on 2017/1/11.
  */
-public class ToolbarActivity extends AppCompatActivity {
+public class ToolbarActivity extends RxActivity {
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {

@@ -14,4 +14,11 @@ public interface IPresenter<V extends IView> {
      * 解绑 view 避免内存泄漏
      */
     void detachView();
+
+    /**
+     * 是否绑定 View
+     * true - 已经绑定
+     * false - 解除绑定
+     */
+    boolean isAttachView();
 }

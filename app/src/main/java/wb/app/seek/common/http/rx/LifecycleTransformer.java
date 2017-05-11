@@ -7,7 +7,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.subjects.BehaviorSubject;
-import wb.app.library.MLog;
 import wb.app.seek.common.http.exception.ApiException;
 import wb.app.seek.common.http.exception.ExceptionHandler;
 
@@ -17,8 +16,6 @@ import wb.app.seek.common.http.exception.ExceptionHandler;
  * Created by W.b on 10/05/2017.
  */
 public class LifecycleTransformer<T> implements ObservableTransformer<T, T> {
-
-    private static final String TAG = "LifecycleTransformer ";
 
     private BehaviorSubject<LifecycleEvent.PresenterLifecycle> mLifecycleEventBehaviorSubject;
 
@@ -31,7 +28,6 @@ public class LifecycleTransformer<T> implements ObservableTransformer<T, T> {
         Observable<LifecycleEvent.PresenterLifecycle> lifecycleObservable = mLifecycleEventBehaviorSubject.filter(new Predicate<LifecycleEvent.PresenterLifecycle>() {
             @Override
             public boolean test(@NonNull LifecycleEvent.PresenterLifecycle presenterLifecycle) throws Exception {
-                MLog.d(TAG, "LifecycleTransformer : presenterLifecycle = " + presenterLifecycle);
                 return presenterLifecycle.equals(LifecycleEvent.PresenterLifecycle.DETACH_VIEW);
             }
         });
