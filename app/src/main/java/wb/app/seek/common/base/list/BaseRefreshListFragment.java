@@ -1,7 +1,9 @@
 package wb.app.seek.common.base.list;
 
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -16,10 +18,11 @@ import wb.app.seek.widgets.recyclerview.BaseRecyclerAdapter;
 
 /**
  * 刷新基类
+ * SwipeRefreshLayout + RecyclerView
  * <p>
  * Created by W.b on 04/05/2017.
  */
-public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extends MvpFragment<P> implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extends MvpFragment<P> {
 
     @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
     @BindView(R.id.swi_refresh_layout) SwipeRefreshLayout mSwiRefreshLayout;
@@ -27,7 +30,8 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
     private List<T> mData = new ArrayList<>();
     private BaseRecyclerAdapter mAdapter;
     private LoadingFooterView mFooterView;
-    private boolean mIsNoMore;//是否还有更多
+    private boolean mIsNoMore;// 是否还有更多
+    private boolean mIsAutoQueryMore = true;// 默认开启自动加载，当数据不满一屏幕时使用
 
     /**
      * 布局管理器
@@ -134,14 +138,25 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
 
-            boolean canScrollDown = false;
-            boolean canScrollUp = true;
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            int lastVisibleItemPos = findLastVisibleItemPosition(layoutManager);
+            int itemCount = layoutManager.getItemCount();
+            int childCount = layoutManager.getChildCount();
 
-            canScrollUp = recyclerView.canScrollVertically(1);
+            // RecyclerView 在顶部
+            boolean isTop = recyclerView.canScrollVertically(-1);
+            // RecyclerView 在底部
+            boolean isBottom = recyclerView.canScrollVertically(1);
 
-            // 上拉加载更多
-            if (!mIsNoMore && !canScrollUp) {
+            // 手动下拉刷新，开启自动加载，否则有可能出现加载不满一屏幕的情况
+            if (!isTop) {
+                mIsAutoQueryMore = true;
+            }
+
+            // 还有更多数据、RecyclerView 在底部、空闲状态，加载更多
+            if (!mIsNoMore && newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPos + 1 == itemCount) {
                 mFooterView.setState(LoadingFooterView.STATE_LOADING);
+                queryMore();
             }
         }
 
@@ -149,22 +164,67 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
 
-            boolean canScrollDown = false;
-            boolean canScrollUp = true;
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            int lastVisibleItemPos = findLastVisibleItemPosition(layoutManager);
+            int itemCount = layoutManager.getItemCount();
+            int childCount = layoutManager.getChildCount();
 
-            canScrollDown = recyclerView.canScrollVertically(-1);
-            canScrollUp = recyclerView.canScrollVertically(1);
-
-//            //下拉刷新
-//            if (!canScrollDown)
-//                onRefresh();
-
-            // 上拉加载更多
-            if (!mIsNoMore && !canScrollUp) {
+            // 数据不满一屏幕时，自动加载更多直到满屏
+            if (lastVisibleItemPos == 0) {
+                // 加了 FooterView 第一次进入界面 lastVisibleItemPos = 0，做拦截
+            } else if (mIsAutoQueryMore && lastVisibleItemPos + 1 == itemCount) {
+                // 可以自动加载更多，并且当前最后可见 item 在屏幕中
                 queryMore();
+            } else if (mIsAutoQueryMore) {
+                // 自动加载已经满屏之后关闭自动加载
+                mIsAutoQueryMore = false;
             }
         }
     };
+
+    /**
+     * 找最后一个可见 item 位置
+     */
+    private int findLastVisibleItemPosition(RecyclerView.LayoutManager layoutManager) {
+        int layoutManagerType;
+        int[] lastPositions = null;// StaggeredGridLayoutManager 最后一个位置
+        int lastVisibleItemPosition = 0;// 最后一个可见 item 的位置
+
+        if (layoutManager instanceof LinearLayoutManager) {
+            layoutManagerType = 0;
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+            layoutManagerType = 1;
+        } else {
+            throw new RuntimeException(
+                    "Unsupported LayoutManager used. Valid ones are LinearLayoutManager, GridLayoutManager and StaggeredGridLayoutManager");
+        }
+
+        switch (layoutManagerType) {
+            case 0:
+                lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                break;
+            case 1:
+                StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+                if (lastPositions == null) {
+                    lastPositions = new int[staggeredGridLayoutManager.getSpanCount()];
+                }
+                staggeredGridLayoutManager.findLastVisibleItemPositions(lastPositions);
+                lastVisibleItemPosition = findMax(lastPositions);
+                break;
+        }
+
+        return lastVisibleItemPosition;
+    }
+
+    private int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
+    }
 
     @Override
     public void showLoading() {
@@ -194,19 +254,14 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
         mFooterView.setState(LoadingFooterView.STATE_END);
     }
 
-    @Override
-    public void onRefresh() {
-        query();
-    }
-
     /**
      * 填充数据
      */
     protected void fillData(boolean isMore, List<T> data) {
         if (isMore) {
-            mAdapter.addMoreData(data);
+            mAdapter.addMoreData(data.subList(0, 3));
         } else {
-            mAdapter.addData(data);
+            mAdapter.addData(data.subList(0, 3));
         }
     }
 

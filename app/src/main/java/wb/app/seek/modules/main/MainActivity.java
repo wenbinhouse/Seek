@@ -136,13 +136,13 @@ public class MainActivity extends BaseActivity {
         if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             closeDrawer();
         } else {
-//            long currentTimeMillis = System.currentTimeMillis();
-//            if (currentTimeMillis - mLastTimeMillis > 2000) {
-//                showToastShort("再按一次退出程序");
-//                mLastTimeMillis = currentTimeMillis;
-//            } else {
+            long currentTimeMillis = System.currentTimeMillis();
+            if (currentTimeMillis - mLastTimeMillis > 2000) {
+                showToastShort("再按一次退出程序");
+                mLastTimeMillis = currentTimeMillis;
+            } else {
                 super.onBackPressed();
-//            }
+            }
         }
     }
 
