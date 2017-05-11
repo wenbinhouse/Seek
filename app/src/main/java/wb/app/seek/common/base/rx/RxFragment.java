@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import wb.app.seek.common.rxbus.RxBus;
 import wb.app.seek.common.rxbus.RxEvent;
 
 /**

@@ -5,7 +5,6 @@ import android.widget.CheckBox;
 
 import wb.app.seek.common.base.BaseApplication;
 import wb.app.seek.common.base.mvp.BasePresenter;
-import wb.app.seek.common.rxbus.RxBus;
 import wb.app.seek.common.rxbus.RxEvent;
 import wb.app.seek.common.rxbus.RxEventType;
 import wb.app.seek.common.utils.SPKey;
