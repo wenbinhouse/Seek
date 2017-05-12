@@ -1,6 +1,7 @@
 package wb.app.seek.common.base.list;
 
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -13,8 +14,8 @@ import butterknife.BindView;
 import wb.app.seek.R;
 import wb.app.seek.common.base.mvp.BasePresenter;
 import wb.app.seek.common.base.mvp.MvpFragment;
-import wb.app.seek.widgets.LoadingFooterView;
 import wb.app.seek.widgets.recyclerview.BaseRecyclerAdapter;
+import wb.app.seek.widgets.recyclerview.DefaultFooterAdapter;
 
 /**
  * 刷新基类
@@ -28,8 +29,7 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
     @BindView(R.id.swi_refresh_layout) SwipeRefreshLayout mSwiRefreshLayout;
 
     private List<T> mData = new ArrayList<>();
-    private BaseRecyclerAdapter mAdapter;
-    private LoadingFooterView mFooterView;
+    private DefaultFooterAdapter<T> mAdapter;
     private boolean mIsNoMore;// 是否还有更多
     private boolean mIsAutoQueryMore = true;// 默认开启自动加载，当数据不满一屏幕时使用
 
@@ -41,7 +41,7 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
     /**
      * 布局管理器
      */
-    protected abstract BaseRecyclerAdapter initAdapter();
+    protected abstract DefaultFooterAdapter<T> initAdapter();
 
     /**
      * 下拉刷新
@@ -67,8 +67,6 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
 
     @Override
     protected void initComponents(View view) {
-        mFooterView = new LoadingFooterView(getContext());
-
         initSwipeRefreshLayout();
 
         initRecyclerView();
@@ -126,11 +124,30 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
                 onItemCommonClick(mData.get(position));
             }
         });
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(getLayoutManager());
         mRecyclerView.addOnScrollListener(onScrollListener);
+        setSpanSize();
+    }
 
-        mAdapter.addFootView(mFooterView.getView());
+    /**
+     * 设置 item 占据的宽度
+     */
+    private void setSpanSize() {
+        final RecyclerView.LayoutManager layoutManager = getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            ((GridLayoutManager) layoutManager).setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    int spanSize = 1;
+                    if (position + 1 == mAdapter.getItemCount()) {
+                        spanSize = ((GridLayoutManager) layoutManager).getSpanCount();
+                    }
+                    return spanSize;
+                }
+            });
+        }
     }
 
     private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
@@ -148,14 +165,15 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
             // RecyclerView 在底部
             boolean isBottom = recyclerView.canScrollVertically(1);
 
-            // 手动下拉刷新，开启自动加载，否则有可能出现加载不满一屏幕的情况
+            // RecyclerView 在顶部、手动下拉刷新，开启自动加载，否则有可能出现加载不满一屏幕的情况
             if (!isTop) {
+                mAdapter.setFooterState(DefaultFooterAdapter.STATE_IDLE);
                 mIsAutoQueryMore = true;
             }
 
-            // 还有更多数据、RecyclerView 在底部、空闲状态，加载更多
-            if (!mIsNoMore && newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPos + 1 == itemCount) {
-                mFooterView.setState(LoadingFooterView.STATE_LOADING);
+            // RecyclerView 不在顶部、还有更多数据、空闲状态，可以加载更多
+            if (isTop && !mIsNoMore && newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPos + 1 == itemCount) {
+                mAdapter.setFooterState(DefaultFooterAdapter.STATE_LOADING);
                 queryMore();
             }
         }
@@ -235,7 +253,7 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
     @Override
     public void hideLoading() {
         stopRefreshAnim();
-        mFooterView.setState(LoadingFooterView.STATE_IDLE);
+        mAdapter.setFooterState(DefaultFooterAdapter.STATE_IDLE);
     }
 
     @Override
@@ -251,7 +269,7 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
     @Override
     public void showNoMore() {
         mIsNoMore = true;
-        mFooterView.setState(LoadingFooterView.STATE_END);
+        mAdapter.setFooterState(DefaultFooterAdapter.STATE_END);
     }
 
     /**
@@ -259,9 +277,9 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
      */
     protected void fillData(boolean isMore, List<T> data) {
         if (isMore) {
-            mAdapter.addMoreData(data.subList(0, 3));
+            mAdapter.addMoreData(data);
         } else {
-            mAdapter.addData(data.subList(0, 3));
+            mAdapter.addData(data);
         }
     }
 

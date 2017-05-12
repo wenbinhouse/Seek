@@ -36,7 +36,7 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
                         if (!isAttachView())
                             return;
 
-                        if (data.getStories() == null || data.getStories().size() == 0)
+                        if (data == null && data.getStories() == null || data.getStories().size() == 0)
                             getView().showEmptyView();
 
                         mBeforeDay = data.getDate();
@@ -77,16 +77,20 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
         getService().getZhihuNewsByDate(mBeforeDay)
                 .compose(new LifecycleTransformer<ZhihuDailyNews>(mLifecycleEventBehaviorSubject))
                 .subscribe(new BaseObserver<ZhihuDailyNews>() {
+
+                    private boolean isHasMore = true;
+
                     @Override
                     public void onSuccess(ZhihuDailyNews data) {
                         if (!isAttachView())
                             return;
 
-                        if (data.getStories() != null && data.getStories().size() > 0) {
+                        if (data != null && data.getStories() != null && data.getStories().size() > 0) {
+                            isHasMore = true;
                             mBeforeDay = data.getDate();
                             getView().showMoreNews(data);
                         } else {
-                            getView().showNoMore();
+                            isHasMore = false;
                         }
                     }
 
@@ -104,6 +108,9 @@ public class ZhihuDailyPresenter extends BasePresenter<ZhihuDailyContract.View> 
                             return;
 
                         getView().hideLoading();
+                        if (!isHasMore) {
+                            getView().showNoMore();
+                        }
                     }
                 });
     }

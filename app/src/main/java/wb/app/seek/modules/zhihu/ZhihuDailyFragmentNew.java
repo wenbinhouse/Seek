@@ -21,7 +21,7 @@ import wb.app.seek.modules.model.ZhihuDailyStory;
 import wb.app.seek.modules.zhihu.adapter.ZhihuDailyAdapterNew;
 import wb.app.seek.modules.zhihu.presenter.ZhihuDailyContract;
 import wb.app.seek.modules.zhihu.presenter.ZhihuDailyPresenter;
-import wb.app.seek.widgets.recyclerview.BaseRecyclerAdapter;
+import wb.app.seek.widgets.recyclerview.DefaultFooterAdapter;
 
 /**
  * Created by W.b on 04/05/2017.
@@ -59,7 +59,7 @@ public class ZhihuDailyFragmentNew extends BaseRefreshListFragment<ZhihuDailySto
     }
 
     @Override
-    protected BaseRecyclerAdapter initAdapter() {
+    protected DefaultFooterAdapter initAdapter() {
         ZhihuDailyAdapterNew adapter = new ZhihuDailyAdapterNew(getContext());
         adapter.setOnItemClickListener(new ZhihuDailyAdapterNew.OnItemClickListener() {
             @Override

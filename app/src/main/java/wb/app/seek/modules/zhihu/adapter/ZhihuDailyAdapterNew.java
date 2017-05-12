@@ -10,13 +10,13 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import wb.app.seek.R;
 import wb.app.seek.modules.model.ZhihuDailyStory;
-import wb.app.seek.widgets.recyclerview.BaseRecyclerAdapter;
 import wb.app.seek.widgets.recyclerview.BaseRecyclerViewHolder;
+import wb.app.seek.widgets.recyclerview.DefaultFooterAdapter;
 
 /**
  * Created by W.b on 04/05/2017.
  */
-public class ZhihuDailyAdapterNew extends BaseRecyclerAdapter<ZhihuDailyStory> {
+public class ZhihuDailyAdapterNew extends DefaultFooterAdapter<ZhihuDailyStory> {
 
     public ZhihuDailyAdapterNew(Context context) {
         super(context);
@@ -28,7 +28,7 @@ public class ZhihuDailyAdapterNew extends BaseRecyclerAdapter<ZhihuDailyStory> {
     }
 
     @Override
-    protected BaseRecyclerViewHolder getViewHolder(View itemView) {
+    protected BaseRecyclerViewHolder getItemViewHolder(View itemView) {
         return new TestViewHolder(itemView);
     }
 

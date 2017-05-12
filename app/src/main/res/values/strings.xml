@@ -79,6 +79,6 @@
 
     <string name="shared_preferences_key">user_settings</string>
 
-    <string name="transition_name_cover_image">封面图片</string>
+    <string name="transition_name_cover_image">cover_image</string>
 
 </resources>

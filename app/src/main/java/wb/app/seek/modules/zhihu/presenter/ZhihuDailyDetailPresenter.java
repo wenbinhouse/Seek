@@ -49,9 +49,11 @@ public class ZhihuDailyDetailPresenter extends BasePresenter<ZhihuDailyDetailCon
                             return;
                         }
 
-                        getView().showTitle(data.getTitle());
-                        getView().showCoverImg(data.getImage());
-                        getView().showWeb(convertZhihuContent(data.getBody()));
+                        if (data != null) {
+                            getView().showTitle(data.getTitle());
+                            getView().showCoverImg(data.getImage());
+                            getView().showWeb(convertZhihuContent(data.getBody()));
+                        }
                     }
 
                     @Override

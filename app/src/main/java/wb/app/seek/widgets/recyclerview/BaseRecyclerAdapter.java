@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import wb.app.seek.R;
+
 /**
  * Created by W.b on 04/05/2017.
  */
@@ -20,9 +22,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
 
     private List<T> mDataList = new ArrayList<>();
 
-    private View footView;
-    private int footViewSize = 0;
-    private boolean isAddFoot = false;
+    protected boolean isAddFooter = false;
 
     /**
      * 获取布局资源 Id
@@ -30,15 +30,34 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
     protected abstract int getItemLayoutResId();
 
     /**
-     * 获取 ViewHolder
+     * 获取列表底部布局 资源 id
      */
-    protected abstract BaseRecyclerViewHolder getViewHolder(View itemView);
+    protected int getFooterLayoutResId() {
+        return R.layout.item_footer;
+    }
 
     /**
-     * 默认的页脚布局
+     * item ViewHolder
+     */
+    protected abstract BaseRecyclerViewHolder getItemViewHolder(View itemView);
+
+    /**
+     * footer ViewHolder
      */
     protected BaseRecyclerViewHolder getFooterViewHolder(View footerView) {
-        return new DefaultFooterViewHolder(footerView);
+        return new DefaultFooterAdapter.DefaultFooterViewHolder(footerView);
+    }
+
+    /**
+     * bind item
+     */
+    protected abstract void bindItemViewHolder(BaseRecyclerViewHolder viewHolder, final int position);
+
+    /**
+     * bind footer
+     */
+    protected void bindFooterViewHolder(BaseRecyclerViewHolder viewHolder) {
+
     }
 
     public BaseRecyclerAdapter(Context context) {
@@ -52,13 +71,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         switch (viewType) {
             case ITEM_TYPE_NORMAL:
                 itemView = inflater.inflate(getItemLayoutResId(), parent, false);
-                return getViewHolder(itemView);
+                return getItemViewHolder(itemView);
 
             case ITEM_TYPE_FOOTER:
-                itemView = footView;
+                itemView = inflater.inflate(getFooterLayoutResId(), parent, false);
                 return getFooterViewHolder(itemView);
         }
-        return getViewHolder(itemView);
+        return getItemViewHolder(itemView);
     }
 
     @Override
@@ -77,7 +96,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
     @Override
     public int getItemViewType(int position) {
         int type = ITEM_TYPE_NORMAL;
-        if (footViewSize == 1 && position == getItemCount() - 1) {
+        if (isAddFooter && position == getItemCount() - 1) {
             type = ITEM_TYPE_FOOTER;
         }
         return type;
@@ -85,26 +104,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
 
     @Override
     public int getItemCount() {
-        return mDataList.size() + footViewSize;
+        return isAddFooter ? mDataList.size() + 1 : mDataList.size();
     }
-
-    public void addFootView(View view) {
-        footView = view;
-        footViewSize = 1;
-        isAddFoot = true;
-    }
-
-    public void removeFootView() {
-        footView = null;
-        footViewSize = 0;
-        isAddFoot = false;
-    }
-
-    protected void bindFooterViewHolder(BaseRecyclerViewHolder viewHolder) {
-
-    }
-
-    protected abstract void bindItemViewHolder(BaseRecyclerViewHolder viewHolder, final int position);
 
     public List<T> getDataList() {
         return mDataList;
