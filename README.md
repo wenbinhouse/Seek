@@ -2,7 +2,7 @@
 
 一个新闻阅读 APP，还在不断完善中
 
-在这个项目中使用了大量的当前流行的开源项目和技术，比如 MVP 模式、 retrofit (okhttp)、 RxJava (RxAndroid)、 RxBus (替代 EventBus)、 butterknife、 glide、 leakcanary 等等
+在这个项目中使用了很多当前流行的开源项目和技术，比如 MVP 模式、 retrofit (okhttp)、 RxJava (RxAndroid)、 RxBus (替代 EventBus)、 butterknife、 glide、 leakcanary 等等
 
 尽管已经尽力做到最好，但是难免会有认知理解的偏差，如果你发现项目中有任何问题，可以给我提建议，也欢迎发起 pr
 
