@@ -1,13 +1,11 @@
 package wb.app.seek.widgets.recyclerview;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import wb.app.library.MLog;
 import wb.app.seek.R;
 
 /**
@@ -41,9 +39,6 @@ public abstract class DefaultFooterAdapter<T> extends BaseRecyclerAdapter<T> {
     protected void bindFooterViewHolder(BaseRecyclerViewHolder viewHolder) {
         DefaultFooterViewHolder holder = (DefaultFooterViewHolder) viewHolder;
 
-//        StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
-//        layoutParams.setFullSpan(true);
-
         holder.itemView.setVisibility(View.VISIBLE);
 
         switch (mCurrentState) {
@@ -68,30 +63,6 @@ public abstract class DefaultFooterAdapter<T> extends BaseRecyclerAdapter<T> {
     public void setFooterState(int state) {
         mCurrentState = state;
         notifyItemChanged(getItemCount() - 1);
-    }
-
-    @Override
-    public void onViewAttachedToWindow(BaseRecyclerViewHolder holder) {
-        super.onViewAttachedToWindow(holder);
-        MLog.e("onViewAttachedToWindow: ");
-    }
-
-    @Override
-    public void onViewDetachedFromWindow(BaseRecyclerViewHolder holder) {
-        super.onViewDetachedFromWindow(holder);
-        MLog.e("onViewDetachedFromWindow: ");
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        MLog.e("onAttachedToRecyclerView: " + getItemCount());
-    }
-
-    @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView);
-        MLog.e("onDetachedFromRecyclerView: ");
     }
 
     public static class DefaultFooterViewHolder extends BaseRecyclerViewHolder {
