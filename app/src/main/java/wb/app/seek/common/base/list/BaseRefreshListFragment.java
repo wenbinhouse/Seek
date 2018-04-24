@@ -39,7 +39,7 @@ public abstract class BaseRefreshListFragment<T, P extends BasePresenter> extend
     protected abstract RecyclerView.LayoutManager getLayoutManager();
 
     /**
-     * 布局管理器
+     * 适配器
      */
     protected abstract DefaultFooterAdapter<T> initAdapter();
 
